@@ -1,7 +1,7 @@
 # Leetcode
 <!-- GFM-TOC -->
 * [Leetcode 题解 - 双指针](#leetcode-题解---双指针)
-    * [1. 有序数组的 Two Sum](#1-有序数组的-two-sum)
+    * [167. Two Sum II - Input array is sorted](#1-有序数组的-two-sum)
     * [2. 两数平方和](#2-两数平方和)
     * [3. 反转字符串中的元音字符](#3-反转字符串中的元音字符)
     * [4. 回文字符串](#4-回文字符串)
