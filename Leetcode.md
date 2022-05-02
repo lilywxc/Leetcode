@@ -73,15 +73,24 @@ class Solution:
                 r -= 1
                 
         return False
+       
+       
+# Solution 2: hashset - O(sqrt(n)) time and O(sqrt(n)) space
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        sqrtSet = set()
         
-# Solution 2: two pointers - O(sqrt(n)) time and O(1) space
-
-
-
-# Solution 3: two pointers - O(sqrt(n)) time and O(1) space
-
-
+        for x in range(int(sqrt(c)) + 1):
+            sqrtSet.add(x**2)
+            
+        for x in sqrtSet:
+            if c - x in sqrtSet:
+                return True
+        
+        return False
 ```
+
+
 
 
 
