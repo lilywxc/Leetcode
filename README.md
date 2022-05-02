@@ -1,6 +1,6 @@
 # Leetcode
 * [Two Pointers](#Two-Pointers)
-    * [167. Two Sum II - Input array is sorted](#1-有序数组的-two-sum)
+    * [167. Two Sum II - Input array is sorted](#167-Two-Sum-II)
     * [2. 两数平方和](#2-两数平方和)
     * [3. 反转字符串中的元音字符](#3-反转字符串中的元音字符)
     * [4. 回文字符串](#4-回文字符串)
@@ -9,14 +9,8 @@
     * [7. 最长子序列](#7-最长子序列)
 
 
-
-双指针主要用于遍历数组，两个指针指向不同的元素，从而协同完成任务。
-
-## 1. 有序数组的 Two Sum
-
-
 ## Two Pointers
-167. Two Sum II - Input Array Is Sorted
+167. Two Sum II
 ```python
 import numpy as np
 class Solution:
