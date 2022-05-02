@@ -53,7 +53,7 @@ class Solution:
                     r = mid - 1
 ```
 
-[633. Sum of Square Numbers](https://leetcode.com/problems/sum-of-square-numbers/)
+[633 Sum of Square Numbers](https://leetcode.com/problems/sum-of-square-numbers/)
 ```
 # Solution 1: two pointers - O(sqrt(n)) time and O(1) space
 class Solution:
