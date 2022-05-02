@@ -25,6 +25,7 @@ class Solution:
             else:
                 l += 1
 
+
 # Solution 2: dictionary - O(n) time and O(n) space
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
@@ -34,7 +35,8 @@ class Solution:
                 return [dict[num] + 1, idx + 1]
             else:
                 dict[target - num] = idx
-                
+          
+          
 # Solution 3: binary search - O(nlogn) time and O(1) space
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
@@ -54,7 +56,7 @@ class Solution:
 ```
 
 #### [633 Sum of Square Numbers](https://leetcode.com/problems/sum-of-square-numbers/)
-```
+```python
 # Solution 1: two pointers - O(sqrt(n)) time and O(1) space
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
@@ -71,6 +73,14 @@ class Solution:
                 r -= 1
                 
         return False
+        
+# Solution 2: two pointers - O(sqrt(n)) time and O(1) space
+
+
+
+# Solution 3: two pointers - O(sqrt(n)) time and O(1) space
+
+
 ```
 
 
