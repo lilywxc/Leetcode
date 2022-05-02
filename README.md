@@ -10,7 +10,7 @@
 
 
 ## Two Pointers
-167. Two Sum II
+### 167. Two Sum II
 ```python
 import numpy as np
 class Solution:
