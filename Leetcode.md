@@ -35,7 +35,7 @@ class Solution:
             else:
                 dict[target - num] = idx
                 
-# Solution 3: binary search = O(nlogn) time and O(1) space
+# Solution 3: binary search - O(nlogn) time and O(1) space
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         for i in range(len(numbers) - 1):
