@@ -1,6 +1,6 @@
 # Leetcode
 
-'''python
+```
 import numpy as np
 class Solution:
     def fractionToDecimal(self, numerator: int, denominator: int) -> str:
@@ -17,4 +17,4 @@ class Solution:
         result.insert(idx+2, '(')
         result.append(')')
         return ''.join(result).replace('(0)', '').rstrip('.')
-'''
+```
