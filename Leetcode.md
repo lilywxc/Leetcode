@@ -1,6 +1,6 @@
 # Leetcode
 * [Two Pointers](#Two-Pointers)
-    * [167. Two Sum II - Input array is sorted](#167-Two-Sum-II)
+    * [167. Two Sum II](#167-Two-Sum-II)
     * [2. 两数平方和](#2-两数平方和)
     * [3. 反转字符串中的元音字符](#3-反转字符串中的元音字符)
     * [4. 回文字符串](#4-回文字符串)
