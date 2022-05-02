@@ -16,12 +16,39 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         l, r = 0, len(numbers)-1
-        while (l < r):
+        while l < r:
             s = numbers[l] + numbers[r]
-            if (s == target):
+            if s == target:
                 return [l+1, r+1]
-            elif (s > target):
+            elif s > target:
                 r -= 1
             else:
                 l += 1
+
+# Solution 2: dictionary - O(n) time and O(n) space
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        dict = {}
+        for idx, num in enumerate(numbers):
+            if num in dict:
+                return [dict[num] + 1, idx + 1]
+            else:
+                dict[target - num] = idx
+                
+# Solution 3: binary search = O(nlogn) time and O(1) space
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        for i in range(len(numbers) - 1):
+            tgt = target - numbers[i]
+            l, r = i + 1, len(numbers) - 1
+        
+            while l <= r:
+                mid = l + (r-l)//2
+
+                if numbers[mid] == tgt:
+                    return [i + 1, mid + 1]
+                elif numbers[mid] < tgt:
+                    l = mid + 1
+                else:
+                    r = mid - 1
 ```
