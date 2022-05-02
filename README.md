@@ -1,5 +1,5 @@
 # Leetcode
-* [Leetcode 题解 - 双指针](#Two Pointers)
+* [Two Pointers](#Two-Pointers)
     * [167. Two Sum II - Input array is sorted](#1-有序数组的-two-sum)
     * [2. 两数平方和](#2-两数平方和)
     * [3. 反转字符串中的元音字符](#3-反转字符串中的元音字符)
