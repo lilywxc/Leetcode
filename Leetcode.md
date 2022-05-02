@@ -12,20 +12,16 @@
 ### Two Pointers
 [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 ```python
-import numpy as np
+# Solution 1: two pointers - O(n) time and O(1) space
 class Solution:
-    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
-        n, r = divmod(abs(numerator), abs(denominator))
-        sign = '-' if np.sign(numerator) * np.sign(denominator) < 0 else ''
-        result = [sign + str(n), '.']
-        stack = []
-        while r not in stack:
-            stack.append(r)
-            n, r = divmod(r*10, abs(denominator))
-            result.append(str(n))
-
-        idx = stack.index(r)
-        result.insert(idx+2, '(')
-        result.append(')')
-        return ''.join(result).replace('(0)', '').rstrip('.')
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        l, r = 0, len(numbers)-1
+        while (l < r):
+            s = numbers[l] + numbers[r]
+            if (s == target):
+                return [l+1, r+1]
+            elif (s > target):
+                r -= 1
+            else:
+                l += 1
 ```
