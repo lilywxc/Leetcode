@@ -9,8 +9,8 @@
     * [7. 最长子序列](#7-最长子序列)
 
 
-## Two Pointers
-### 167. Two Sum II
+### Two Pointers
+#### 167. Two Sum II
 ```python
 import numpy as np
 class Solution:
