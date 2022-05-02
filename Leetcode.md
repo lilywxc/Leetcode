@@ -10,7 +10,8 @@
 
 
 ### Two Pointers
-167. Two Sum II [link](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
+167 Two Sum II
+[(link)](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 ```python
 # Solution 1: two pointers - O(n) time and O(1) space
 class Solution:
