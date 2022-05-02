@@ -1,7 +1,7 @@
 # Leetcode
 * [Two Pointers](#Two-Pointers)
     * [167. Two Sum II](#167-Two-Sum-II)
-    * [2. 两数平方和](#2-两数平方和)
+    * [633. Sum of Square Numbers](#633-Sum-of-Square-Numbers)
     * [3. 反转字符串中的元音字符](#3-反转字符串中的元音字符)
     * [4. 回文字符串](#4-回文字符串)
     * [5. 归并两个有序数组](#5-归并两个有序数组)
@@ -52,3 +52,74 @@ class Solution:
                 else:
                     r = mid - 1
 ```
+
+[633. Sum of Square Numbers](https://leetcode.com/problems/sum-of-square-numbers/)
+```
+# Solution 1: two pointers - O(sqrt(n)) time and O(1) space
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        l, r = 0, int(sqrt(c))
+        
+        while l <= r:
+            cur = l**2 + r**2
+            
+            if cur == c:
+                return True
+            elif cur < c:
+                l += 1
+            else:
+                r -= 1
+                
+        return False
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
