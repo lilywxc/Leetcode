@@ -6,7 +6,7 @@
     * [680. Valid Palindrome II](#680-Valid-Palindrome-II)
     * [88. Merge Sorted Array](#88-Merge-Sorted-Array)
     * [141. Linked List Cycle](#141-Linked-List-Cycle)
-    * [7. 最长子序列](#7-最长子序列)
+    * [524. Longest Word in Dictionary through Deleting](#524-Longest-Word-in-Dictionary-through-Deleting)
 
 
 ### Two Pointers
@@ -185,3 +185,8 @@ Consider breaking down the movement of the slow pointer into two steps, the non-
 - Both pointers are now in the cycle. Consider two runners running in a cycle - the fast runner moves 2 steps while the slow runner moves 1 steps at a time. To catch up with the slow runner, the number of steps that fast runner needs is (distance between the 2 runners)/(difference of speed). As the distance is at most "K" and the speed difference is 1, we conclude that run time = K
 
 Therefore, the worst case time complexity is O(N+K), which is O(n).
+
+#### [524. Longest Word in Dictionary through Deleting](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/)
+```python
+
+```
