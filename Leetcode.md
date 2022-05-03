@@ -188,5 +188,21 @@ Therefore, the worst case time complexity is O(N+K), which is O(n).
 
 #### [524. Longest Word in Dictionary through Deleting](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/)
 ```python
-
+class Solution:
+    def findLongestWord(self, s: str, dictionary: List[str]) -> str:
+        bestMatch = ""
+        
+        for word in dictionary:
+            i = 0
+            for char in s:
+                if i < len(word) and char == word[i]:
+                    i += 1
+            
+            if i == len(word):
+                if (len(word) > len(bestMatch) or len(word) == len(bestMatch) and word < bestMatch):
+                    bestMatch = word
+                    
+        return bestMatch
 ```
+
+
