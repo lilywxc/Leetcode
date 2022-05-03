@@ -101,7 +101,7 @@ class Solution:
         vows = set('aeiouAEIOU')
         
         l, r = 0, len(s) - 1
-        while l <= r:
+        while l < r:
             while l <= r and s[l] not in vows: 
                 l += 1
             while l <= r and s[r] not in vows: 
