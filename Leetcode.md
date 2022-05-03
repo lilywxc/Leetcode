@@ -5,7 +5,7 @@
     * [345. Reverse Vowels of a String](#345-Reverse-Vowels-of-a-String)
     * [680. Valid Palindrome II](#680-Valid-Palindrome-II)
     * [88. Merge Sorted Array](#88-Merge-Sorted-Array)
-    * [6. 判断链表是否存在环](#6-判断链表是否存在环)
+    * [141. Linked List Cycle](#141-Linked-List-Cycle)
     * [7. 最长子序列](#7-最长子序列)
 
 
@@ -150,5 +150,28 @@ class Solution:
                 p2 -= 1
 ```
 
+#### [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if head is None:
+            return False
+        
+        slow = head
+        fast = head.next
+        
+        while slow is not fast:
+            if fast is None or fast.next is None:
+                return False
+            slow = slow.next
+            fast = fast.next
+        
+        return True
+```
 
