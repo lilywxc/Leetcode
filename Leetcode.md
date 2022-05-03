@@ -3,7 +3,7 @@
     * [167. Two Sum II](#167-Two-Sum-II)
     * [633. Sum of Square Numbers](#633-Sum-of-Square-Numbers)
     * [345. Reverse Vowels of a String](#345-Reverse-Vowels-of-a-String)
-    * [4. 回文字符串](#4-回文字符串)
+    * [680. Valid Palindrome II](#680-Valid-Palindrome-II)
     * [5. 归并两个有序数组](#5-归并两个有序数组)
     * [6. 判断链表是否存在环](#6-判断链表是否存在环)
     * [7. 最长子序列](#7-最长子序列)
@@ -115,6 +115,22 @@ class Solution:
         return ''.join(s)
 ```
 
-
+#### [680. Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)
+```python
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        l, r = 0, len(s) - 1
+        
+        while l < r:
+            if s[l] != s[r]:
+                opt1 = s[l:r]
+                opt2 = s[l + 1:r + 1]
+                
+                return opt1 == opt1[::-1] or opt2 == opt2[::-1]
+            
+            l, r = l + 1, r - 1
+            
+        return True
+```        
 
 
