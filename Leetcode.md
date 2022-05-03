@@ -7,6 +7,8 @@
     * [88. Merge Sorted Array](#88-Merge-Sorted-Array)
     * [141. Linked List Cycle](#141-Linked-List-Cycle)
     * [524. Longest Word in Dictionary through Deleting](#524-Longest-Word-in-Dictionary-through-Deleting)
+* [Sorting](#Sorting)
+    * [215. Kth Largest Element in an Array](#215-Kth-Largest-Element-in-an-Array)
 
 
 ### Two Pointers
@@ -203,6 +205,69 @@ class Solution:
                     bestMatch = word
                     
         return bestMatch
+```
+
+### Sorting
+
+#### [215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+top K elements method could be solved using heap or quick select
+- heap: we use min-heap of size k to store the largest k elements (since the smallest element is popped out, what're left in the heap at the end are the largest k elements)
+- quick select: based on quicksort using partition
+```python
+# Solution 1: sorting - O(nlogn) time and O(1) space
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return sorted(nums, reverse=True)[k-1]
+
+# Solution 2: heapsort - O(k + (n-k)logk) time and O(k) space
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = []
+        for n in nums:
+            if len(heap) == k:
+                heapq.heappushpop(heap, n)
+            else:
+                heapq.heappush(heap, n)
+            
+        return heapq.heappop(heap)
+        # return heapq.nlargest(k, nums)[-1]
+        
+# Solution 3: quickselect - O(n) time and O(1) space
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        l, r = 0, len(nums) - 1
+        
+        while True:
+            idx = self.partition(nums, l, r)
+            
+            if idx > k - 1:
+                r = idx - 1
+            elif idx < k - 1:
+                l = idx + 1
+            else:
+                break
+        
+        return nums[idx]
+        
+    def partition(self, arr, start, end):
+        pivot = arr[start]
+        l = start + 1
+        r = end
+        
+        while l <= r:
+            if arr[l] < pivot and arr[r] > pivot:
+                arr[l], arr[r] = arr[r], arr[l]
+                l += 1
+                r -= 1
+            if arr[l] >= pivot:
+                l += 1
+            if arr[r] <= pivot:
+                r -= 1
+            
+        arr[start], arr[r] = arr[r], arr[start] 
+        return r # the position of the pivot
+        
+        # r will stop at a place where all numbers on the right are smaller than pivot, and l will stop at a place where all numbers on the left are bigger than pivot, including r (_ _ _ r l _ _). Thus swaping pivot and r gives the final list
 ```
 
 
