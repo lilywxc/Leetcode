@@ -267,11 +267,10 @@ class Solution:
         arr[start], arr[r] = arr[r], arr[start] 
         return r # the position of the pivot
         
-        '''
-        r will stop at a place where all numbers on the right are smaller than pivot, 
+<!--         r will stop at a place where all numbers on the right are smaller than pivot, 
         and l will stop at a place where all numbers on the left are bigger than pivot, including r (_ _ _ r l _ _). 
-        Thus swaping pivot and r gives the final list
-        '''
+        Thus swaping pivot and r gives the final list -->
+
 ```
 
 
