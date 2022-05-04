@@ -15,6 +15,7 @@
 * [Greedy](#Greedy)
     * [455. Assign Cookies](#455-Assign-Cookies)
     * [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
+    * [452. Minimum Number of Arrows to Burst Balloons](#452-Minimum-Number-of-Arrows-to-Burst-Balloons)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -421,5 +422,22 @@ class Solution:
                 prevEnd = intv[1]
             else:
                 res += 1  
+        return res
+```
+
+#### [452. Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/description/)
+```python
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        res = 0
+        prevEnd = float('-inf')
+        
+        points.sort(key = lambda x: x[1])
+        
+        for intv in points:
+            if intv[0] > prevEnd:
+                res += 1
+                prevEnd = intv[1]
+                
         return res
 ```
