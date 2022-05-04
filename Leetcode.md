@@ -9,7 +9,8 @@
     * [524. Longest Word in Dictionary through Deleting](#524-Longest-Word-in-Dictionary-through-Deleting)
 * [Sorting](#Sorting)
     * [215. Kth Largest Element in an Array](#215-Kth-Largest-Element-in-an-Array)
-
+    * [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
+    
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -273,4 +274,61 @@ class Solution:
 
 ```
 
+#### [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+```python
+# # Solution 1: bucket sort - O(n) time and O(n) space
+# class Solution:
+#     def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
+#         buckets = [[] for _ in range(len(nums) + 1)]
+        
+#         freqMap = Counter(nums).items()
+        
+#         for num, freq in freqMap:
+#             buckets[freq].append(num)
+        
+#         res = []
+#         for bucket in buckets[::-1]:
+#             if bucket:
+#                 for num in bucket:
+#                     res.append(num)
+                    
+#         return res[:k]
 
+'''
+Counter() is collections, and it has methods keys(), values(), items(), but it's not subscriptable, i.e., we cannot do Counter()[3]
+* Counter(nums).most_common(k) will return the result directly
+
+different ways to create frequency map
+1. 
+freqMap = {}
+for num in nums:
+	if num in d:
+		freqMap[num] += 1
+	else:
+		freqMap[num] = 1
+2.
+freqMap = collections.defaultdict(int)
+for num in nums:
+    freqMap[num] += 1
+'''
+
+# Solution 2: heap sort - O(nlogk) and O(n) space
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
+        freqMap = Counter(nums)
+
+        heap = []
+        for num, count in freqMap.items(): # O(nlog(k))
+            if len(heap) == k:
+                heappushpop(heap, (count, num))
+            else:
+                heappush(heap, (count, num))
+
+        res = []
+        while heap: # O(klogk)
+            count, num = heappop(heap) 
+            print(num, count)
+            res.append(num)
+
+        return res
+```
