@@ -20,6 +20,7 @@
     * [121. Best Time to Buy and Sell Stock](#121-Best-Time-to-Buy-and-Sell-Stock)
     * [122. Best Time to Buy and Sell Stock II](#122-Best-Time-to-Buy-and-Sell-Stock-II)
     * [392. Is Subsequence](#392-Is-Subsequence)
+    * [665. Non decreasing Array](665-Non-decreasing-Array)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -517,4 +518,27 @@ class Solution:
 # this problem can be solved easily by two pointers as well
 ```
 
+#### [665. Non decreasing Array](https://leetcode.com/problems/non-decreasing-array/description/)
+```python
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        violated = False
+
+        for i in range(1, len(nums)):
+            if nums[i] < nums[i - 1]:
+                if violated:
+                    return False
+                
+                violated = True
+                
+                # when violation happens, nums[i - 1] > nums[i] 
+                # we want to keep numbers as small as possible,
+                # so that we have more flexibility with numbers later
+                if i < 2 or nums[i - 2] <= nums[i]:
+                    nums[i - 1] = nums[i] 
+                else:
+                    nums[i] = nums[i - 1]
+                
+        return True
+```
 
