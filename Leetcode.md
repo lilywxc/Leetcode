@@ -445,15 +445,10 @@ class Solution:
 
 #### [406. Queue Reconstruction by Height](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
 Consider a queue with two 7-height people and one 6-height person. 
-
 First, pick out tallest group of people (7-height) and sort them based on k. 
-
 Since there's no other groups of people taller than them, each guy's index will be just as same as his k value.
-
 Now it's time to find a place for the guy of height 6. 
-
 Since he is "invisible" for the 7-height guys, he could take whatever place without disturbing 7-height guys order. 
-
 However, for him the others are visible, and hence he should take the position equal to his k-value, in order to have his proper place.
 
 sorted List: [[7, 0], [7, 1], [6, 1], [5, 0], [5, 2], [4, 4]]
