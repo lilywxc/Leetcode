@@ -12,6 +12,7 @@
     * [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
     * [451. Sort Characters By Frequency](#451-Sort-Characters-By-Frequency)
     * [75. Sort Colors](#75-Sort-Colors)
+    * [455. Assign Cookies](#455-Assign-Cookies)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -382,4 +383,22 @@ class Solution:
                 p2 -= 1
             else:
                 curr += 1
+```
+
+#### [455. Assign Cookies](https://leetcode.com/problems/assign-cookies/)
+```python
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        g.sort()
+        s.sort()
+        
+        child, cookie = 0, 0
+        while child < len(g) and cookie < len(s):
+            if g[child] <= s[cookie]:
+                child += 1
+                cookie += 1
+            else:
+                cookie += 1
+                
+        return child
 ```
