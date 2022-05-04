@@ -14,7 +14,7 @@
     * [75. Sort Colors](#75-Sort-Colors)
 * [Greedy](#Greedy)
     * [455. Assign Cookies](#455-Assign-Cookies)
-    * [435. Non overlapping Intervals](435-Non-overlapping-Intervals)
+    * [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
