@@ -19,6 +19,7 @@
     * [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
     * [121. Best Time to Buy and Sell Stock](#121-Best-Time-to-Buy-and-Sell-Stock)
     * [122. Best Time to Buy and Sell Stock II](#122-Best-Time-to-Buy-and-Sell-Stock-II)
+    * [392. Is Subsequence](#392-Is-Subsequence)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -489,7 +490,7 @@ class Solution:
 # the brute force will be having a nested for loops in O(n^2)
 ```
 
-### [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/)
+#### [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/)
 ```python
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
@@ -501,4 +502,19 @@ class Solution:
                 
         return profit
 ```
+
+#### [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/description/)
+```python
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        for c in s:
+            i = t.find(c)
+            if i == -1:
+                return False
+            else:
+                t = t[i + 1:]
+        return True
+# this problem can be solved easily by two pointers as well
+```
+
 
