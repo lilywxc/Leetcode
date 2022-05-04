@@ -406,7 +406,7 @@ class Solution:
         return child
 ```
 
-#### [435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+#### [435. Non overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 for every selection, the end point is the most important - the smallest end point we choice, the more space left for the following intervals, and more intervals could be selected. We want to sort the intervals based on end point, and select the interval that has overlap with previous one each time.
 ```python
 class Solution:
