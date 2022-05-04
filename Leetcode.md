@@ -10,6 +10,7 @@
 * [Sorting](#Sorting)
     * [215. Kth Largest Element in an Array](#215-Kth-Largest-Element-in-an-Array)
     * [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
+    * [451. Sort Characters By Frequency](#451-Sort-Characters-By-Frequency)
     
 
 ### Two Pointers
@@ -286,11 +287,12 @@ class Solution:
 # Solution 1: bucket sort - O(n) time and O(n) space
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
-        buckets = [[] for _ in range(len(nums) + 1)]
+        freqMap = Counter(nums)
         
-        freqMap = Counter(nums).items()
+        max_freq = max(freqMap.values())
+        buckets = [[] for _ in range(max_freq + 1)]  
         
-        for num, freq in freqMap:
+        for num, freq in freqMap.items():
             buckets[freq].append(num)
         
         res = []
@@ -338,4 +340,24 @@ class Solution:
             res.append(num)
 
         return res
+```
+
+#### [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/solution/)
+```python
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        freqMap = collections.Counter(s)
+        max_freq = max(freqMap.values())
+        
+        buckets = [[] for _ in range(max_freq + 1)]
+        
+        for num, count in freqMap.items():
+            buckets[count].append(num)
+            
+        stringBuilder = []
+        for count in range(len(buckets) - 1, 0, -1):
+            for char in buckets[count]:
+                stringBuilder.append(char * count)
+    
+        return "".join(stringBuilder)
 ```
