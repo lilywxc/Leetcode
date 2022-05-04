@@ -276,23 +276,23 @@ class Solution:
 
 #### [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
 ```python
-# # Solution 1: bucket sort - O(n) time and O(n) space
-# class Solution:
-#     def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
-#         buckets = [[] for _ in range(len(nums) + 1)]
+# Solution 1: bucket sort - O(n) time and O(n) space
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
+        buckets = [[] for _ in range(len(nums) + 1)]
         
-#         freqMap = Counter(nums).items()
+        freqMap = Counter(nums).items()
         
-#         for num, freq in freqMap:
-#             buckets[freq].append(num)
+        for num, freq in freqMap:
+            buckets[freq].append(num)
         
-#         res = []
-#         for bucket in buckets[::-1]:
-#             if bucket:
-#                 for num in bucket:
-#                     res.append(num)
+        res = []
+        for bucket in buckets[::-1]:
+            if bucket:
+                for num in bucket:
+                    res.append(num)
                     
-#         return res[:k]
+        return res[:k]
 
 '''
 Counter() is collections, and it has methods keys(), values(), items(), but it's not subscriptable, i.e., we cannot do Counter()[3]
