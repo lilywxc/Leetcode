@@ -17,6 +17,8 @@
     * [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
     * [452. Minimum Number of Arrows to Burst Balloons](#452-Minimum-Number-of-Arrows-to-Burst-Balloons)
     * [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
+    * [121. Best Time to Buy and Sell Stock](#121-Best-Time-to-Buy-and-Sell-Stock)
+    * [122. Best Time to Buy and Sell Stock II](#122-Best-Time-to-Buy-and-Sell-Stock-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -472,5 +474,31 @@ class Solution:
         return output
 ```
 
+#### [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        minPrice = float('inf') # min price in "previous days"
+        maxProfit = 0
+        
+        for price in prices:
+            minPrice = min(price, minPrice)
+            maxProfit = max(price - minPrice, maxProfit)
+            
+        return maxProfit
+# the brute force will be having a nested for loops in O(n^2)
+```
 
+### [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/)
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0
+        
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]
+                
+        return profit
+```
 
