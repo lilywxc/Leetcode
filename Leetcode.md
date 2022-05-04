@@ -293,24 +293,24 @@ class Solution:
                     res.append(num)
                     
         return res[:k]
+```
+Counter() is collections, and it has methods keys(), values(), items(), but it's not subscriptable, i.e., we cannot do Counter()[3]
+* Counter(nums).most_common(k) will return the result directly
 
-# Counter() is collections, and it has methods keys(), values(), items(), 
-# but it's not subscriptable, i.e., we cannot do Counter()[3]
-# * Counter(nums).most_common(k) will return the result directly
-
-# different ways to create frequency map
-# 1. 
-# freqMap = {}
-# for num in nums:
-# 	if num in d:
-# 		freqMap[num] += 1
-# 	else:
-# 		freqMap[num] = 1
-# 2.
-# freqMap = collections.defaultdict(int)
-# for num in nums:
-#     freqMap[num] += 1m] += 1
-
+different ways to create frequency map
+1. 
+freqMap = {}
+for num in nums:
+	if num in d:
+		freqMap[num] += 1
+	else:
+		freqMap[num] = 1
+2.
+freqMap = collections.defaultdict(int)
+for num in nums:
+    freqMap[num] += 1
+    
+```python
 # Solution 2: heap sort - O(nlogk) and O(n) space
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
