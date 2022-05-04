@@ -27,8 +27,9 @@ class Solution:
                 r -= 1
             else:
                 l += 1
+```
 
-
+```python
 # Solution 2: dictionary - O(n) time and O(n) space
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
@@ -76,8 +77,9 @@ class Solution:
                 r -= 1
                 
         return False
-       
-       
+```
+
+```python     
 # Solution 2: hashset - O(sqrt(n)) time and O(sqrt(n)) space
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
@@ -219,7 +221,9 @@ top K elements method could be solved using heap or quick select
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         return sorted(nums, reverse=True)[k-1]
+```
 
+```python
 # Solution 2: heapsort - O(k + (n-k)logk) time and O(k) space
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
@@ -232,7 +236,9 @@ class Solution:
             
         return heapq.heappop(heap)
         # return heapq.nlargest(k, nums)[-1]
-        
+```
+
+```python        
 # Solution 3: quickselect - O(n) time and O(1) space
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
