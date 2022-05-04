@@ -12,6 +12,7 @@
     * [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
     * [451. Sort Characters By Frequency](#451-Sort-Characters-By-Frequency)
     * [75. Sort Colors](#75-Sort-Colors)
+* [Greedy](#Greedy)
     * [455. Assign Cookies](#455-Assign-Cookies)
 
 ### Two Pointers
@@ -385,6 +386,7 @@ class Solution:
                 curr += 1
 ```
 
+### Greedy
 #### [455. Assign Cookies](https://leetcode.com/problems/assign-cookies/)
 ```python
 class Solution:
