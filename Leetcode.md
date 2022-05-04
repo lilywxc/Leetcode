@@ -38,9 +38,10 @@ class Solution:
             if num in dict:
                 return [dict[num] + 1, idx + 1]
             else:
-                dict[target - num] = idx
-          
-          
+                dict[target - num] = idx   
+```
+
+```python          
 # Solution 3: binary search - O(nlogn) time and O(1) space
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
