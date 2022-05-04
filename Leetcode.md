@@ -16,6 +16,7 @@
     * [455. Assign Cookies](#455-Assign-Cookies)
     * [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
     * [452. Minimum Number of Arrows to Burst Balloons](#452-Minimum-Number-of-Arrows-to-Burst-Balloons)
+    * [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -441,3 +442,34 @@ class Solution:
                 
         return res
 ```
+
+#### [406. Queue Reconstruction by Height](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
+consider a queue with two 7-height people and one 6-height person. 
+First, pick out tallest group of people (7-height) and sort them based on k. 
+Since there's no other groups of people taller than them, each guy's index will be just as same as his k value.
+Now it's time to find a place for the guy of height 6. 
+Since he is "invisible" for the 7-height guys, he could take whatever place without disturbing 7-height guys order. 
+However, for him the others are visible, and hence he should take the position equal to his k-value, in order to have his proper place.
+sorted List: [[7, 0], [7, 1], [6, 1], [5, 0], [5, 2], [4, 4]]
+
+[[7, 0]]
+[[7, 0], [7, 1]]
+[[7, 0], [6, 1], [7, 1]]
+[[5, 0], [7, 0], [6, 1], [7, 1]]
+[[5, 0], [7, 0], [5, 2], [6, 1], [7, 1]]
+[[5, 0], [7, 0], [5, 2], [6, 1], [4, 4], [7, 1]]
+
+```python
+class Solution:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        people.sort(key = lambda x: (-x[0], x[1]))
+        output = []
+        
+        for p in people:
+            output.insert(p[1], p)
+            
+        return output
+```
+
+
+
