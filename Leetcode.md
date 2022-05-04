@@ -11,7 +11,7 @@
     * [215. Kth Largest Element in an Array](#215-Kth-Largest-Element-in-an-Array)
     * [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
     * [451. Sort Characters By Frequency](#451-Sort-Characters-By-Frequency)
-    
+    * [75. Sort Colors](#75-Sort-Colors)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -360,4 +360,26 @@ class Solution:
                 stringBuilder.append(char * count)
     
         return "".join(stringBuilder)
+```
+
+#### [75. Sort Colors](https://leetcode.com/problems/sort-colors/)
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        p0, p2 = 0, len(nums) - 1 
+        curr = 0
+        
+        while curr <= p2:
+            if nums[curr] == 0:
+                nums[p0], nums[curr] = nums[curr], nums[p0]
+                curr += 1
+                p0 += 1
+            elif nums[curr] == 2:
+                nums[p2], nums[curr] = nums[curr], nums[p2]
+                p2 -= 1
+            else:
+                curr += 1
 ```
