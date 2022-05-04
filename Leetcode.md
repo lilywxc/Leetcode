@@ -14,6 +14,7 @@
     * [75. Sort Colors](#75-Sort-Colors)
 * [Greedy](#Greedy)
     * [455. Assign Cookies](#455-Assign-Cookies)
+    * [435. Non-overlapping Intervals](435-Non-overlapping-Intervals)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -403,4 +404,22 @@ class Solution:
                 cookie += 1
                 
         return child
+```
+
+#### [435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+for every selection, the end point is the most important - the smallest end point we choice, the more space left for the following intervals, and more intervals could be selected. We want to sort the intervals based on end point, and select the interval that has overlap with previous one each time.
+```python
+class Solution:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        res = 0
+        prevEnd = float('-inf')
+        
+        intervals.sort(key = lambda x: x[1]) # sort based on end point
+        
+        for intv in intervals:
+            if intv[0] >= prevEnd: # non-overlap
+                prevEnd = intv[1]
+            else:
+                res += 1  
+        return res
 ```
