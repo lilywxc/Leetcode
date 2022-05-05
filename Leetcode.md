@@ -21,6 +21,7 @@
     * [122. Best Time to Buy and Sell Stock II](#122-Best-Time-to-Buy-and-Sell-Stock-II)
     * [392. Is Subsequence](#392-Is-Subsequence)
     * [665. Non decreasing Array](#665-Non-decreasing-Array)
+    * [53. Maximum Subarray](#53-Maximum-Subarray)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -542,3 +543,34 @@ class Solution:
         return True
 ```
 
+#### [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
+```python
+# Solution 1: Greedy
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        for i in range(1, len(nums)):
+            if nums[i-1] > 0:
+                nums[i] += nums[i-1]
+            else:
+                continue
+                
+        return max(nums)
+
+# ex.    [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+# nums = [-2, 1, -2, 4,  3, 5, 6,  1, 5]
+```
+```python
+# Solution 2: devide and conquer
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        current_subarray = max_subarray = nums[0]
+        
+        for num in nums[1:]:
+            # If current_subarray is negative, throw it away. Otherwise, keep adding to it.
+            current_subarray = max(num, current_subarray + num)
+            max_subarray = max(max_subarray, current_subarray)
+        
+        return max_subarray
+```
+
+#### []
