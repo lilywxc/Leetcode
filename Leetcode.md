@@ -23,6 +23,7 @@
     * [665. Non decreasing Array](#665-Non-decreasing-Array)
     * [53. Maximum Subarray](#53-Maximum-Subarray)
     * [763. Partition Labels](#763-Partition-Labels)
+* [Divide and Conquer](#Divide-and-Conquer)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -592,4 +593,9 @@ class Solution:
                 anchor = i + 1
                 
         return res
+```
+
+#### [Divide and Conquer](https://leetcode.com/problems/different-ways-to-add-parentheses/)
+```python
+
 ```
