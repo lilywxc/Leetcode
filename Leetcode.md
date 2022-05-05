@@ -22,6 +22,7 @@
     * [392. Is Subsequence](#392-Is-Subsequence)
     * [665. Non decreasing Array](#665-Non-decreasing-Array)
     * [53. Maximum Subarray](#53-Maximum-Subarray)
+    * [763. Partition Labels](#763-Partition-Labels)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -573,4 +574,22 @@ class Solution:
         return max_subarray
 ```
 
-#### []
+#### [763. Partition Labels](https://leetcode.com/problems/partition-labels/description/)
+```python
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        # ex. "abccaddbeffe"
+        
+        last = {c: i for i, c in enumerate(s)}
+        
+        anchor = 0
+        p = 0
+        res = []
+        for i, c in enumerate(s):
+            p = max(p, last[c])
+            if i == p:
+                res.append(i - anchor + 1)
+                anchor = i + 1
+                
+        return res
+```
