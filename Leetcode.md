@@ -597,9 +597,9 @@ class Solution:
                 
         return res
 ```
-### [Divide and Conquer]
+### Divide and Conquer
 #### [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
 ```python
 
 ```
-
+![graphs](pictures/241. Different Ways to Add Parentheses)
