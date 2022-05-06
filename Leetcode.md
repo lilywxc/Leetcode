@@ -602,4 +602,4 @@ class Solution:
 ```python
 
 ```
-![graphs](pictures/241. Different Ways to Add Parentheses)
+![graphs](pictures/241. Different Ways to Add Parentheses.png)
