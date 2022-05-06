@@ -606,20 +606,13 @@ class Solution:
 - note, we create a memo to get answers for repeated calculation
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png" width="700">
 
-ex. "2*3-4*5"
-
-[4] * [5]
-
-res: 4*5 [20]
-
-[3] - [20]
-
-res: 3-4*5 [-17]
-
+ex. "2*3-4*5" <br />
+[4] * [5] <br />
+res: 4*5 [20] <br />
+[3] - [20] <br />
+res: 3-4*5 [-17] <br />
 [3] - [4]
-
 res: 3-4 [-1]
-
 [-1] * [5]
 
 res: 3-4*5 [-17, -5]
