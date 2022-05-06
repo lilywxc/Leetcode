@@ -602,4 +602,5 @@ class Solution:
 ```python
 
 ```
-![graphs](https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png | width=100)
+![graphs](https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png)
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png" width="100" height="100">
