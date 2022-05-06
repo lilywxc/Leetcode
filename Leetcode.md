@@ -24,6 +24,9 @@
     * [53. Maximum Subarray](#53-Maximum-Subarray)
     * [763. Partition Labels](#763-Partition-Labels)
 * [Divide and Conquer](#Divide-and-Conquer)
+    * [241. Different Ways to Add Parentheses](#241-Different-Ways-to-Add-Parentheses)
+
+
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -594,8 +597,9 @@ class Solution:
                 
         return res
 ```
-
-#### [Divide and Conquer](https://leetcode.com/problems/different-ways-to-add-parentheses/)
+### [Divide and Conquer]
+#### [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
 ```python
 
 ```
+
