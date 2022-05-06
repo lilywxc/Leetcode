@@ -599,7 +599,88 @@ class Solution:
 ```
 ### Divide and Conquer
 #### [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
-```python
+- The problem becomes easier when we think about these expressions as expression trees.
+- We can traverse over the experssion and whenever we encounter an operator, we recursively divide the expression into left and right part 
+- and evaluate them seperately until we reach a situation where our expression is purely a number and in this case we can simply return that number.
+Since there can be multiple ways to evaluate an expression (depending on which operator you take first) we will get a list of reults from left and the right part.
+Now that we have all the possible results from the left and the right part, we can use them to find out all the possible results for the current operator.
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png" width="700">
 
+ex. "2*3-4*5"
+
+[4] * [5]
+
+res: 4*5 [20]
+
+[3] - [20]
+
+res: 3-4*5 [-17]
+
+[3] - [4]
+
+res: 3-4 [-1]
+
+[-1] * [5]
+
+res: 3-4*5 [-17, -5]
+
+[2] * [-17, -5]
+
+res: 2*3-4*5 [-34]
+
+res: 2*3-4*5 [-34, -10]
+
+[2] * [3]
+
+res: 2*3 [6]
+
+[6] - [20]
+
+res: 2*3-4*5 [-34, -10, -14]
+
+[2] * [-1]
+
+res: 2*3-4 [-2]
+
+[6] - [4]
+
+res: 2*3-4 [-2, 2]
+
+[-2, 2] * [5]
+
+res: 2*3-4*5 [-34, -10, -14, -10]
+
+res: 2*3-4*5 [-34, -10, -14, -10, 10]
+```python
+class Solution:
+    def diffWaysToCompute(self, expression: str, memo = {}) -> List[int]:
+     
+        if expression.isdigit():
+            return [int(expression)]
+        
+        if expression in memo:
+            return memo[expression]
+        
+        res = []
+        for i, c in enumerate(expression):
+            if c in '*+-':
+                left = self.diffWaysToCompute(expression[:i])
+                right = self.diffWaysToCompute(expression[i+1:])
+                
+                # print(left, c, right)
+                for x in left:
+                    for y in right:
+                        res.append(self.compute(x, y, c))
+                        # print('res:', expression, res)
+       
+        memo[expression] = res
+        return res
+                
+    def compute(self, x, y, op):
+        if op == "+":
+            return x + y
+        elif op == "-":
+            return x - y
+        else:
+            return x * y
 ```
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png" width="600">
