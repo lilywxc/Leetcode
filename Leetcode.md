@@ -600,10 +600,10 @@ class Solution:
 ### Divide and Conquer
 #### [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
 - The problem becomes easier when we think about these expressions as expression trees.
-- We can traverse over the experssion and whenever we encounter an operator, we recursively divide the expression into left and right part 
-- and evaluate them seperately until we reach a situation where our expression is purely a number and in this case we can simply return that number.
-Since there can be multiple ways to evaluate an expression (depending on which operator you take first) we will get a list of reults from left and the right part.
-Now that we have all the possible results from the left and the right part, we can use them to find out all the possible results for the current operator.
+- We can traverse over the experssion and whenever we encounter an operator, we recursively divide the expression into left and right part and evaluate them seperately until we reach a situation where our expression is purely a number and in this case we can simply return that number.
+- Since there can be multiple ways to evaluate an expression (depending on which operator you take first) we will get a list of reults from left and the right part.
+- Now that we have all the possible results from the left and the right part, we can use them to find out all the possible results for the current operator.
+- note, we create a memo to get answers for repeated calculation
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/241.%20Different%20Ways%20to%20Add%20Parentheses.png" width="700">
 
 ex. "2*3-4*5"
