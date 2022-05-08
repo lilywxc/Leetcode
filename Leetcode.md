@@ -29,6 +29,7 @@
     * [95. Unique Binary Search Trees II](#95-Unique-Binary-Search-Trees-II)
 * [Binary Search](#Binary-Search)
     * [69. Sqrt x](#69-Sqrt-x)
+    * [744. Find Smallest Letter Greater Than Target](#744-Find-Smallest-Letter-Greater-Than-Target)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -750,3 +751,21 @@ class Solution:
 We return r (the smaller) when we break out the while loop. Consider one step earlier, l = r = m: 
 - if m^2 > key, r = m - 1. We know r now is smaller than x cuz that's a previous location of l, meaning the square < x for sure. And l should not be the answer because l = m and we have evaluated that m^2 > key. r is the answer
 - If m^2 < key, l = m + 1. We know l now is bigger than x cuz that's a previous location of r, meaning the square > x for sure. And r should be the answer because l = m and we have evaluated that m^2 > key.
+
+#### [744. Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/)
+```python
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        l = 0
+        h = len(letters) - 1
+        
+        while l <= h:
+            m = l + (h - l) // 2
+            
+            if letters[m] <= target:
+                l = m + 1
+            else:
+                h = m - 1
+        
+        return letters[l] if l < len(letters) else letters[0]
+```
