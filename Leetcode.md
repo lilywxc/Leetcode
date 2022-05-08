@@ -32,6 +32,7 @@
     * [744. Find Smallest Letter Greater Than Target](#744-Find-Smallest-Letter-Greater-Than-Target)
     * [540. Single Element in a Sorted Array](#540-Single-Element-in-a-Sorted-Array)
     * [278. First Bad Version](#278-First-Bad-Version)
+    * [153. Find Minimum in Rotated Sorted Array](#153-Find-Minimum-in-Rotated-Sorted-Array)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -835,4 +836,21 @@ class Solution:
         return l
 ```
 
-
+#### [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/submissions/)
+the main idea for our checks is to converge the left and right bounds on the start
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l = 0
+        h = len(nums) - 1
+        
+        while l < h:
+            m = l + (h - l) // 2
+            
+            if nums[m] > nums[h]:
+                l = m + 1
+            else:
+                h = m
+                
+        return nums[l]
+```
