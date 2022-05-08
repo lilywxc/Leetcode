@@ -33,6 +33,7 @@
     * [540. Single Element in a Sorted Array](#540-Single-Element-in-a-Sorted-Array)
     * [278. First Bad Version](#278-First-Bad-Version)
     * [153. Find Minimum in Rotated Sorted Array](#153-Find-Minimum-in-Rotated-Sorted-Array)
+    * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -853,4 +854,10 @@ class Solution:
                 h = m
                 
         return nums[l]
+```
+
+
+#### [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+```python
+
 ```
