@@ -26,6 +26,7 @@
 * [Divide and Conquer](#Divide-and-Conquer)
     * [241. Different Ways to Add Parentheses](#241-Different-Ways-to-Add-Parentheses)
     * [96. Unique Binary Search Trees]([#96-Unique-Binary-Search-Trees)
+    * [95. Unique Binary Search Trees II](#95-Unique-Binary-Search-Trees-II)
 
 
 
@@ -670,4 +671,36 @@ class Solution:
                 G[n] += G[i - 1]*G[n - i]
                 
         return G[num]
+```
+
+#### [95. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        
+        def generateTrees(start, end):
+            if start > end:
+                return [None, ]
+            
+            res = []
+            for i in range(start, end + 1):
+                left = generateTrees(start, i - 1)
+                right = generateTrees(i + 1, end)
+                
+                for l in left:
+                    for r in right:
+                        current = TreeNode(i)
+                        current.left = l
+                        current.right = r
+                        res.append(current)
+                        
+            return res
+        
+        return generateTrees(1, n) if n else []
 ```
