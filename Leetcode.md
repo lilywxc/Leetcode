@@ -25,6 +25,7 @@
     * [763. Partition Labels](#763-Partition-Labels)
 * [Divide and Conquer](#Divide-and-Conquer)
     * [241. Different Ways to Add Parentheses](#241-Different-Ways-to-Add-Parentheses)
+    * [96. Unique Binary Search Trees]([#96-Unique-Binary-Search-Trees)
 
 
 
@@ -655,4 +656,18 @@ class Solution:
             return x - y
         else:
             return x * y
+```
+
+#### [96. Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)
+```python
+class Solution:
+    def numTrees(self, num: int) -> int:
+        G = [0]*(num + 1)
+        G[0], G[1] = 1, 1 
+        
+        for n in range(2, num + 1):
+            for i in range(1, n + 1):
+                G[n] += G[i - 1]*G[n - i]
+                
+        return G[num]
 ```
