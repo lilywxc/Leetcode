@@ -719,7 +719,7 @@ def binarySearch(nums, key):
    
    while l <= r:
    	
-	m = l + (h - l) // 2
+	m = l + (r - l) // 2
 	
 	if nums[m] == key:
 	    return m
@@ -739,7 +739,7 @@ def binarySearch(nums, key):
    
    while l < r:
    	
-	m = l + (h - l) // 2
+	m = l + (r - l) // 2
 	
 	if nums[m] >= key:
 	    r = m
@@ -859,5 +859,29 @@ class Solution:
 
 #### [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 ```python
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        first = self.binarySearch(nums, target)
+        
+        if first == len(nums) or nums[first] != target:
+            return [-1, -1]
+        
+        last = self.binarySearch(nums, target + 1) - 1
+        
+        return [first, last]
+        
+        
+    def binarySearch(self, nums, key):
+        l = 0
+        r = len(nums)
+        
+        while l < r:
+            m = l + (r - l) // 2
 
+            if nums[m] >= key:
+                r = m
+            else:
+                l = m + 1
+
+        return l
 ```
