@@ -27,7 +27,7 @@
     * [241. Different Ways to Add Parentheses](#241-Different-Ways-to-Add-Parentheses)
     * [96. Unique Binary Search Trees]([#96-Unique-Binary-Search-Trees)
     * [95. Unique Binary Search Trees II](#95-Unique-Binary-Search-Trees-II)
-
+* [Binary Search](#Binary-Search)
 
 
 ### Two Pointers
@@ -704,3 +704,49 @@ class Solution:
         
         return generateTrees(1, n) if n else []
 ```
+
+### Binary Search
+ordinary/original binary search
+```python
+def binarySearch(nums, key):
+   l, r = 0, len(nums) - 1
+   
+   while l <= r:
+	m = l + (h - l) // 2
+	
+	if nums[m] == key:
+		return m
+        elif nums[m] > key:
+		h = m - 1;
+        else:
+		l = m + 1
+  
+    return -1
+```
+
+#### [69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+```python
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x < 2:
+            return x
+            
+        l = 2
+        r = x // 2
+        
+        while l <= r:
+            m = l + (r - l)//2
+            square = m * m
+            
+            if square > x:
+                r = m - 1
+            elif square < x:
+                l = m + 1
+            else:
+                return m
+            
+        return r
+```
+We return r (the smaller) when we break out the while loop. Consider one step earlier, l = r = m: 
+- if m^2 > key, r = m - 1. We know r now is smaller than x cuz that's a previous location of l, meaning the square < x for sure. And l should not be the answer because l = m and we have evaluated that m^2 > key. r is the answer
+- If m^2 < key, l = m + 1. We know l now is bigger than x cuz that's a previous location of r, meaning the square > x for sure. And r should be the answer because l = m and we have evaluated that m^2 > key.
