@@ -28,7 +28,7 @@
     * [96. Unique Binary Search Trees]([#96-Unique-Binary-Search-Trees)
     * [95. Unique Binary Search Trees II](#95-Unique-Binary-Search-Trees-II)
 * [Binary Search](#Binary-Search)
-
+    * [69. Sqrt(x)](#69-Sqrt(x))
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
