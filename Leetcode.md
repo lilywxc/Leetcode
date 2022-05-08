@@ -30,6 +30,7 @@
 * [Binary Search](#Binary-Search)
     * [69. Sqrt x](#69-Sqrt-x)
     * [744. Find Smallest Letter Greater Than Target](#744-Find-Smallest-Letter-Greater-Than-Target)
+    * [540. Single Element in a Sorted Array](#540-Single-Element-in-a-Sorted-Array)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -727,6 +728,25 @@ def binarySearch(nums, key):
     return -1
 ```
 
+Variant example: find the leftmost match of a key in a non-decreasing array (has repeated numbers)
+```python
+def binarySearch(nums, key):
+   l = 0
+   r = len(nums) - 1
+   
+   while l < r:
+   	
+	m = l + (h - l) // 2
+	
+	if nums[m] >= key:
+	    r = m
+        else:
+            l = m + 1
+  
+    return l
+```
+in this case where r is assigned m, we need while loop of l < r instead of l <= r to avoid possibly infinite loop
+
 #### [69. Sqrt x](https://leetcode.com/problems/sqrtx/)
 ```python
 class Solution:
@@ -770,4 +790,26 @@ class Solution:
                 h = m - 1
         
         return letters[l] if l < len(letters) else letters[0]
+```
+
+#### [540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/description/)
+```python
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        l = 0
+        h = len(nums) - 1
+        
+        while l < h:
+            m = l + (h - l) // 2 
+            
+            if m % 2 == 1: # make sure m is at even idex
+                m -= 1
+                
+            if nums[m] == nums[m + 1]:
+                l = m + 2
+            else:
+                h = m
+                
+        return nums[l]
+	# when we break out the while loop, l = r, so both index l and r of nunms is correct
 ```
