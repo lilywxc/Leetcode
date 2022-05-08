@@ -718,11 +718,11 @@ def binarySearch(nums, key):
 	m = l + (h - l) // 2
 	
 	if nums[m] == key:
-		return m
-        elif nums[m] > key:
-		h = m - 1;
+	    return m
+	elif nums[m] > key:
+            r = m - 1
         else:
-		l = m + 1
+            l = m + 1
   
     return -1
 ```
