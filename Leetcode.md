@@ -31,6 +31,7 @@
     * [69. Sqrt x](#69-Sqrt-x)
     * [744. Find Smallest Letter Greater Than Target](#744-Find-Smallest-Letter-Greater-Than-Target)
     * [540. Single Element in a Sorted Array](#540-Single-Element-in-a-Sorted-Array)
+    * [278. First Bad Version](#278-First-Bad-Version)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -813,3 +814,25 @@ class Solution:
         return nums[l]
 	# when we break out the while loop, l = r, so both index l and r of nunms is correct
 ```
+
+#### [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+```python
+# def isBadVersion(version: int) -> bool:
+
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        l = 0
+        h = n
+        
+        while l < h:
+            m = l + (h - l) // 2
+            
+            if isBadVersion(m):
+                h = m
+            else:
+                l = m + 1
+        
+        return l
+```
+
+
