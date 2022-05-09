@@ -36,7 +36,8 @@
     * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
 * [Search](#Search)
     * [BFS](#BFS)
-	    * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
+        * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
+        * [279. Perfect Squares](#279-Perfect-Squares) 
 
 
 ### Two Pointers
@@ -920,3 +921,28 @@ class Solution:
         return -1
 ```
 note, if the input grid is not immutable, then we should have a set "seen" to store whether the cell has been visited or not, which takes O(N) - now the space is O(1) as we modify in place.
+
+#### [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
+```python
+
+```
+
+```python
+# Solution 2: DP - O(N*√N) time and O(N) space
+# numSquares(n) = min(numSquares(n-k) + 1) ∀k∈{square numbers}
+class Solution:
+    def numSquares(self, n: int) -> int:
+
+        square_nums = [i**2 for i in range(0, int(math.sqrt(n))+1)]
+        
+        dp = [float('inf')] * (n+1)
+        dp[0] = 0 # base case
+        
+        for i in range(1, n+1):
+            for square in square_nums:
+                if i < square:
+                    break
+                dp[i] = min(dp[i], dp[i-square] + 1)
+        
+        return dp[-1]
+```
