@@ -923,7 +923,7 @@ class Solution:
 note, if the input grid is not immutable, then we should have a set "seen" to store whether the cell has been visited or not, which takes O(N) - now the space is O(1) as we modify in place.
 
 #### [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/279.%20Perfect%20Squares.png" width="700">
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/279.%20Perfect%20Squares.png" width="550">
 
 ```python
 # Solution 1: BFS
