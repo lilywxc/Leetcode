@@ -36,6 +36,7 @@
     * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
 * [Search](#Search)
     * [BFS](#BFS)
+	    * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
 	* [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
 
 
