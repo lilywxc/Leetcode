@@ -34,6 +34,10 @@
     * [278. First Bad Version](#278-First-Bad-Version)
     * [153. Find Minimum in Rotated Sorted Array](#153-Find-Minimum-in-Rotated-Sorted-Array)
     * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
+* [Search](#Search)
+    * [BFS](#BFS)
+	* [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
+
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -885,3 +889,33 @@ class Solution:
 
         return l
 ```
+
+### Search
+
+### BFS
+#### [1091. Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/)
+```python
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        
+        if grid[0][0] or grid[n-1][n-1]:
+            return -1
+        
+        directions = [[1,0], [-1,0], [0,1], [0,-1], [-1,-1], [1,1], [1,-1], [-1,1]]
+        
+        q = collections.deque([(0,0,1)]) 
+        while q:
+            i, j, dist = q.popleft()
+            if i == n - 1 and j == n - 1: 
+                return dist
+            
+            for d1, d2 in directions:
+                x, y = i + d1, j + d2
+                if 0 <= x < n and 0 <= y < n and grid[x][y] == 0:
+                    grid[x][y] = 1
+                    q.append((x, y, dist + 1))
+                    
+        return -1
+```
+note, if the input grid is not immutable, then we should have a set "seen" to store whether the cell has been visited or not, which takes O(N) - now the space is O(1) as we modify in place.
