@@ -923,8 +923,33 @@ class Solution:
 note, if the input grid is not immutable, then we should have a set "seen" to store whether the cell has been visited or not, which takes O(N) - now the space is O(1) as we modify in place.
 
 #### [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
+[279. Perfect Squares](https://github.com/lilywxc/Leetcode/blob/main/pictures/279.%20Perfect%20Squares.png)
 ```python
-
+# Solution 1: BFS
+class Solution:
+    def numSquares(self, n: int) -> int:
+        square_nums = [i**2 for i in range(1, int(math.sqrt(n))+1)]
+        
+        level = 0
+        queue = {n} # we normally use queue in BFS, but we use set here to
+                    # eliminate the redundancy of remainders within the same level
+        
+        while queue:
+            level += 1
+            
+            next_queue = set()
+            for remainder in queue:
+                for square_num in square_nums:
+                    if square_num == remainder:
+                        return level
+                    elif square_num >= remainder:
+                        break
+                    else:
+                        next_queue.add(remainder - square_num)
+        
+            queue = next_queue
+    
+        return level
 ```
 
 ```python
