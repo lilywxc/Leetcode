@@ -36,9 +36,9 @@
     * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
 * [Search](#Search)
     * [BFS](#BFS)
-     * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
-     * [279. Perfect Squares](#279-Perfect-Squares) 
-     * [127. Word Ladder](#127-Word-Ladder)
+          * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
+          * [279. Perfect Squares](#279-Perfect-Squares) 
+          * [127. Word Ladder](#127-Word-Ladder)
 
 
 ### Two Pointers
