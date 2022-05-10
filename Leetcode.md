@@ -39,6 +39,8 @@
 		* [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
 		* [279. Perfect Squares](#279-Perfect-Squares) 
 		* [127. Word Ladder](#127-Word-Ladder)
+	* [DFS](#DFS)
+		* [695. Max Area of Island](#695-Max-Area-of-Island)
 
 
 ### Two Pointers
@@ -1042,4 +1044,11 @@ class Solution:
                         if adj not in visited:
                             queue.append((adj, steps + 1))
         return 0
+```
+
+### DFS
+
+#### [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/description/)
+```python
+
 ```
