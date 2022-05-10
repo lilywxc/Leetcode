@@ -1050,5 +1050,48 @@ class Solution:
 
 #### [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/description/)
 ```python
+# DFS recursive
+class Solution:
+    def maxAreaOfIsland(self, grid):
+        nrow, ncol = len(grid), len(grid[0])
 
+        def dfs(i, j):
+            if 0 <= i < nrow and 0 <= j < ncol and grid[i][j]:
+                grid[i][j] = 0 # mark visited cell in place, and get rid of seen set
+                return 1 + dfs(i - 1, j) + dfs(i, j + 1) + dfs(i + 1, j) + dfs(i, j - 1)
+            
+            return 0
+
+        areas = [dfs(i, j) for i in range(nrow) for j in range(ncol) if grid[i][j]]
+        
+        return max(areas) if areas else 0
+	
+# DFS iterative
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        nrow, ncol = len(grid), len(grid[0])
+        directions = [[1,0], [-1,0], [0,1], [0,-1]]
+        seen = set()
+        max_area = 0
+        
+        for r0 in range(nrow):
+            for c0 in range(ncol):
+                if grid[r0][c0] and (r0, c0) not in seen:
+                    q = [(r0, c0)]
+                    seen.add((r0, c0))
+                    
+                    cur_area = 0
+                    while q:
+                        r, c = q.pop()  # popleft() turns it to BFS 
+                        cur_area += 1
+                        
+                        for d1, d2 in directions:
+                            x, y = r + d1, c + d2
+                            if 0 <= x < nrow and 0 <= y < ncol and grid[x][y] and (x, y) not in seen:
+                                q.append((x, y))
+                                seen.add((x, y))
+                    
+                    max_area = max(max_area, cur_area)
+                    
+        return max_area
 ```
