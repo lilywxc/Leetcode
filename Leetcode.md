@@ -36,8 +36,9 @@
     * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
 * [Search](#Search)
     * [BFS](#BFS)
-        * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
-        * [279. Perfect Squares](#279-Perfect-Squares) 
+     * [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
+     * [279. Perfect Squares](#279-Perfect-Squares) 
+     * [127. Word Ladder](#127-Word-Ladder)
 
 
 ### Two Pointers
@@ -971,4 +972,74 @@ class Solution:
                 dp[i] = min(dp[i], dp[i-square] + 1)
         
         return dp[-1]
+```
+
+#### [127. Word Ladder](https://leetcode.com/problems/word-ladder/)
+```python
+# BFS implementation using set
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordSet = set(wordList)
+        if endWord not in wordSet: 
+            return 0
+            
+        bq = {beginWord}
+        eq = {endWord}
+        dist = 1
+        word_len = len(beginWord)
+        
+        while bq:
+            dist += 1
+            next_queue = set()
+            wordSet -= bq # remove visited words
+            
+            for word in bq:
+                for i in range(word_len):
+                    for c in "abcdefghijklmnopqrstuvwxyz":
+                        if c != word[i]:
+                            new_word = word[:i] + c + word[i + 1:]
+                             
+                            if new_word in eq:                    
+                                return dist
+                            
+                            if new_word in wordSet:
+                                print(word, '->', new_word, dist)
+                                next_queue.add(new_word)
+                                wordSet.remove(new_word)
+                                
+            bq = next_queue
+            if len(eq) < len(bq):
+                bq, eq = eq, bq
+                
+        return 0
+	
+# BFS implementation using queue
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        if endWord not in set(wordList): 
+            return 0
+        
+        # construct intermediate dict
+        d = defaultdict(list)
+        for word in wordList:
+            for i in range(len(word)):
+                s = word[:i] + "_" + word[i+1:]
+                d[s].append(word)
+            
+        queue, visited = deque([(beginWord, 1)]), set()
+        while queue:
+            word, steps = queue.popleft()
+            if word not in visited:
+                visited.add(word)
+                
+                if word == endWord:
+                    return steps
+                
+                for i in range(len(word)):
+                    s = word[:i] + "_" + word[i+1:]
+                    
+                    for adj in d[s]:
+                        if adj not in visited:
+                            queue.append((adj, steps + 1))
+        return 0
 ```
