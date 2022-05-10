@@ -41,6 +41,7 @@
 		* [127. Word Ladder](#127-Word-Ladder)
 	* [DFS](#DFS)
 		* [695. Max Area of Island](#695-Max-Area-of-Island)
+		* [200. Number of Islands](#200-Number-of-Islands)
 
 
 ### Two Pointers
@@ -1094,4 +1095,26 @@ class Solution:
                     max_area = max(max_area, cur_area)
                     
         return max_area
+```
+
+#### [200. Number of Islands](https://leetcode.com/problems/number-of-islands/description/)
+```python
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        nrow, ncol = len(grid), len(grid[0])
+
+        def dfs(x, y):
+            if 0 <= x < nrow and 0 <= y < ncol and grid[x][y] == "1":
+                grid[x][y] = "0"
+                for i, j in ((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+                    dfs(i, j)
+
+        num = 0
+        for x in range(nrow):
+            for y in range(ncol):
+                if grid[x][y] == "1":
+                    dfs(x, y)
+                    num += 1
+                    
+        return num
 ```
