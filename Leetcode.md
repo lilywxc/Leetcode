@@ -43,6 +43,7 @@
 		* [695. Max Area of Island](#695-Max-Area-of-Island)
 		* [200. Number of Islands](#200-Number-of-Islands)
 		* [547. Number of Provinces](#547-Number-of-Provinces)
+		* [130. Surrounded Regions](#130-Surrounded-Regions)
 
 
 ### Two Pointers
@@ -1140,4 +1141,27 @@ class Solution:
                 num += 1
                 
         return num
+```
+
+#### [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/submissions/)
+```python
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+
+        if not any(board): 
+            return
+
+        m, n = len(board), len(board[0])
+        
+        border = [idx for k in range(max(m, n)) for idx in ((0, k), (m-1, k), (k, 0), (k, n-1))]
+
+        while border:
+            i, j = border.pop()
+            if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+                board[i][j] = 'B'
+                border += [(i, j-1), (i, j+1), (i-1, j), (i+1, j)]
+
+        for row in board:
+            for i, c in enumerate(row):
+                row[i] = 'O' if c == 'B' else 'X'
 ```
