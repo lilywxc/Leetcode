@@ -42,6 +42,7 @@
 	* [DFS](#DFS)
 		* [695. Max Area of Island](#695-Max-Area-of-Island)
 		* [200. Number of Islands](#200-Number-of-Islands)
+		* [547. Number of Provinces](#547-Number-of-Provinces)
 
 
 ### Two Pointers
@@ -1116,5 +1117,27 @@ class Solution:
                     dfs(x, y)
                     num += 1
                     
+        return num
+```
+
+#### [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/submissions/)
+``python
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        N = len(M)
+        seen = set()
+        
+        def dfs(node):
+            for adj, isConnected in enumerate(M[node]):
+                if isConnected and adj not in seen:
+                    seen.add(adj)
+                    dfs(adj)
+
+        num = 0
+        for i in range(N):
+            if i not in seen:
+                dfs(i)
+                num += 1
+                
         return num
 ```
