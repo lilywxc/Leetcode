@@ -47,7 +47,10 @@
 		* [417. Pacific Atlantic Water Flow](#417-Pacific-Atlantic-Water-Flow)
 	* [Backtracking](#Backtracking)
 		* [17. Letter Combinations of a Phone Number](#17-Letter-Combinations-of-a-Phone-Number)
-
+		* [78. Subsets](#78-Subsets)
+		* [90. Subsets II](#90-Subsets-II)
+		* [39. Combination Sum](#39-Combination-Sum)
+		* [40. Combination Sum](#40-Combination-Sum)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1223,4 +1226,41 @@ class Solution:
         combinations = []
         backtrack(0, [])
         return combinations
+```
+
+#### [78. Subsets](#78-Subsets)
+```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(index, path):
+            if len(path) == k:  
+                combinations.append(path[:])
+                return
+            
+            for i in range(index, n):
+                path.append(nums[i])
+                backtrack(i + 1, path)
+                path.pop()
+        
+        n = len(nums)
+        combinations = [[]]
+        for k in range(1, n + 1):
+            backtrack(0, [])
+            
+        return combinations
+```
+
+#### [90. Subsets II](#90-Subsets-II)
+```python
+
+```
+
+#### [39. Combination Sum](#39-Combination-Sum)
+```python
+
+```
+
+#### [40. Combination Sum](#40-Combination-Sum)
+```python
+
 ```
