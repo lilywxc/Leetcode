@@ -1203,6 +1203,8 @@ class Solution:
 ```
 
 ### Backtracking
+the execution of the backtracking is unfolded as a DFS traversal in a n-ary tree. The total number of steps during the backtracking would be the number of nodes in the tree.
+
 #### [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/submissions/)
 ```python
 class Solution:
@@ -1294,7 +1296,25 @@ class Solution:
 		
 #### [39. Combination Sum](https://leetcode.com/problems/combination-sum/)
 ```python
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def backtrack(index, path, remain):
+            if remain == 0:
+                combinations.append(path[:])
+                return 
+            elif remain < 0:
+                return
+           
+            for i in range(index, n):
+                path.append(candidates[i])
+                backtrack(i, path, remain - candidates[i]) # note we start at i again, as we are allowed to use candidate multiple times
+                path.pop()
 
+        n = len(candidates)
+        combinations = []
+        backtrack(0, [], target)
+	
+        return combinations
 ```
 
 #### [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
