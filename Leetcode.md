@@ -1274,7 +1274,22 @@ class Solution:
 
 #### [77. Combinations](https://leetcode.com/problems/combinations/)
 ```python
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        def backtrack(index, path):
+            if len(path) == k:
+                combinations.append(path[:])
+                return 
+           
+            for i in range(index, n):
+                path.append(i + 1)
+                backtrack(i + 1, path)
+                path.pop()
 
+        combinations = []
+        backtrack(0, [])
+	
+        return combinations
 ```
 		
 #### [39. Combination Sum](https://leetcode.com/problems/combination-sum/)
