@@ -49,8 +49,9 @@
 		* [17. Letter Combinations of a Phone Number](#17-Letter-Combinations-of-a-Phone-Number)
 		* [78. Subsets](#78-Subsets)
 		* [90. Subsets II](#90-Subsets-II)
+		* [77. Combinations](#77-Combinations)
 		* [39. Combination Sum](#39-Combination-Sum)
-		* [40. Combination Sum](#40-Combination-Sum)
+		* [40. Combination Sum II](#40-Combination-Sum-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1229,7 +1230,7 @@ class Solution:
         return combinations
 ```
 
-#### [78. Subsets](#78-Subsets)
+#### [78. Subsets](https://leetcode.com/problems/subsets/)
 ```python
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
@@ -1248,7 +1249,7 @@ class Solution:
         return combinations
 ```
 
-#### [90. Subsets II](#90-Subsets-II)
+#### [90. Subsets II](https://leetcode.com/problems/subsets-ii/)
 ```python
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
@@ -1271,12 +1272,17 @@ class Solution:
         return combinations
 ```
 
-#### [39. Combination Sum](#39-Combination-Sum)
+#### [77. Combinations](https://leetcode.com/problems/combinations/)
+```python
+
+```
+		
+#### [39. Combination Sum](https://leetcode.com/problems/combination-sum/)
 ```python
 
 ```
 
-#### [40. Combination Sum](#40-Combination-Sum)
+#### [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
 ```python
 
 ```
