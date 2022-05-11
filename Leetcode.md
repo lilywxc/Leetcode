@@ -1320,5 +1320,27 @@ class Solution:
 
 #### [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
 ```python
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def backtrack(index, path, remain):
+            if remain == 0:
+                combinations.append(path[:])
+                return 
+            elif remain < 0:
+                return
+           
+            for i in range(index, n):
+                if i > index and candidates[i] == candidates[i - 1]:
+                    continue
+                    
+                path.append(candidates[i])
+                backtrack(i + 1, path, remain - candidates[i])
+                path.pop()
 
+        n = len(candidates)
+        candidates.sort()
+        combinations = []
+        backtrack(0, [], target)
+	
+        return combinations
 ```
