@@ -44,6 +44,7 @@
 		* [200. Number of Islands](#200-Number-of-Islands)
 		* [547. Number of Provinces](#547-Number-of-Provinces)
 		* [130. Surrounded Regions](#130-Surrounded-Regions)
+		* [417. Pacific Atlantic Water Flow](#417-Pacific-Atlantic-Water-Flow)
 
 
 ### Two Pointers
@@ -1164,4 +1165,33 @@ class Solution:
         for row in board:
             for i, c in enumerate(row):
                 row[i] = 'O' if c == 'B' else 'X'
+```
+
+#### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
+```python
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        if not heights:
+            return []
+
+        p_visited = set()
+        a_visited = set()
+        rows, cols = len(heights), len(heights[0])
+
+        def dfs(i, j, visited):
+            visited.add((i, j))
+            
+            for (x, y) in ((i, j + 1), (i, j - 1), (i + 1, j), (i - 1, j)):
+                if 0 <= x < rows and 0 <= y < cols and heights[x][y] >= heights[i][j] and (x, y) not in visited:
+                    dfs(x, y, visited)
+
+        for row in range(rows):
+            dfs(row, 0, p_visited)
+            dfs(row, cols - 1, a_visited)
+
+        for col in range(cols):
+            dfs(0, col, p_visited)
+            dfs(rows - 1, col, a_visited)
+
+        return list(p_visited & a_visited)
 ```
