@@ -54,7 +54,7 @@
 		* [40. Combination Sum II](#40-Combination-Sum-II)
 		* [216. Combination Sum III](#216-Combination-Sum-III)
 		* [46. Permutations](#46-Permutations)
-		* [47. Permutations II](#46-Permutations-II)
+		* [47. Permutations II](#47-Permutations-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
