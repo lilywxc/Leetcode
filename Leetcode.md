@@ -45,6 +45,8 @@
 		* [547. Number of Provinces](#547-Number-of-Provinces)
 		* [130. Surrounded Regions](#130-Surrounded-Regions)
 		* [417. Pacific Atlantic Water Flow](#417-Pacific-Atlantic-Water-Flow)
+	* [Backtracking](#Backtracking)
+		* [17. Letter Combinations of a Phone Number](#17-Letter-Combinations-of-a-Phone-Number)
 
 
 ### Two Pointers
@@ -1194,4 +1196,31 @@ class Solution:
             dfs(rows - 1, col, a_visited)
 
         return list(p_visited.intersection(a_visited))
+```
+
+### Backtracking
+#### [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/submissions/)
+```python
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if len(digits) == 0: 
+            return []
+        
+        letters = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", 
+                   "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+        
+        def backtrack(index, path):
+            if len(path) == len(digits):
+                combinations.append("".join(path))
+                return 
+            
+            possible_letters = letters[digits[index]]
+            for letter in possible_letters:
+                path.append(letter)
+                backtrack(index + 1, path)
+                path.pop()
+
+        combinations = []
+        backtrack(0, [])
+        return combinations
 ```
