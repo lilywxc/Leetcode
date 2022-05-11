@@ -52,6 +52,9 @@
 		* [77. Combinations](#77-Combinations)
 		* [39. Combination Sum](#39-Combination-Sum)
 		* [40. Combination Sum II](#40-Combination-Sum-II)
+		* [216. Combination Sum III](#216-Combination-Sum-III)
+		* [46. Permutations](#46-Permutations)
+		* [47. Permutations II](#46-Permutations-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1343,4 +1346,36 @@ class Solution:
         backtrack(0, [], target)
 	
         return combinations
+```
+
+#### [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/)
+```python
+class Solution:
+    def combinationSum3(self, k: int, target: int) -> List[List[int]]:
+        def backtrack(index, path, remain):
+            if remain == 0 and len(path) == k:
+                combinations.append(path[:])
+                return 
+            elif remain < 0 or len(path) == k:
+                return
+           
+            for i in range(index, 9):
+                path.append(i + 1)
+                backtrack(i + 1, path, remain - (i + 1))
+                path.pop()
+
+        combinations = []
+        backtrack(0, [], target)
+	
+        return combinations
+```
+
+#### [46. Permutations](https://leetcode.com/problems/permutations/)
+```python
+
+```
+
+#### [47. Permutations II](https://leetcode.com/problems/permutations-ii/)
+```python
+
 ```
