@@ -1193,5 +1193,5 @@ class Solution:
             dfs(0, col, p_visited)
             dfs(rows - 1, col, a_visited)
 
-        return list(p_visited & a_visited)
+        return list(p_visited.intersection(a_visited))
 ```
