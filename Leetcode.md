@@ -1372,10 +1372,43 @@ class Solution:
 
 #### [46. Permutations](https://leetcode.com/problems/permutations/)
 ```python
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
 
+        def backtrack(index):
+            if index == n:
+                ans.append(nums[:])
+                
+            for i in range(index, n):
+                nums[index], nums[i] = nums[i], nums[index]
+                backtrack(index + 1)
+                nums[index], nums[i] = nums[i], nums[index]
+                
+        ans = []
+        n = len(nums)
+        backtrack(0)
+        return ans
 ```
 
 #### [47. Permutations II](https://leetcode.com/problems/permutations-ii/)
 ```python
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(path, counter):
+            if len(path) == len(nums):
+                results.append(path[:])
+                return
 
+            for num in counter:
+                if counter[num] > 0:
+                    path.append(num)
+                    counter[num] -= 1
+                    backtrack(path, counter)
+                    path.pop()
+                    counter[num] += 1
+
+        results = []
+        backtrack([], Counter(nums))
+
+        return results
 ```
