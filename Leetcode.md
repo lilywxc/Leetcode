@@ -1225,6 +1225,7 @@ class Solution:
 
         combinations = []
         backtrack(0, [])
+	
         return combinations
 ```
 
@@ -1233,9 +1234,7 @@ class Solution:
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         def backtrack(index, path):
-            if len(path) == k:  
-                combinations.append(path[:])
-                return
+            combinations.append(path[:])
             
             for i in range(index, n):
                 path.append(nums[i])
@@ -1243,16 +1242,33 @@ class Solution:
                 path.pop()
         
         n = len(nums)
-        combinations = [[]]
-        for k in range(1, n + 1):
-            backtrack(0, [])
+        combinations = []
+        backtrack(0, [])
             
         return combinations
 ```
 
 #### [90. Subsets II](#90-Subsets-II)
 ```python
-
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(index, path):
+            combinations.append(path[:])
+            
+            for i in range(index, n):
+                if i > index and nums[i] == nums[i - 1]:
+                    continue
+                    
+                path.append(nums[i])
+                backtrack(i + 1, path)
+                path.pop()
+        
+        n = len(nums)
+        nums.sort()
+        combinations = []
+        backtrack(0, [])
+            
+        return combinations
 ```
 
 #### [39. Combination Sum](#39-Combination-Sum)
