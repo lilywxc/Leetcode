@@ -1372,6 +1372,7 @@ class Solution:
 
 #### [46. Permutations](https://leetcode.com/problems/permutations/)
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/46.%20Permutations.png" width="700">
+
 ```python
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
