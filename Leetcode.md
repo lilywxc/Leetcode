@@ -55,6 +55,7 @@
 		* [216. Combination Sum III](#216-Combination-Sum-III)
 		* [46. Permutations](#46-Permutations)
 		* [47. Permutations II](#47-Permutations-II)
+		* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1414,3 +1415,27 @@ class Solution:
 
         return results
 ```
+
+#### [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+```python
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def backtracking(index, path):
+            if index == n:
+                res.append(path[:])
+            
+            for i in range(index, n):
+                curr = s[index : i + 1] 
+                
+                if curr == curr[::-1]: # check palindrome
+                    path.append(curr)
+                    backtracking(i + 1, path)
+                    path.pop()
+
+        n = len(s)
+        res = []
+        backtracking(0, [])
+        
+        return res
+```
+
