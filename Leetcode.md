@@ -56,7 +56,7 @@
 		* [46. Permutations](#46-Permutations)
 		* [47. Permutations II](#47-Permutations-II)
 		* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
-		* [267. Palindrome Permutation II](#267. Palindrome Permutation II)
+		* [267. Palindrome Permutation II](#267-Palindrome-Permutation-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
