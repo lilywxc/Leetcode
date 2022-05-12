@@ -56,6 +56,7 @@
 		* [46. Permutations](#46-Permutations)
 		* [47. Permutations II](#47-Permutations-II)
 		* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
+		* [267. Palindrome Permutation II](#267. Palindrome Permutation II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1439,3 +1440,41 @@ class Solution:
         return res
 ```
 
+#### [267. Palindrome Permutation II](https://leetcode.com/problems/palindrome-permutation-ii/)
+```python
+class Solution:
+    def generatePalindromes(self, s: str) -> List[str]:
+        counter = collections.Counter(s)
+        mid = ''
+        half = []
+        for char, count in counter.items():
+            q, r = divmod(count, 2)
+            half += char * q
+            
+            if r == 1:
+                if mid == '':
+                    mid = char 
+                else:
+                    return [] # only one single char is acceptable
+            
+        def backtrack(path):
+            if len(path) == n:
+                cur = ''.join(path)
+                ans.append(cur + mid + cur[::-1])
+            else:
+                for i in range(n):
+                    if visited[i] or (i > 0 and half[i] == half[i-1] and not visited[i-1]):
+                        continue
+                    visited[i] = True
+                    path.append(half[i])
+                    backtrack(path)
+                    visited[i] = False
+                    path.pop()
+                    
+        ans = []
+        n = len(half)
+        visited = [False] * len(half)
+        backtrack([])
+        
+        return ans
+```
