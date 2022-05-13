@@ -60,6 +60,7 @@
 		* [93. Restore IP Addresses](#93-Restore-IP-Addresses)
 		* [79. Word Search](#79-Word-Search)
 		* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
+		* [37. Sudoku Solver](#37-Sudoku-Solver)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1581,4 +1582,64 @@ class Solution:
         backtrack(root, [])
         
         return res
+```
+
+#### [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/submissions/)
+```python
+from collections import defaultdict
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+                
+        def is_valid(r, c, v):
+            box_id = (r // 3) * 3 + c // 3
+            return v not in rows[r] and v not in cols[c] and v not in boxes[box_id]
+
+
+        def backtrack(r, c):
+            if c == n:
+                if r == n - 1:
+                    return True
+                else:
+                    c = 0
+                    r += 1
+
+            if board[r][c] != '.':
+                return backtrack(r, c + 1)
+
+            box_id = (r // 3) * 3 + c // 3
+            for v in range(1, 10):
+                if not is_valid(r, c, v):
+                    continue
+
+                board[r][c] = str(v)
+                rows[r].add(v)
+                cols[c].add(v)
+                boxes[box_id].add(v)
+
+                if backtrack(r, c + 1):
+                    return True
+
+                # backtrack
+                board[r][c] = '.'
+                rows[r].remove(v)
+                cols[c].remove(v)
+                boxes[box_id].remove(v)
+
+            return False
+
+        
+        n = len(board)
+        rows, cols, boxes = defaultdict(set), defaultdict(set), defaultdict(set)
+
+        for r in range(n):
+            for c in range(n):
+                if board[r][c] == '.':
+                    continue
+
+                v = int(board[r][c])
+                rows[r].add(v)
+                cols[c].add(v)
+                boxes[(r // 3) * 3 + c // 3].add(v)
+                
+        backtrack(0, 0)
 ```
