@@ -58,6 +58,7 @@
 		* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
 		* [267. Palindrome Permutation II](#267-Palindrome-Permutation-II)
 		* [93. Restore IP Addresses](#93-Restore-IP-Addresses)
+		* [79. Word Search](#79-Word-Search)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1508,4 +1509,40 @@ class Solution:
         backtrack(0, [], s)
         
         return res
+```
+#### [79. Word Search](https://leetcode.com/problems/word-search/)
+```python
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+
+        def backtrack(row, col, s):
+            if len(s) == 0:
+                return True
+
+            if row < 0 or row == ROWS or col < 0 or col == COLS or board[row][col] != s[0]:
+                return False
+
+            ret = False
+            board[row][col] = '#'
+            
+            for d1, d2 in directions:
+                ret = backtrack(row + d1, col + d2, s[1:])
+                if ret: 
+                    break # no clean-up if we do "return True" here (sudden-death return)
+
+            # revert the change
+            board[row][col] = s[0]
+
+            return ret
+        
+        ROWS = len(board)
+        COLS = len(board[0])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+        for row in range(ROWS):
+            for col in range(COLS):
+                if backtrack(row, col, word):
+                    return True
+
+        return False
 ```
