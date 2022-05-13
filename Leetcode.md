@@ -59,6 +59,7 @@
 		* [267. Palindrome Permutation II](#267-Palindrome-Permutation-II)
 		* [93. Restore IP Addresses](#93-Restore-IP-Addresses)
 		* [79. Word Search](#79-Word-Search)
+		* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1545,4 +1546,39 @@ class Solution:
                     return True
 
         return False
+```
+
+#### [257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        if not root:
+            return []
+        
+        def backtrack(root, path):
+
+            path.append(str(root.val))
+
+            if root.left:
+                backtrack(root.left, path)
+                path.pop()
+
+            if root.right:
+                backtrack(root.right, path)
+                path.pop()
+
+            if root.left is None and root.right is None:
+                res.append('->'.join(path))
+                
+        
+        res = []
+        backtrack(root, [])
+        
+        return res
 ```
