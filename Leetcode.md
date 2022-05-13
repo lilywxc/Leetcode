@@ -57,6 +57,7 @@
 		* [47. Permutations II](#47-Permutations-II)
 		* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
 		* [267. Palindrome Permutation II](#267-Palindrome-Permutation-II)
+		* [93. Restore IP Addresses](#93-Restore-IP-Addresses)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1477,4 +1478,34 @@ class Solution:
         backtrack([])
         
         return ans
+```
+
+#### [93. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/)
+```python
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        
+        def backtrack(k, path, s):
+            if k == 4:
+                if len(s) == 0:
+                    res.append('.'.join(path))
+                else:
+                    return
+            
+            for i in range(min(3, len(s))):
+                if s[0] == '0' and i != 0:
+                    break
+                    
+                part = s[0 : i + 1]
+
+                print(s, part)
+                if int(part) <= 255:
+                    path.append(part)
+                    backtrack(k + 1, path, s[i + 1:])
+                    path.pop()
+                        
+        res = []
+        backtrack(0, [], s)
+        
+        return res
 ```
