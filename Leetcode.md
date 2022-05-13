@@ -61,6 +61,7 @@
 		* [79. Word Search](#79-Word-Search)
 		* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
 		* [37. Sudoku Solver](#37-Sudoku-Solver)
+		* [51. N Queens](#51-N-Queens)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1585,6 +1586,7 @@ class Solution:
 ```
 
 #### [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/submissions/)
+#### [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/submissions/)
 ```python
 from collections import defaultdict
 class Solution:
@@ -1642,4 +1644,9 @@ class Solution:
                 boxes[(r // 3) * 3 + c // 3].add(v)
                 
         backtrack(0, 0)
+```
+
+#### [51. N Queens](https://leetcode.com/problems/n-queens/description/)
+```python
+
 ```
