@@ -1718,19 +1718,7 @@ Good subproblem:
 
 #### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)
 ```python
-# Solution 1: bottom up DP
-class Solution:
-    def climbStairs(self, n: int) -> int:
-        dp = {}
-        dp[1] = 1
-        dp[2] = 2
-        
-        for i in range(3, n+1):
-            dp[i] = dp[i-1] + dp[i-2]
-
-        return dp[n]
-    
-# Solution 2: bottom up DP (constant space)
+# Solution 1: bottom up DP (constant space)
 class Solution:
     def climbStairs(self, n: int) -> int:
         if n == 1:
@@ -1744,6 +1732,18 @@ class Solution:
             second = tmp
             
         return second
+	
+# Solution 2: bottom up DP
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        dp = {}
+        dp[1] = 1
+        dp[2] = 2
+        
+        for i in range(3, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+
+        return dp[n]
 
 # Solution 3: top down DP
 class Solution:
