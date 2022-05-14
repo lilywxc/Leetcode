@@ -66,6 +66,8 @@
     * [70. Climbing Stairs](#70-Climbing-Stairs)
     * [198. House Robber](#198-House-Robber)
     * [213. House Robber II](#213-House-Robber-II)
+    * [Mail Misalignment](#Mail-Misalignment)
+    * [Cow](#Cow)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1825,4 +1827,52 @@ class Solution:
             return rob_next
         
         return max(rob_helper(nums[1:]), rob_helper(nums[:-1]))
+```
+
+#### Mail Misalignment
+有N个信和信封, 它们被打乱, 求错误装信方式的数量。
+
+思路：定义一个数组 dp 存储错误方式数量，dp[i] 表示前 i 个信和信封的错误方式数量。假设第 i 个信装到第 j 个信封里面，而第 j 个信装到第 k 个信封里面。根据 i 和 k 是否相等，有两种情况：
+
+- i == k，交换 i 和 j 的信后，它们的信和信封在正确的位置，但是其余 i-2 封信有 dp[i-2] 种错误装信的方式。由于 j 有 i-1 种取值，因此共有 (i-1)*dp[i-2] 种错误装信方式。
+- i != k，交换 i 和 j 的信后，第 i 个信和信封在正确的位置，其余 i-1 封信有 dp[i-1] 种错误装信方式。由于 j 有 i-1 种取值，因此共有 (i-1)*dp[i-1] 种错误装信方式。
+
+综上所述，错误装信数量方式数量为：dp[i] = (i-1)*dp[i-2] + (i-1)*dp[i-1]
+
+```python
+def MailMisalignment(int n):
+    if n == 0 or n == 1:
+    	return 0
+	
+    dp = [None] * (n+1)
+    dp[0] = 0
+    dp[1] = 0
+    dp[2] = 1
+    
+    for i in range(3, n):
+        dp[i] = (i-1)*dp[i-2] + (i-1)*dp[i-1]
+	
+    return dp[n]
+```
+
+#### Cow
+假设农场中成熟的母牛每年都会生 1 头小母牛，并且永远不会死。第一年有 1 只小母牛，从第二年开始，母牛开始生小母牛。每只小母牛 3 年之后成熟又可以生小母牛。给定整数 N，求 N 年后牛的数量。
+
+思路：dp数组存储每年成熟小母女的数量。因为只有成熟的母女才会继续生产牛。例：1，2，3，4，6 ... 即第N年后牛的数量等于第N - 1年牛的数量，加上第N - 3年成熟小母牛下的小母牛(3年成熟)。
+
+状态转移方程：dp[i] = dp[i - 1] + dp[i - 3], n > 3
+```python
+def cow(int n):
+    if i < 4:
+    	return n
+	
+    dp = [None] * (n + 1)
+
+    for i in range(5):
+        dp[i] = i
+
+    for i in range(5, n+1):
+        dp[i] = dp[i - 1] + dp[i - 3]
+   
+    return dp[n]
 ```
