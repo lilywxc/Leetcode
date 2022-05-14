@@ -1692,13 +1692,20 @@ class Solution:
 ### Dynamic Programming
 
 Example: Bowling
-Given n pins 0, 1, ..., n-1, where pin i has value V_i - we get Vi point by hitting 1 pin i, and get V_i * V_i+1 by hitting 2 pins i and i + 1. We want to get max score
+Given n pins 0, 1, ..., n-1, where pin i has value V_i. We get V_i point by hitting 1 pin i, and get V_i * V_i+1 by hitting 2 pins i and i + 1. We want to get max score.
 
 SIRTBT
-- Subproblem: F(i)
-- good subproblem: prefixes x[:i], suffixes x[i:], substrings x[i:j]
-- Original B(i) = max{B(i+1)}
+- Subproblem: B(i) = max score possible starting with pin i, i + 1, ..., n-1
+- Original B(0)
+- B(i) = max{B(i+1), B(i+1) + V_i, B(i+2) + V_i*V_i+1}
+- Topological order: decreasing i, i.e. for i = n, n-1, ...., 0
+- Base: B(n) = 0
+- Time: O(n)
 
+Good subproblem: 
+- prefixes x[:i] O(n)
+- suffixes x[i:] O(n)
+- substrings x[i:j] O(n^2)
 
 
 
