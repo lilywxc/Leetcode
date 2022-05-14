@@ -63,11 +63,14 @@
 		* [37. Sudoku Solver](#37-Sudoku-Solver)
 		* [51. N Queens](#51-N-Queens)
 * [Dynamic Programming](#Dynamic-Programming)
-    * [70. Climbing Stairs](#70-Climbing-Stairs)
-    * [198. House Robber](#198-House-Robber)
-    * [213. House Robber II](#213-House-Robber-II)
-    * [Mail Misalignment](#Mail-Misalignment)
-    * [Cow](#Cow)
+	* [Fibonacci](#Fibonacci)
+		* [70. Climbing Stairs](#70-Climbing-Stairs)
+		* [198. House Robber](#198-House-Robber)
+		* [213. House Robber II](#213-House-Robber-II)
+		* [Mail Misalignment](#Mail-Misalignment)
+		* [Cow](#Cow)
+	* [Matrix path](#Matrix-path) 
+		* [64. Minimum Path Sum](#64-Minimum-Path-Sum)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1719,6 +1722,8 @@ Good subproblem:
 - suffixes x[i:] O(n)
 - substrings x[i:j] O(n^2)
 
+#### Fibonacci
+
 #### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)
 ```python
 # Solution 1: bottom up DP (constant space)
@@ -1875,4 +1880,26 @@ def cow(int n):
         dp[i] = dp[i - 1] + dp[i - 3]
    
     return dp[n]
+```
+
+#### Matrix path
+
+#### [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
+```python
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        
+        # base case
+        for i in range(1, n):
+            grid[0][i] += grid[0][i-1]
+        for i in range(1, m):
+            grid[i][0] += grid[i-1][0]
+            
+        for i in range(1, m):
+            for j in range(1, n):
+                grid[i][j] += min(grid[i-1][j], grid[i][j-1])
+                
+        return grid[-1][-1]
 ```
