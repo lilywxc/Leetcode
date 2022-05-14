@@ -1955,6 +1955,7 @@ Now, add a new element a(i) with the same difference as previous ones. Note that
 
 And there is one more sequence: a(0), ..., a(i). Therefore, dp[i] = dp[i-1] + 1. And the total number of arithmetic slices in a(0), ..., a(i) is dp[i-1] + dp[i] = dp[i-1] + (dp[i-1] + 1)
 ```python
+# Solution 1: DP
 class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         n = len(nums)
@@ -1964,5 +1965,19 @@ class Solution:
             if nums[i-1] - nums[i-2] == nums[i] - nums[i-1]:
                 dp[i] = dp[i-1] + 1
             ans += dp[i]
+        return ans
+    
+# Solution 2: DP with constant space        
+class Solution:
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp, dpPrev = 0, 0
+        ans = 0
+        for i in range(2, n):
+            if nums[i-1] - nums[i-2] == nums[i] - nums[i-1]:
+                dp = dpPrev + 1
+            ans += dp
+            dpPrev = dp
+            dp = 0
         return ans
 ```
