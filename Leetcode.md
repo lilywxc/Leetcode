@@ -69,8 +69,9 @@
 		* [213. House Robber II](#213-House-Robber-II)
 		* [Mail Misalignment](#Mail-Misalignment)
 		* [Cow](#Cow)
-	* [Matrix path](#Matrix-path) 
+	* [Matrix Path](#Matrix-Path) 
 		* [64. Minimum Path Sum](#64-Minimum-Path-Sum)
+		* [62. Unique Paths](#62-Unique-Paths)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1882,7 +1883,7 @@ def cow(int n):
     return dp[n]
 ```
 
-#### Matrix path
+#### Matrix Path
 
 #### [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
 ```python
@@ -1903,3 +1904,24 @@ class Solution:
                 
         return grid[-1][-1]
 ```
+
+#### [62. Unique Paths](https://leetcode.com/problems/unique-paths/description/)
+```python
+# Solution 1: DP
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        d = [[1] * n for _ in range(m)]
+
+        for r in range(1, m):
+            for c in range(1, n):
+                d[r][c] = d[r - 1][c] + d[r][c - 1]
+
+        return d[-1][-1]
+    
+# Solution 2: Math
+from math import factorial
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        return factorial(m + n - 2) // (factorial(n - 1) * factorial(m - 1))
+```
+
