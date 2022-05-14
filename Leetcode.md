@@ -1694,13 +1694,13 @@ class Solution:
 Example: Bowling
 Given n pins 0, 1, ..., n-1, where pin i has value V_i. We get V_i point by hitting 1 pin i, and get V_i * V_i+1 by hitting 2 pins i and i + 1. We want to get max score.
 
-SIRTBT
-- Subproblem: B(i) = max score possible starting with pin i, i + 1, ..., n-1
-- Original B(0)
-- B(i) = max{B(i+1), B(i+1) + V_i, B(i+2) + V_i*V_i+1}
-- Topological order: decreasing i, i.e. for i = n, n-1, ...., 0
-- Base: B(n) = 0
-- Time: O(n)
+**SORTBT**
+- **S**ubproblem: B(i) = max score possible starting with pin i, i + 1, ..., n-1
+- **O**riginal: B(0)
+- **R**elate: B(i) = max{B(i+1), B(i+1) + V_i, B(i+2) + V_i*V_i+1}
+- **T**opological order: decreasing i, i.e. for i = n, n-1, ...., 0
+- **B**ase: B(n) = 0
+- **T**ime: O(n)
 
 Bottom up
 ```python
