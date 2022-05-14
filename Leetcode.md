@@ -65,7 +65,7 @@
 * [Dynamic Programming](#Dynamic-Programming)
     * [70. Climbing Stairs](#70-Climbing-Stairs)
     * [198. House Robber](#198-House-Robber)
-    * [213. House Robber II](213-House-Robber-II)
+    * [213. House Robber II](#213-House-Robber-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
