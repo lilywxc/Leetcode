@@ -1702,7 +1702,7 @@ Given n pins 0, 1, ..., n-1, where pin i has value V_i. We get V_i point by hitt
 - **B**ase: B(n) = 0
 - **T**ime: O(n)
 
-Bottom up
+Bottom up DP implementation
 ```python
 base     B(n) = 0
 topo     for i = n, n-1, ..., 0:
