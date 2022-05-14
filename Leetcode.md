@@ -1702,6 +1702,13 @@ SIRTBT
 - Base: B(n) = 0
 - Time: O(n)
 
+Bottom up
+```python
+base     B(n) = 0
+topo     for i = n, n-1, ..., 0:
+relate      B(i) = max{B(i+1), B(i+1) + V_i, B(i+2) + V_i*V_i+1}
+original    return B(0)
+```	
 Good subproblem: 
 - prefixes x[:i] O(n)
 - suffixes x[i:] O(n)
