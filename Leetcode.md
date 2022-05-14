@@ -1690,6 +1690,10 @@ class Solution:
 ```
 
 ### Dynamic Programming
+
+Example: Bowling
+Given n pins 0, 1, ..., n-1, where pin i has value V_i - we get Vi point by hitting 1 pin i, and get V_i * V_i+1 by hitting 2 pins i and i + 1. We want to get max score
+
 SIRTBT
 - Subproblem: F(i)
 - good subproblem: prefixes x[:i], suffixes x[i:], substrings x[i:j]
