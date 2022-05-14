@@ -72,6 +72,8 @@
 	* [Matrix Path](#Matrix-Path) 
 		* [64. Minimum Path Sum](#64-Minimum-Path-Sum)
 		* [62. Unique Paths](#62-Unique-Paths)
+	* [Range](#Range)
+		* [303. Range Sum Query](#303-Range-Sum-Query)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1925,3 +1927,25 @@ class Solution:
         return factorial(m + n - 2) // (factorial(n - 1) * factorial(m - 1))
 ```
 
+### Range
+
+#### [303. Range Sum Query](https://leetcode.com/problems/range-sum-query-immutable/)
+```python
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.preSum = nums
+        for i in range(len(nums)-1):
+            self.preSum[i+1] += self.preSum[i]
+            
+    def sumRange(self, left: int, right: int) -> int:
+        if left == 0: 
+            return self.preSum[right]
+        
+        return self.preSum[right] - self.preSum[left-1]
+```
+
+#### []()
+```python
+
+```
