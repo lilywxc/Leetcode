@@ -63,7 +63,8 @@
 		* [37. Sudoku Solver](#37-Sudoku-Solver)
 		* [51. N Queens](#51-N-Queens)
 * [Dynamic Programming](#Dynamic-Programming)
-
+    * [70. Climbing Stairs](#70-Climbing-Stairs)
+    * 
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1690,6 +1691,7 @@ class Solution:
 ```
 
 ### Dynamic Programming
+Dynamic Programming is recursive approach with memorization
 
 Example: Bowling
 Given n pins 0, 1, ..., n-1, where pin i has value V_i. We get V_i point by hitting 1 pin i, and get V_i * V_i+1 by hitting 2 pins i and i + 1. We want to get max score.
@@ -1714,5 +1716,44 @@ Good subproblem:
 - suffixes x[i:] O(n)
 - substrings x[i:j] O(n^2)
 
+#### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)
+```python
+# Solution 1: bottom up DP
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        dp = {}
+        dp[1] = 1
+        dp[2] = 2
+        
+        for i in range(3, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
 
+        return dp[n]
+    
+# Solution 2: bottom up DP (constant space)
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n == 1:
+            return 1
+        
+        first, second = 1, 2
+        
+        for i in range(3, n + 1):
+            tmp = first + second
+            first = second
+            second = tmp
+            
+        return second
 
+# Solution 3: top down DP
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        def climb(n):
+            if n not in dic:
+                dic[n] = climb(n-1) + climb(n-2)
+
+            return dic[n]  
+    
+        dic = {1:1, 2:2}
+        return climb(n)
+```
