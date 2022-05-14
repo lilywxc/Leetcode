@@ -64,7 +64,7 @@
 		* [51. N Queens](#51-N-Queens)
 * [Dynamic Programming](#Dynamic-Programming)
     * [70. Climbing Stairs](#70-Climbing-Stairs)
-    * 
+    * [198. House Robber](#198-House-Robber)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1756,4 +1756,46 @@ class Solution:
     
         dic = {1:1, 2:2}
         return climb(n)
+```
+
+#### [198. House Robber](https://leetcode.com/problems/house-robber/)
+```python
+# Solution 1: DP (constant space)
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        N = len(nums)
+        rob_next_next = 0
+        rob_next = nums[N - 1]
+        
+        for i in range(N - 2, -1, -1):
+            maxRobbedAmount = max(rob_next, rob_next_next + nums[i])
+            rob_next_next = rob_next
+            rob_next = maxRobbedAmount
+            
+        return rob_next
+            
+# Solution 2: DP 
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        # subproblem: suffix dp[i:]
+        # topo. order: N, N-1, ..., 0
+        
+        if not nums:
+            return 0
+        
+        N = len(nums)
+        maxRobbedAmount = [None for _ in range(N + 1)]
+        
+        # Base case
+        maxRobbedAmount[N], maxRobbedAmount[N - 1] = 0, nums[N - 1]
+        
+        # relate
+        for i in range(N - 2, -1, -1):
+            maxRobbedAmount[i] = max(maxRobbedAmount[i + 1], maxRobbedAmount[i + 2] + nums[i])
+            
+        # original
+        return maxRobbedAmount[0] 
 ```
