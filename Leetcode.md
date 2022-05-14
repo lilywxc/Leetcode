@@ -76,7 +76,8 @@
 		* [303. Range Sum Query](#303-Range-Sum-Query)
 		* [413. Arithmetic Slices](#413-Arithmetic-Slices)
 	* [Breakdown](#Breakdown)
-		* [Integer Break](#Integer-Break)
+		* [343. Integer Break](#343-Integer-Break)
+		* [279. Perfect Squares](#279-Perfect-Squares) 
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2023,4 +2024,28 @@ class Solution:
         product *= n;
         
         return product;
+```
+
+#### [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
+```python
+# Solution 1: DP - O(N*√N) time and O(N) space
+# numSquares(n) = min(numSquares(n-k) + 1) ∀k∈{square numbers}
+class Solution:
+    def numSquares(self, n: int) -> int:
+
+        square_nums = [i**2 for i in range(0, int(math.sqrt(n))+1)]
+        
+        dp = [float('inf')] * (n+1)
+        dp[0] = 0 # base case
+        
+        for i in range(1, n+1):
+            for square in square_nums:
+                if i < square:
+                    break
+                dp[i] = min(dp[i], dp[i-square] + 1)
+        
+        return dp[-1]
+```
+```python
+
 ```
