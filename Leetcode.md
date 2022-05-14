@@ -75,6 +75,8 @@
 	* [Range](#Range)
 		* [303. Range Sum Query](#303-Range-Sum-Query)
 		* [413. Arithmetic Slices](#413-Arithmetic-Slices)
+	* [Breakdown](#Breakdown)
+		* [Integer Break](#Integer-Break)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1920,7 +1922,8 @@ class Solution:
                 d[r][c] = d[r - 1][c] + d[r][c - 1]
 
         return d[-1][-1]
-    
+```
+```python
 # Solution 2: Math
 from math import factorial
 class Solution:
@@ -1980,4 +1983,44 @@ class Solution:
             dpPrev = dp
             dp = 0
         return ans
+```
+
+#### Breakdown
+
+#### [343. Integer Break](https://leetcode.com/problems/integer-break/description/)
+write i as: i = j + S where S = i - j corresponds to either one number or a sum of two or more numbers
+1. S is a single number: dp[i] = j * (i - j)
+2. S is a sum of at least 2 numbers: dp[i] = j * dp[i - j]
+```python
+# Solution 1: DP
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        
+        dp = [0] * (n + 1);
+        dp[1] = 1
+        
+        for i in range(2, n + 1):
+            for j in range(1, i):
+                dp[i] = max(dp[i], max(j * dp[i - j], j * (i - j)))
+    
+        return dp[n]
+```
+```python
+# Solution 2: Math
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        if n==2:
+            return 1
+        
+        if n==3: 
+            return 2
+        
+        product = 1
+        while n > 4:
+            product *= 3
+            n -= 3
+        
+        product *= n;
+        
+        return product;
 ```
