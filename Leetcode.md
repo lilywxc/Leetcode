@@ -65,6 +65,7 @@
 * [Dynamic Programming](#Dynamic-Programming)
     * [70. Climbing Stairs](#70-Climbing-Stairs)
     * [198. House Robber](#198-House-Robber)
+    * [213. House Robber II](213-House-Robber-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1798,4 +1799,30 @@ class Solution:
             
         # original
         return maxRobbedAmount[0] 
+```
+
+#### [213. House Robber II](https://leetcode.com/problems/house-robber-ii/)
+```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+          
+        if not nums or len(nums) == 0:
+            return 0
+        
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_helper(nums):
+            N = len(nums)
+            rob_next_next = 0
+            rob_next = nums[N - 1]
+
+            for i in range(N - 2, -1, -1):
+                maxRobbedAmount = max(rob_next, rob_next_next + nums[i])
+                rob_next_next = rob_next
+                rob_next = maxRobbedAmount
+
+            return rob_next
+        
+        return max(rob_helper(nums[1:]), rob_helper(nums[:-1]))
 ```
