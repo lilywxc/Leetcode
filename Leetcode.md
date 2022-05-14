@@ -1947,10 +1947,13 @@ class NumArray:
 ```
 
 #### [413. Arithmetic Slices](https://leetcode.com/problems/arithmetic-slices/)
-use dp[i] to store the number of arithmetic slices possible in the range (k,i) and not in any range (k,j) such that j<i. 
-Again, k refers to the minimum index possible such that (k,j) constitutes a valid Arithmetic Slice.
+use dp[i] to store the number of arithmetic slices possible in the range (k,i), where k refers to the minimum index such that the range (k,i) constitutes a valid arithmetic slice, and (k,i) is not a part of any range (k,j) where j<i. 
 
-consider the range (0, i-1), constituted by the elements a(0), ..., a(i-1). Let's denote the number of arithmetic slices as dp[i-1]. Now, add a new element a(i) with the same difference as previous ones. Note that a(1), ..., a(i) can be mapped perfectly to a(0), ..., a(i-1). Thus a(1), ..., a(i) has the same number of arithmetic slices as a(0), ..., a(i-1), which is dp[i-1]. And there is one more sequence: a(0), ..., a(i). Therefore, dp[i] = dp[i-1] + 1. And the total number of arithmetic slices in a(0), ..., a(i) is dp[i-1] + dp[i] = dp[i-1] + (dp[i-1] + 1)
+consider the range (0, i-1), constituted by the elements a(0), ..., a(i-1). Let's denote the number of arithmetic slices as dp[i-1]. 
+
+Now, add a new element a(i) with the same difference as previous ones. Note that a(1), ..., a(i) can be mapped perfectly to a(0), ..., a(i-1). Thus a(1), ..., a(i) has the same number of arithmetic slices as a(0), ..., a(i-1), which is dp[i-1]. 
+
+And there is one more sequence: a(0), ..., a(i). Therefore, dp[i] = dp[i-1] + 1. And the total number of arithmetic slices in a(0), ..., a(i) is dp[i-1] + dp[i] = dp[i-1] + (dp[i-1] + 1)
 ```python
 class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
