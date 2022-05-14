@@ -62,6 +62,8 @@
 		* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
 		* [37. Sudoku Solver](#37-Sudoku-Solver)
 		* [51. N Queens](#51-N-Queens)
+* [Dynamic Programming](#Dynamic-Programming)
+
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -1686,3 +1688,13 @@ class Solution:
         
         return ans
 ```
+
+### Dynamic Programming
+SIRTBT
+- Subproblem: F(i)
+- good subproblem: prefixes x[:i], suffixes x[i:], substrings x[i:j]
+- Original B(i) = max{B(i+1)}
+
+
+
+
