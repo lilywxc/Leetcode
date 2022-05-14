@@ -1586,7 +1586,6 @@ class Solution:
 ```
 
 #### [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/submissions/)
-#### [37. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/submissions/)
 ```python
 from collections import defaultdict
 class Solution:
@@ -1648,5 +1647,42 @@ class Solution:
 
 #### [51. N Queens](https://leetcode.com/problems/n-queens/description/)
 ```python
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        
+        def create_board(board):
+            res = []
+            for row in board:
+                res.append("".join(row))
+            return res
+        
+        def backtrack(row, diagonals, anti_diagonals, cols, board):
+            if row == n:
+                ans.append(create_board(board))
+                return
 
+            for col in range(n):
+                curr_diagonal = row - col
+                curr_anti_diagonal = row + col
+                
+                if (col in cols or curr_diagonal in diagonals or curr_anti_diagonal in anti_diagonals):
+                    continue
+
+                cols.add(col)
+                diagonals.add(curr_diagonal)
+                anti_diagonals.add(curr_anti_diagonal)
+                board[row][col] = "Q"
+
+                backtrack(row + 1, diagonals, anti_diagonals, cols, board)
+
+                cols.remove(col)
+                diagonals.remove(curr_diagonal)
+                anti_diagonals.remove(curr_anti_diagonal)
+                board[row][col] = "."
+
+        ans = []
+        empty_board = [["."] * n for _ in range(n)]
+        backtrack(0, set(), set(), set(), empty_board)
+        
+        return ans
 ```
