@@ -2254,7 +2254,7 @@ class Solution:
 
 #### [1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
 
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/1143.%20Longest%20Common%20Subsequence.png" width="500">
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/1143.%20Longest%20Common%20Subsequence.png" width="350">
 
 ```python
 # Solution: DP with space optimization
@@ -2276,13 +2276,13 @@ class Solution:
                 if text2[col] == text1[row]:
                     current[row] = 1 + previous[row + 1] # previous is the "t" col in graph, and previous[row + 1] is the yellow "2"
                 else:
-                    current[row] = max(previous[row], current[row + 1]) # current is the "a" col in graph, and current[row + 1] is the "2" below green "3"
+                    current[row] = max(previous[row], current[row + 1]) # current[row + 1] is the "2" below green "3"
                     
             previous, current = current, previous
         
         return previous[0]
 
-
+# Solution: DP
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         n1 = len(text1)
