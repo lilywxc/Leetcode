@@ -2208,6 +2208,8 @@ class Solution:
        
         return length 
 ```
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/376.%20Wiggle%20Subsequence.png" width="700">
+
 
 ```python
 # Solution: space optimized DP
