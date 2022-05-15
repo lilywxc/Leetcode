@@ -87,6 +87,9 @@
 	* [01 Bag](#01-Bag)
 		* [416. Partition Equal Subset Sum](#416-Partition-Equal-Subset-Sum)
 		* [494. Target Sum](#494-Target-Sum)
+		* [474. Ones and Zeroes](#474-Ones-and-Zeroes)
+		* [322. Coin Change](#322-Coin-Change)
+		* [518. Coin Change 2](#518-Coin-Change-2)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2448,7 +2451,7 @@ class Solution:
                 
         return dp[n][subset_sum]
     
-
+# space optimization
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         total_sum = sum(nums)
@@ -2502,3 +2505,91 @@ class Solution:
         return count[target]
 ```
 
+#### [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/description/)
+思路：多维费用的 0-1 背包问题，有两个背包大小，0 的数量和 1 的数量。
+```python
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+              
+        for s in strs:
+            zeros, ones = 0, 0
+            
+            for c in s:
+                if c == '0':
+                    zeros += 1
+                else:
+                    ones += 1
+              
+            for i in range(m, zeros - 1, -1):
+                  for j in range(n, ones - 1, -1):
+                        dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1)
+              
+        return dp[m][n]
+```
+
+#### [322. Coin Change](https://leetcode.com/problems/coin-change/description/)
+思路：完全背包问题, 只需要将 0-1 背包的逆序遍历 dp 数组改为正序遍历即可。
+```python
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        n = len(coins)
+        dp = [[float('inf')] * (amount + 1) for _ in range(n + 1)]
+        dp[0][0] = 0
+        
+        for i in range(1, n + 1):
+            coin = coins[i - 1]
+            for j in range(amount + 1):
+                if j < coin:
+                    dp[i][j] = dp[i - 1][j]
+                else:
+                    dp[i][j] = min(dp[i - 1][j], dp[i][j - coin] + 1)
+            
+        return dp[n][amount] if dp[n][amount] != float('inf') else -1 
+	
+# space optimization
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if amount == 0:
+            return 0
+        
+        dp = [float('inf')] * (amount + 1)
+        dp[0] = 0
+        for coin in coins:
+            for i in range(coin, amount + 1):
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+                
+        return dp[amount] if dp[amount] != float('inf') else -1 
+```
+
+#### [518. Coin Change 2](https://leetcode.com/problems/coin-change-2/description/)
+思路：完全背包问题
+```python
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        n = len(coins)
+        dp = [[0] * (amount + 1) for _ in range(n + 1)]
+        dp[0][0] = 1
+        
+        for i in range(1, n + 1):
+            coin = coins[i - 1]
+            
+            for j in range(amount + 1):
+                if j < coin:
+                    dp[i][j] = dp[i - 1][j]
+                else:
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - coin]
+            
+        return dp[n][amount]
+
+# space optimization
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+        for coin in coins:
+            for i in range(coin, amount + 1):
+                dp[i] = dp[i] + dp[i - coin]
+                
+        return dp[amount]
+```
