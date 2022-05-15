@@ -83,6 +83,7 @@
 		* [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
 		* [646. Maximum Length of Pair Chain](#646-Maximum-Length-of-Pair-Chain)
 		* [376. Wiggle Subsequence](#376-Wiggle-Subsequence)
+		* [1143. Longest Common Subsequence](#1143-Longest-Common-Subsequence)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2249,4 +2250,51 @@ class Solution:
                     down[i] = max(down[i], up[j] + 1)
                     
         return 1 + max(down[n - 1], up[n - 1])
+```
+
+#### [1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/1143.%20Longest%20Common%20Subsequence.png" width="700">
+
+```python
+# Solution: DP with space optimization
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        
+        if len(text2) < len(text1):
+            text1, text2 = text2, text1
+   
+        n1 = len(text1)
+        n2 = len(text2)
+
+        previous = [0] * (n1 + 1)
+        current = [0] * (n1 + 1)
+        
+        # Iterate up each column, starting from the last one.
+        for col in range(n2 - 1, -1, -1):
+            for row in range(n1 - 1, -1, -1):
+                if text2[col] == text1[row]:
+                    current[row] = 1 + previous[row + 1] # the previous is the 
+                else:
+                    current[row] = max(previous[row], current[row + 1])
+                    
+            previous, current = current, previous
+        
+        return previous[0]
+
+
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        n1 = len(text1)
+        n2 = len(text2)
+        dp_grid = [[0] * (n2 + 1) for _ in range(n1 + 1)]
+        
+        for col in range(n2 - 1, -1, -1):
+            for row in range(n1 - 1, -1, -1):
+                if text2[col] == text1[row]:
+                    dp_grid[row][col] = 1 + dp_grid[row + 1][col + 1]
+                else:
+                    dp_grid[row][col] = max(dp_grid[row + 1][col], dp_grid[row][col + 1])
+        
+        return dp_grid[0][0]
 ```
