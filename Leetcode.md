@@ -2270,13 +2270,16 @@ class Solution:
         previous = [0] * (n1 + 1)
         current = [0] * (n1 + 1)
         
-        # Iterate up each column, starting from the last one.
+        # fix the suffix of text 2 (col), and iterate up each letter in text 1
         for col in range(n2 - 1, -1, -1):
             for row in range(n1 - 1, -1, -1):
                 if text2[col] == text1[row]:
-                    current[row] = 1 + previous[row + 1] # previous is the "t" col in graph, and previous[row + 1] is the yellow "2"
+                    current[row] = 1 + previous[row + 1] # previous is the "t" col in graph
+		    					 # previous[row + 1] is the yellow "2"
+							 # current is the "a" col in graph
+							 # curret[row] is the green "3"
                 else:
-                    current[row] = max(previous[row], current[row + 1]) # current[row + 1] is the "2" below green "3"
+                    current[row] = max(previous[row], current[row + 1])
                     
             previous, current = current, previous
         
