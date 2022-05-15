@@ -2414,7 +2414,7 @@ class Solution:
         return dp[subset_sum]
 ```
 
-#### [494. Target Sum]()
+#### [494. Target Sum](https://leetcode.com/problems/target-sum/description/)
 思路：背包大小为 target + sum(nums)//2 的0-1背包问题
 ```
                   sum(P) - sum(N) = target
@@ -2425,6 +2425,7 @@ sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
 
 dp[i][j] is the number of ways to make the subset_sum = j using elements in subset {nums[0], ..., nums[i]}       
 ```python
+# DP
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         total_sum = sum(nums)
@@ -2439,8 +2440,11 @@ class Solution:
         dp[0][0] = 1
         for i in range(1, n + 1):
             num = nums[i - 1]
-            for j in range(subset_sum + 1):
-                dp[i][j] = dp[i - 1][j] + dp[i - 1][j - num]
+            for j in range(subset_sum + 1):   
+	    	if j < curr:
+                    dp[i][j] = dp[i - 1][j]
+                else:
+                    dp[i][j] = dp[i - 1][j] + dp[i - 1][j - num]
                 
         return dp[n][subset_sum]
     
@@ -2461,5 +2465,40 @@ class Solution:
                 dp[j] = dp[j] + dp[j - num]
                 
         return dp[subset_sum]
+```
+```python
+# DFS
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        def findTarget(i, target):
+            if (i, target) not in cache:
+                r = 0
+                
+                if i == len(nums):
+                    if target == 0:
+                        r = 1
+                else:
+                    r = findTarget(i + 1, target - nums[i]) + findTarget(i + 1, target + nums[i])
+                cache[(i, target)] = r
+                
+            return cache[(i, target)]
+        
+        cache = {}
+        return findTarget(0, target)
+```
+```python
+# BFS
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        count = defaultdict(int)
+        count[0] = 1
+        for x in nums:
+            step = defaultdict(int)
+            for y in count:
+                step[y + x] += count[y]
+                step[y - x] += count[y]
+            count = step
+
+        return count[target]
 ```
 
