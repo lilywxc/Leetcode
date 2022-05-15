@@ -2420,7 +2420,9 @@ class Solution:
                   sum(P) - sum(N) = target
 sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
                        2 * sum(P) = target + sum(nums)
-```		       
+		       	   sum[P] = [target + sum(nums)] // 2
+```
+
 dp[i][j] is the number of ways to make the subset_sum = j using elements in subset {nums[0], ..., nums[i]}       
 ```python
 class Solution:
