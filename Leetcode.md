@@ -2362,9 +2362,36 @@ dp[i][j] = true if the sum j can be formed by elements in subset {nums[0], ..., 
 dp[i][j] = true in two cases:
 1. sum j can be formed without including nums[i], i.e., dp[i-1][j] == true
 2. sum j can be formed by including nums[i], i.e., dp[i−1][j−nums[i]]==true
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/416.%20Partition%20Equal%20Subset%20Sum.png" width="350">
+
 ```python
+# DP with constant space
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
+        total_sum = sum(nums)
+        
+        if total_sum % 2 != 0:
+            return False
+        
+        subset_sum = total_sum // 2
+
+        # construct a dp table of size (subset_sum + 1)
+        dp = [False] * (subset_sum + 1)
+        dp[0] = True
+        for curr in nums:
+            for j in range(subset_sum, curr - 1, -1):
+                dp[j] = dp[j] or dp[j - curr]
+
+        return dp[subset_sum]
+
+# DP
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        '''
+        dp[i][j] = true if the sum j can be formed by elements in 
+        subset {nums[0], ..., nums[i]}
+        '''
         total_sum = sum(nums)
 
         if total_sum % 2 != 0:
