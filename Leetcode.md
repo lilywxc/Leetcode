@@ -2363,7 +2363,7 @@ dp[i][j] = true in two cases:
 1. sum j can be formed without including nums[i], i.e., dp[i-1][j] == true
 2. sum j can be formed by including nums[i], i.e., dp[i−1][j−nums[i]]==true
 
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/416.%20Partition%20Equal%20Subset%20Sum.png" width="350">
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/416.%20Partition%20Equal%20Subset%20Sum.png" width="500">
 
 ```python
 # DP with constant space
