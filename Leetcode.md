@@ -82,6 +82,7 @@
 	* [Subsequence](#Subsequence)
 		* [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
 		* [646. Maximum Length of Pair Chain](#646-Maximum-Length-of-Pair-Chain)
+		* [376. Wiggle Subsequence](#376-Wiggle-Subsequence)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2185,3 +2186,65 @@ class Solution(object):
         return max(dp)
 ```
 
+#### [376. Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/)
+```python
+# Solution: greedy
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        if n < 2:
+            return len(nums)
+
+        length = 1
+        sign = 0
+        for i in range(1, n):
+            if nums[i] < nums[i-1] and sign != -1: # peak
+                sign = -1
+                length += 1
+            elif nums[i] > nums[i-1] and sign != 1: # valley
+                sign = 1
+                length += 1
+       
+        return length 
+```
+
+```python
+# Solution: space optimized DP
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        if n < 2:
+            return len(nums)
+        
+        down, up = 1, 1
+        
+        for i in range(1, n):
+            if nums[i] > nums[i - 1]:
+                up = down + 1
+            elif nums[i] < nums[i - 1]:
+                down = up + 1
+                
+        return max(down, up)
+
+# Solution: DP
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        if n < 2:
+            return len(nums)
+        
+        up = [0] * n
+        down = [0] * n
+        
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    up[i] = max(up[i], down[j] + 1)
+                elif  nums[i] < nums[j]:
+                    down[i] = max(down[i], up[j] + 1)
+                    
+        return 1 + max(down[n - 1], up[n - 1])
+```
