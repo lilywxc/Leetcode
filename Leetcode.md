@@ -86,6 +86,7 @@
 		* [1143. Longest Common Subsequence](#1143-Longest-Common-Subsequence)
 	* [01 Bag](#01-Bag)
 		* [416. Partition Equal Subset Sum](#416-Partition-Equal-Subset-Sum)
+		* [494. Target Sum](#494-Target-Sum)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2358,6 +2359,8 @@ Variants:
 - 其它：物品之间相互约束或者依赖
 
 #### [416. Partition Equal Subset Sum](#416-Partition-Equal-Subset-Sum)
+思路：背包大小为 total_sum//2 的0-1背包问题
+
 dp[i][j] = true if the sum j can be formed by elements in subset {nums[0], ..., nums[i]}, otherwise dp[i][j] = false
 dp[i][j] = true in two cases:
 1. sum j can be formed without including nums[i], i.e., dp[i-1][j] == true
@@ -2366,26 +2369,6 @@ dp[i][j] = true in two cases:
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/416.%20Partition%20Equal%20Subset%20Sum.png" width="500">
 
 ```python
-# DP with constant space
-class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
-        total_sum = sum(nums)
-        
-        if total_sum % 2 != 0:
-            return False
-        
-        subset_sum = total_sum // 2
-
-        # construct a dp table of size (subset_sum + 1)
-        dp = [False] * (subset_sum + 1)
-        dp[0] = True
-        for curr in nums:
-            for j in range(subset_sum, curr - 1, -1):
-                dp[j] = dp[j] or dp[j - curr]
-
-        return dp[subset_sum]
-
-# DP
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         '''
@@ -2410,4 +2393,71 @@ class Solution:
                 else:
                     dp[i][j] = dp[i - 1][j] or dp[i - 1][j - curr]
         return dp[n][subset_sum]
+	
+# DP with constant space
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        total_sum = sum(nums)
+        
+        if total_sum % 2 != 0:
+            return False
+        
+        subset_sum = total_sum // 2
+
+        # construct a dp table of size (subset_sum + 1)
+        dp = [False] * (subset_sum + 1)
+        dp[0] = True
+        for num in nums:
+            for j in range(subset_sum, num - 1, -1):
+                dp[j] = dp[j] or dp[j - num]
+
+        return dp[subset_sum]
 ```
+
+#### [494. Target Sum]()
+思路：背包大小为 target + sum(nums)//2 的0-1背包问题
+
+                  sum(P) - sum(N) = target
+sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
+                       2 * sum(P) = target + sum(nums)
+		       
+dp[i][j] is the number of ways to make the subset_sum = j using elements in subset {nums[0], ..., nums[i]}       
+```python
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        total_sum = sum(nums)
+        
+        if (total_sum + target) % 2 != 0 or total_sum < target:
+            return 0
+        
+        subset_sum = (total_sum + target) // 2
+        n = len(nums)
+        
+        dp = defaultdict(lambda: defaultdict(int)) # target could be negative, can't use array
+        dp[0][0] = 1
+        for i in range(1, n + 1):
+            num = nums[i - 1]
+            for j in range(subset_sum + 1):
+                dp[i][j] = dp[i - 1][j] + dp[i - 1][j - num]
+                
+        return dp[n][subset_sum]
+    
+
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        total_sum = sum(nums)
+        
+        if (total_sum + target) % 2 != 0 or total_sum < target:
+            return 0
+        
+        subset_sum = (total_sum + target) // 2
+
+        dp = defaultdict(int)
+        dp[0] = 1
+        for num in nums:
+            for j in range(subset_sum, num - 1, -1):
+                dp[j] = dp[j] + dp[j - num]
+                
+        return dp[subset_sum]
+```
+
