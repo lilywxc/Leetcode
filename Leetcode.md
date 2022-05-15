@@ -2104,8 +2104,53 @@ class Solution:
 #### Subsequence
 
 #### [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
+let dp[i] represents the length of the longest increasing subsequence that ends with nums[i]. Then, dp[i] = max(dp[j] + 1) for all j where nums[j] < nums[i] and j < i.
 ```python
+# Solution 1: DP
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        dp = [1] * len(nums)
+        for i in range(1, len(nums)):
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
 
+        return max(dp)
+```
+
+Initialize an array sub which contains the first element of nums.
+Iterate through the input, starting from the second element. For each element num: If num is greater than any element in sub, then add num to sub. Otherwise, iterate through sub and find the first element that is greater than or equal to num. Replace that element with num.
+Return the length of sub.
+```python
+# Solution 2: math
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        def binarySearch(nums, key):
+            l = 0
+            r = len(nums) - 1
+
+            while l < r:
+                m = l + (r - l) // 2
+
+                if nums[m] == key:
+                    return m
+                elif nums[m] > key:
+                    r = m
+                else:
+                    l = m + 1
+
+            return l
+        
+        sub = [nums[0]]
+        for num in nums[1:]:
+            if num > sub[-1]:
+                sub.append(num)
+            else:
+                idx = binarySearch(sub, num)
+                sub[idx] = num
+        
+        return len(sub)
+    
 ```
 
 
