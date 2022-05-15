@@ -81,6 +81,7 @@
 		* [91. Decode Ways](#91-Decode-Ways)
 	* [Subsequence](#Subsequence)
 		* [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
+		* [646. Maximum Length of Pair Chain](#646-Maximum-Length-of-Pair-Chain)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2150,7 +2151,37 @@ class Solution:
                 sub[idx] = num
         
         return len(sub)
-    
 ```
 
+#### [646. Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)
+```python
+# Solution 1: interval
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+        N = len(pairs)
+        ans = 0
+        pairs.sort(key = lambda x: x[1])
+
+        prevEnd = float('-inf')
+        for head, tail in pairs:
+            if head > prevEnd:
+                prevEnd = tail
+                ans += 1
+                
+        return ans
+```
+```python
+# Solution 2: DP
+class Solution(object):
+    def findLongestChain(self, pairs):
+        pairs.sort()
+        dp = [1] * len(pairs)
+
+        for j in range(len(pairs)):
+            for i in range(j):
+                if pairs[i][1] < pairs[j][0]:
+                    dp[j] = max(dp[j], dp[i] + 1)
+
+        return max(dp)
+```
 
