@@ -2106,7 +2106,7 @@ class Solution:
 #### Subsequence
 
 #### [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
-let dp[i] represents the length of the longest increasing subsequence that ends with nums[i]. Then, dp[i] = max(dp[j] + 1) for all j where nums[j] < nums[i] and j < i.
+let dp[i] represents the length of the longest increasing subsequence that **ends with nums[i]**. Then, dp[i] = max(dp[j] + 1) for all j where nums[j] < nums[i] and j < i.
 ```python
 # Solution 1: DP
 class Solution:
