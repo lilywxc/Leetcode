@@ -79,6 +79,8 @@
 		* [343. Integer Break](#343-Integer-Break)
 		* [279. Perfect Squares dup](#279-Perfect-Squares-dup) 
 		* [91. Decode Ways](#91-Decode-Ways)
+	* [Subsequence](#Subsequence)
+		* [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2098,3 +2100,12 @@ class Solution:
                 
         return dp[len(s)]
 ```
+
+#### Subsequence
+
+#### [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
+```python
+
+```
+
+
