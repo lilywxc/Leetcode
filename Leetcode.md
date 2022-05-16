@@ -96,6 +96,7 @@
 		* [309. Best Time to Buy and Sell Stock with Cooldown](#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown)
 		* [714. Best Time to Buy and Sell Stock with Transaction Fee](#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee)
 		* [123. Best Time to Buy and Sell Stock III](#123-Best-Time-to-Buy-and-Sell-Stock-III)
+		* [188. Best Time to Buy and Sell Stock IV](#188-Best-Time-to-Buy-and-Sell-Stock-IV)
 
 
 ### Two Pointers
@@ -2727,5 +2728,66 @@ class Solution:
 
         return t2_profit
 ```
+for k transactions, see Leetcode-188 below
 
-#### []()
+#### [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
+```python
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        if k == 0:
+            return 0
+        
+        if 2*k >= len(prices): 
+            return sum(max(0, prices[i]-prices[i-1]) for i in range(1, len(prices)))
+    
+        profit = [0] * (k+1)
+        cost = [float('inf')] * (k+1)
+
+        profit[0] = 0
+        
+        for price in prices:
+            for i in range(1, k + 1):
+                cost[i] = min(cost[i], price - profit[i - 1])
+                profit[i] = max(profit[i], price - cost[i])
+
+        return profit[k]
+```
+Dynamic Programming approach: 
+
+dp[day_number][used_transaction_number][stock_holding_status]. The value of dp[i][j][l] represents the best profit we can have at the end of the i-th day, with j remaining transactions to make and l stocks.
+
+- Keep holding the stock: dp[i][j][1] = dp[i-1][j][1]
+- Keep not holding the stock: dp[i][j][0] = dp[i-1][j][0]
+- Buying, when j>0: dp[i][j][1] = dp[i-1][j-1][0] - prices[i]
+- Selling: dp[i][j][0] = dp[i-1][j][1] + prices[i]
+We can combine they together to find the maximum profit:
+- dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - prices[i])
+- dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1] + prices[i])
+
+```python
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        n = len(prices)
+
+        if k==0:
+            return 0
+
+        if 2*k >= len(prices): 
+            return sum(max(0, prices[i]-prices[i-1]) for i in range(1, len(prices)))
+    
+        dp = [[[float('-inf')]*2 for _ in range(k + 1)] for _ in range(n)]
+	
+	dp[0][0][0] = 0
+        dp[0][1][1] = -prices[0]
+
+        for i in range(1, n):
+            for j in range(k + 1):
+                dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1] + prices[i])
+                if j > 0:
+                    dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0]-prices[i])
+
+        res = max(dp[n-1][j][0] for j in range(k + 1))
+        
+        return res
+```
+
