@@ -102,6 +102,9 @@
 		* [72. Edit Distance](#72-Edit-Distance)
 		* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
 		* [204. Count Primes](#204-Count-Primes)
+* [Math](#Math)
+	* [Prime](#Prime)
+		* [204. Count Primes](#204-Count-Primes)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2898,6 +2901,8 @@ class Solution:
         return ans
 ```
 
+### Math
+#### Prime
 #### [204. Count Primes](https://leetcode.com/problems/count-primes/)
 ```python
 # Solution 1
