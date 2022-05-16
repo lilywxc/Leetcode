@@ -2634,8 +2634,20 @@ class Solution:
 #### Stock Trade
 
 #### [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
-```python
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/309.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown.png" width="500">
 
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        sold, held, reset = float('-inf'), float('-inf'), 0
+
+        for price in prices:
+            pre_sold = sold
+            sold = held + price
+            held = max(held, reset - price)
+            reset = max(reset, pre_sold)
+
+        return max(sold, reset)
 ```
 
 
