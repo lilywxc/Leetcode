@@ -90,8 +90,11 @@
 		* [474. Ones and Zeroes](#474-Ones-and-Zeroes)
 		* [322. Coin Change](#322-Coin-Change)
 		* [518. Coin Change 2](#518-Coin-Change-2)
-		* [139. Word Break](#139-Word-Break)
 		* [377. Combination Sum IV](#377-Combination-Sum-IV)
+		* [139. Word Break](#139-Word-Break)
+	* [Stock Trade](#Stock-Trade)
+		* [309. Best Time to Buy and Sell Stock with Cooldown](#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown)
+
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2589,10 +2592,26 @@ class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
         dp = [0] * (amount + 1)
         dp[0] = 1
+	
         for coin in coins:
             for i in range(coin, amount + 1):
                 dp[i] = dp[i] + dp[i - coin]
                 
+        return dp[amount]
+```
+
+#### [377. Combination Sum IV](377. Combination Sum IV)
+```python
+class Solution:
+    def combinationSum4(self, nums: List[int], amount: int) -> int:
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+
+        for i in range(amount + 1):
+            for num in nums:
+                if i >= num:
+                    dp[i] = dp[i] + dp[i - num]
+                    
         return dp[amount]
 ```
 
@@ -2612,8 +2631,12 @@ class Solution:
         return dp[n]
 ```
 
-#### [377. Combination Sum IV](377. Combination Sum IV)
+#### Stock Trade
+
+#### [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
 ```python
 
 ```
+
+
 
