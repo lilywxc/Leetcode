@@ -2698,19 +2698,8 @@ class Solution:
             s4 = max(s4, s3 + prices[i])
             print(prices[i], [s1, s2, s3, s4])
         return max(0, s4)
-    
-# generalization to k transactions
-def maxProfit(self, prices: List[int], k: int) -> int:
-    states = [0] + [-float('inf') for i in range(2*k)]
-    states[1] = -prices[0]
-
-    for i in range(1, len(prices)):
-        for j in range(k):
-            states[2*j + 1] = max(states[2*j + 1], states[2*j] - prices[i])
-            states[2*j + 2] = max(states[2*j + 2], states[2*j + 1] + prices[i])
-
-    return max(0, states[-1])
 ```
+see Leetcode-188 below for generalization for k transactions
 
 ```python
 class Solution:
@@ -2728,9 +2717,31 @@ class Solution:
 
         return t2_profit
 ```
-for k transactions, see Leetcode-188 below
+see Leetcode-188 below for generalization for k transactions
 
 #### [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
+```python
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        if k==0:
+            return 0
+
+        if 2*k >= len(prices): 
+            return sum(max(0, prices[i]-prices[i-1]) for i in range(1, len(prices)))
+    
+    
+        states = [0] + [-float('inf') for i in range(2*k)]
+        states[1] = -prices[0]
+
+        for i in range(1, len(prices)):
+            for j in range(k):
+                states[2*j + 1] = max(states[2*j + 1], states[2*j] - prices[i])
+                states[2*j + 2] = max(states[2*j + 2], states[2*j + 1] + prices[i])
+
+        return max(0, states[-1])
+```
+
+
 ```python
 class Solution:
     def maxProfit(self, k: int, prices: List[int]) -> int:
@@ -2752,7 +2763,8 @@ class Solution:
 
         return profit[k]
 ```
-Dynamic Programming approach: 
+
+Dynamic Programming approach (detailed version of solution #1)
 
 dp[day_number][used_transaction_number][stock_holding_status]. The value of dp[i][j][l] represents the best profit we can have at the end of the i-th day, with j remaining transactions to make and l stocks.
 
@@ -2760,6 +2772,7 @@ dp[day_number][used_transaction_number][stock_holding_status]. The value of dp[i
 - Keep not holding the stock: dp[i][j][0] = dp[i-1][j][0]
 - Buying, when j>0: dp[i][j][1] = dp[i-1][j-1][0] - prices[i]
 - Selling: dp[i][j][0] = dp[i-1][j][1] + prices[i]
+
 We can combine they together to find the maximum profit:
 - dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - prices[i])
 - dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1] + prices[i])
@@ -2784,7 +2797,7 @@ class Solution:
             for j in range(k + 1):
                 dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1] + prices[i])
                 if j > 0:
-                    dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0]-prices[i])
+                    dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - prices[i])
 
         res = max(dp[n-1][j][0] for j in range(k + 1))
         
