@@ -97,7 +97,10 @@
 		* [714. Best Time to Buy and Sell Stock with Transaction Fee](#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee)
 		* [123. Best Time to Buy and Sell Stock III](#123-Best-Time-to-Buy-and-Sell-Stock-III)
 		* [188. Best Time to Buy and Sell Stock IV](#188-Best-Time-to-Buy-and-Sell-Stock-IV)
-
+	* [String Operations](#String-Operations)
+		* [583. Delete Operation for Two Strings](#583-Delete-Operation-for-Two-Strings)
+		* [72. Edit Distance](#72-Edit-Distance)
+		* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2804,3 +2807,104 @@ class Solution:
         return res
 ```
 
+#### String Operations
+
+#### [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/)
+```python
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        '''
+        this problem is equivalent to longest common substring
+        '''
+        m = len(word1)
+        n = len(word2)
+        
+        dp = [[0] * (n+1) for _ in range(m+1)]
+        
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                if word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+                    
+        return m + n - 2 * dp[m][n]
+```
+
+#### [72. Edit Distance](#72-Edit-Distance)
+```python
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        n = len(word1)
+        m = len(word2)
+        
+        # if one of the strings is empty
+        if n * m == 0:
+            return n + m
+        
+        d = [ [0] * (m + 1) for _ in range(n + 1)]
+        
+        for i in range(n + 1):
+            d[i][0] = i
+        for j in range(m + 1):
+            d[0][j] = j
+        
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+                if word1[i - 1] == word2[j - 1]:
+                    d[i][j] = d[i-1][j-1]
+                else:
+                    d[i][j] = min(d[i-1][j], d[i][j-1], d[i-1][j-1]) + 1
+        
+        return d[n][m]
+```
+
+#### [650. 2 Keys Keyboard](https://leetcode.com/problems/2-keys-keyboard/)
+```python
+# DP
+class Solution:
+    def minSteps(self, n: int) -> int:
+        if n == 1:
+            return 0
+        
+        dp = [float('inf')] * (n+1)  # dp[i] denote minimal operations for i 'A'
+        dp[1] = 0
+        dp[2] = 2
+        
+        
+        '''
+        i:   number of required 'A'
+        j:   number of existing 'A'
+        i-j: number of missing 'A'
+
+        '''
+        for i in range(3, n+1):
+            for j in range(1, i):
+                q, r = divmod(i - j, j)
+                if r == 0:
+                    dp[i] = min(dp[i], dp[j] + 1 + q)
+
+        return dp[n]
+```
+
+We can break our moves into groups of (copy, paste, ..., paste). Let C denote copying and P denote pasting. 
+Then for example, in the sequence of moves CPPCPPPPCP, the groups would be [CPP][CPPPP][CP].
+
+Say these groups have lengths g_1, g_2, .... After parsing the first group, there are g_1 'A's. After parsing the second group, there are g_1 * g_2 'A's, and so on.
+At the end, there are g_1 * g_2 * ... * g_n 'A's.
+
+We want exactly N = g_1 * g_2 * ... * g_n. If any of the g_i are composite, say g_i = p * q, then we can split this group into two groups (the first of which has one copy followed by p-1 pastes, while the second group having one copy and q-1 pastes).
+```python
+class Solution:
+    def minSteps(self, n: int) -> int:
+        ans = 0
+        d = 2
+        
+        while n > 1:
+            while n % d == 0:
+                ans += d
+                n /= d
+            d += 1
+            
+        return ans
+```
