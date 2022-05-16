@@ -94,6 +94,7 @@
 		* [139. Word Break](#139-Word-Break)
 	* [Stock Trade](#Stock-Trade)
 		* [309. Best Time to Buy and Sell Stock with Cooldown](#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown)
+		* [714. Best Time to Buy and Sell Stock with Transaction Fee](#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee)
 
 
 ### Two Pointers
@@ -2650,5 +2651,29 @@ class Solution:
         return max(sold, reset)
 ```
 
-
+#### [714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+If I am holding a share after today, then either 
+1. I am just continuing holding the share I had yesterday, or 
+2. I held no share yesterday, but bought in one share today
+```
+hold = max(hold, not_hold - prices[i])
+```
+If I am not holding a share after today, then either
+1. I did not hold a share yesterday, or 
+2. I held a share yesterday but I decided to sell it out today
+```
+not_hold = max(not_hold, hold + prices[i] - fee)
+```
+note that We can calculate "not_hold" first without using temporary variables because selling and buying on the same day can't be better than just continuing to hold the stock
+```python
+class Solution:
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        not_hold, hold = 0, -prices[0]
+        
+        for i in range(1, len(prices)):
+            not_hold = max(not_hold, hold + prices[i] - fee)
+            hold = max(hold, not_hold - prices[i])
+            
+        return not_hold
+```
 
