@@ -101,6 +101,7 @@
 		* [583. Delete Operation for Two Strings](#583-Delete-Operation-for-Two-Strings)
 		* [72. Edit Distance](#72-Edit-Distance)
 		* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
+		* [204. Count Primes](#204-Count-Primes)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2896,3 +2897,41 @@ class Solution:
             
         return ans
 ```
+
+#### [204. Count Primes](https://leetcode.com/problems/count-primes/)
+```python
+# Solution 1
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        
+        primes = [False] * 2 + [True] * (n - 2)
+        
+        for i in range(2, int(sqrt(n)) + 1):
+            if (primes[i] == True):
+                for p in range(i * i, n, i):
+                    primes[p] = False
+                
+               
+        return sum(primes)
+	
+# Solution 2
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        notPrimes = [False] * n
+        
+        count = 0
+        for i in range(2, n):
+            if (notPrimes[i] == False):
+                count += 1 
+                
+                j = 2
+                while i * j < n:
+                    notPrimes[i * j] = True
+                    j += 1
+                
+               
+        return count
+```
+
