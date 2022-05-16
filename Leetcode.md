@@ -95,6 +95,7 @@
 	* [Stock Trade](#Stock-Trade)
 		* [309. Best Time to Buy and Sell Stock with Cooldown](#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown)
 		* [714. Best Time to Buy and Sell Stock with Transaction Fee](#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee)
+		* [123. Best Time to Buy and Sell Stock III](#123-Best-Time-to-Buy-and-Sell-Stock-III)
 
 
 ### Two Pointers
@@ -2664,7 +2665,7 @@ If I am not holding a share after today, then either
 ```
 not_hold = max(not_hold, hold + prices[i] - fee)
 ```
-note that We can calculate "not_hold" first without using temporary variables because selling and buying on the same day can't be better than just continuing to hold the stock
+note that we can calculate "not_hold" first without using temporary variables because selling and buying on the same day can't be better than just continuing to hold the stock
 ```python
 class Solution:
     def maxProfit(self, prices: List[int], fee: int) -> int:
@@ -2675,5 +2676,52 @@ class Solution:
             hold = max(hold, not_hold - prices[i])
             
         return not_hold
+```
+
+#### [123. Best Time to Buy and Sell Stock III](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/)
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/123.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20III.png" width="350">
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        s1 = -prices[0]
+        s2 = float('-inf')
+        s3 = float('-inf')
+        s4 = float('-inf')
+
+        for i in range(1, len(prices)):           
+            s1 = max(s1, - prices[i])
+            s2 = max(s2, s1 + prices[i])
+            s3 = max(s3, s2 - prices[i])
+            s4 = max(s4, s3 + prices[i])
+            print(prices[i], [s1, s2, s3, s4])
+        return max(0, s4)
+    
+# generalization to k transactions
+def maxProfit(self, prices: List[int], k: int) -> int:
+    states = [0] + [-float('inf') for i in range(2*k)]
+    states[1] = -prices[0]
+
+    for i in range(1, len(prices)):
+        for j in range(k):
+            states[2*j + 1] = max(states[2*j + 1], states[2*j] - prices[i])
+            states[2*j + 2] = max(states[2*j + 2], states[2*j + 1] + prices[i])
+
+    return max(0, states[-1])
+```
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        t1_cost, t2_cost = float('inf'), float('inf')
+        t1_profit, t2_profit = 0, 0
+
+        for price in prices:
+            t1_cost = min(t1_cost, price)
+            t1_profit = max(t1_profit, price - t1_cost)
+            
+            # reinvest the gained profit in the second transaction
+            t2_cost = min(t2_cost, price - t1_profit)
+            t2_profit = max(t2_profit, price - t2_cost)
+
+        return t2_profit
 ```
 
