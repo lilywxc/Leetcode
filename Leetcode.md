@@ -2864,26 +2864,14 @@ class Solution:
 # DP
 class Solution:
     def minSteps(self, n: int) -> int:
-        if n == 1:
-            return 0
-        
-        dp = [float('inf')] * (n+1)  # dp[i] denote minimal operations for i 'A'
-        dp[1] = 0
-        dp[2] = 2
-        
-        
-        '''
-        i:   number of required 'A'
-        j:   number of existing 'A'
-        i-j: number of missing 'A'
+        dp = [0] * (n + 1)
 
-        '''
-        for i in range(3, n+1):
-            for j in range(1, i):
-                q, r = divmod(i - j, j)
-                if r == 0:
-                    dp[i] = min(dp[i], dp[j] + 1 + q)
-
+        for i in range(2, n + 1):
+            dp[i] = i # the possible maximum
+            for j in range(1, i): # j is the existing 'A'
+                if i % j == 0:
+                    dp[i] = min(dp[i], dp[j] + (i//j))
+                
         return dp[n]
 ```
 
