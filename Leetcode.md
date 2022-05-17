@@ -112,6 +112,7 @@
 	* [172. Factorial Trailing Zeroes](#172-Factorial-Trailing-Zeroes)
 	* [67. Add Binary](#67-Add-Binary)
 	* [415. Add Strings](#415-Add-Strings)
+	* [462. Minimum Moves to Equal Array Elements II](#462Minimum-Moves-to-Equal-Array-Elements-II)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3165,4 +3166,16 @@ class Solution:
         return ''.join(str(x) for x in res[::-1])
 ```
 
+#### [462. Minimum Moves to Equal Array Elements II](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/)
+proof:
 
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/462.%20Minimum%20Moves%20to%20Equal%20Array%20Elements%20II.png" width="700">
+
+```python
+class Solution(object):
+    def minMoves2(self, nums):
+        n = len (nums)
+        mid = sorted (nums) [n // 2]
+        res = sum (abs (i - mid) for i in nums)
+        return res
+```
