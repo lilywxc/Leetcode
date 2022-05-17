@@ -103,10 +103,11 @@
 		* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
 		* [204. Count Primes](#204-Count-Primes)
 * [Math](#Math)
-	* [Prime](#Prime)
-		* [204. Count Primes](#204-Count-Primes)
-		* [Greatest Common Divisor](#Greatest-Common-Divisor)
-		* [Least Common Multiple](#Least-Common-Multiple)
+	* [204. Count Primes](#204-Count-Primes)
+	* [Greatest Common Divisor](#Greatest-Common-Divisor)
+	* [Least Common Multiple](#Least-Common-Multiple)
+	* [504. Base 7](#504-Base-7)
+	* [405. Convert a Number to Hexadecimal](#405-Convert-a-Number-to-Hexadecimal)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2904,7 +2905,7 @@ class Solution:
 ```
 
 ### Math
-#### Prime
+
 #### [204. Count Primes](https://leetcode.com/problems/count-primes/)
 ```python
 # Solution 1
@@ -2981,4 +2982,47 @@ def lcm(a, b):
 	return a * b //gcd(a, b)
 ```
 	
-	
+#### [504. Base 7](https://leetcode.com/problems/base-7/)
+```python
+class Solution:
+    def convertToBase7(self, num: int) -> str:        
+        n, res = abs(num), ''
+        
+        if num== 0:
+            return '0'
+        
+        while n:
+            n, r = divmod(n, 7)
+            res = str(r) + res
+
+        return '-' * (num < 0) + res
+```
+
+#### [405. Convert a Number to Hexadecimal](https://leetcode.com/problems/convert-a-number-to-hexadecimal/description/)
+```python
+class Solution:
+    def toHex(self, num: int) -> str:
+        if num == 0: 
+            return '0'
+        
+        num = num & 0xFFFFFFFF # same as num = num + 2**32
+        dic = '0123456789abcdef'
+        res = ''
+        
+        while num:
+            num, r = divmod(num, 16)
+            res = str(dic[r]) + res
+
+        return res
+```
+
+#### [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/)
+```python
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        if columnNumber == 0:
+            return "" 
+
+        q, r = divmod(columnNumber - 1, 26)
+        return self.convertToTitle(q) + chr(r + ord('A'))
+```
