@@ -1,4 +1,4 @@
-# Leetcode
+# Leetcode - Algorithm
 * [Two Pointers](#Two-Pointers)
     * [167. Two Sum II](#167-Two-Sum-II)
     * [633. Sum of Square Numbers](#633-Sum-of-Square-Numbers)
