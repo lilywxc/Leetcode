@@ -3211,8 +3211,8 @@ class Solution:
 
 #### [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)
 
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/367.%20Valid%20Perfect%20Square.png" width="900">
-detailed explanation:[]
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/367.%20Valid%20Perfect%20Square.png" width="500">
+
 ```python
 # Newton's Method
 class Solution:
