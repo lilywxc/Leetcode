@@ -113,6 +113,11 @@
 	* [67. Add Binary](#67-Add-Binary)
 	* [415. Add Strings](#415-Add-Strings)
 	* [462. Minimum Moves to Equal Array Elements II](#462-Minimum-Moves-to-Equal-Array-Elements-II)
+	* [169. Majority Element](#169-Majority-Element)
+	* [367. Valid Perfect Square](#367-Valid-Perfect-Square)
+	* [326. Power of Three](#326-Power-of-Three)
+	* [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
+	* [628. Maximum Product of Three Numbers](#628-Maximum-Product-of-Three-Numbers)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3179,3 +3184,69 @@ class Solution(object):
         res = sum (abs (i - mid) for i in nums)
         return res
 ```
+
+#### [169. Majority Element](https://leetcode.com/problems/majority-element/description/)
+given that it is impossible (in both cases) to discard more majority elements than minority elements, we are safe in discarding the prefix and attempting to recursively solve the majority element problem for the suffix. Eventually, a suffix will be found for which count does not hit 0, and the majority element of that suffix will necessarily be the same as the majority element of the overall array.
+```python
+# O(n) time and O(1) space
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        count = 0
+        candidate = None
+
+        for num in nums:
+            if count == 0:
+                candidate = num
+            count += (1 if num == candidate else -1)
+
+        return candidate
+```
+```python
+# O(n) time and O(n) space
+class Solution:
+    def majorityElement(self, nums):
+        counts = collections.Counter(nums)
+        return max(counts.keys(), key=counts.get)
+```
+
+#### [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/367.%20Valid%20Perfect%20Square.png" width="900">
+detailed explanation:[]
+```python
+# Newton's Method
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        if num < 2:
+            return True
+        
+        x = num // 2
+        while x * x > num:
+            x = (x + num // x) // 2
+            
+        return x * x == num
+```
+```python
+# Binary search
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        if num < 2:
+            return True
+        
+        l, r = 2, num // 2
+        
+        while l <= r:
+            m = l + (r - l) // 2
+        
+            square = m * m
+            if square == num:
+                return True
+            if square > num:
+                r = m - 1
+            else:
+                l = m + 1
+        
+        return False
+```
+
+#### []()
