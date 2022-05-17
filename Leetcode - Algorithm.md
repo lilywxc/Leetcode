@@ -110,7 +110,6 @@
 	* [462. Minimum Moves to Equal Array Elements II](#462-Minimum-Moves-to-Equal-Array-Elements-II)
 	* [169. Majority Element](#169-Majority-Element)
 	* [367. Valid Perfect Square](#367-Valid-Perfect-Square)
-	* [326. Power of Three](#326-Power-of-Three)
 	* [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
 	* [628. Maximum Product of Three Numbers](#628-Maximum-Product-of-Three-Numbers)
 * [Bit Computation](#Bit-Computation)
@@ -119,6 +118,7 @@
 	* [168. Excel Sheet Column Title](#168-Excel-Sheet-Column-Title)
 	* [67. Add Binary](#67-Add-Binary)
 	* [415. Add Strings](#415-Add-Strings)
+	* [326. Power of Three](#326-Power-of-Three)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3125,13 +3125,6 @@ class Solution:
         return False
 ```
 
-#### [326. Power of Three](https://leetcode.com/problems/power-of-three/description/)
-```python
-class Solution:
-    def isPowerOfThree(self, n: int) -> bool:
-        return n > 0 and (3**19) % n == 0
-```
-
 #### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/description/)
 ```python
 class Solution:
@@ -3325,4 +3318,11 @@ class Solution:
             res.append(carry)
         
         return ''.join(str(x) for x in res[::-1])
+```
+
+#### [326. Power of Three](https://leetcode.com/problems/power-of-three/description/)
+```python
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+        return n > 0 and (3**19) % n == 0
 ```
