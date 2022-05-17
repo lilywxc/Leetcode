@@ -105,6 +105,8 @@
 * [Math](#Math)
 	* [Prime](#Prime)
 		* [204. Count Primes](#204-Count-Primes)
+		* [Greatest Common Divisor](#Greatest-Common-Divisor)
+		* [Least Common Multiple](#Least-Common-Multiple)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -2940,3 +2942,43 @@ class Solution:
         return count
 ```
 
+#### Greatest Common Divisor
+```python
+def gcd(a, b):
+	return b==0? a: gcd(b, a%b) 
+```
+
+对于 a 和 b 的最大公约数 f(a, b)：
+- 如果 a 和 b 均为偶数，f(a, b) = 2*f(a/2, b/2)
+- 如果 a 是偶数 b 是奇数，f(a, b) = f(a/2, b)
+- 如果 b 是偶数 a 是奇数，f(a, b) = f(a, b/2)
+- 如果 a 和 b 均为奇数，f(a, b) = f(b, a-b)
+
+乘 2 和除 2 都可以转换为移位操作
+```python
+def gcd(a, b):
+    if (a < b):
+        return gcd(b, a)
+  
+    if (b == 0):
+        return a
+	
+    isAEven, isBEven = isEven(a), isEven(b)
+    if isAEven and isBEven:
+        return 2 * gcd(a >> 1, b >> 1)
+    elif isAEven and not isBEven:
+        return gcd(a >> 1, b)
+    elif not isAEven and isBEven:
+        return gcd(a, b >> 1)
+    else:
+        return gcd(b, a - b)
+```
+note x >> y is equivalent to dividing x with 2^y, and x << y is equivalent to multiplying x with 2^y. 
+
+#### Least Common Multiple
+```python
+def lcm(a, b):
+	return a * b //gcd(a, b)
+```
+	
+	
