@@ -109,6 +109,9 @@
 	* [504. Base 7](#504-Base-7)
 	* [405. Convert a Number to Hexadecimal](#405-Convert-a-Number-to-Hexadecimal)
 	* [168. Excel Sheet Column Title](#168-Excel-Sheet-Column-Title)
+	* [172. Factorial Trailing Zeroes](#172-Factorial-Trailing-Zeroes)
+	* [67. Add Binary](#67-Add-Binary)
+	* [415. Add Strings](#415-Add-Strings)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3026,4 +3029,140 @@ class Solution:
 
         q, r = divmod(columnNumber - 1, 26)
         return self.convertToTitle(q) + chr(r + ord('A'))
+       
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        res = ''
+        while columnNumber:
+            columnNumber, r = divmod(columnNumber - 1, 26)
+            res = chr(r + ord('A')) + res
+            
+        return res
 ```
+
+#### [172. Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/)
+```python
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        '''
+        fives = n/5 + (n/5)/5 + ((n/5)/5)/5 + ...
+        '''
+        zero_count = 0
+        while n > 0:
+            n //= 5
+            zero_count += n
+        return zero_count
+
+#  O(logn)
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        zero_count = 0
+        current_multiple = 5
+        while n >= current_multiple:
+            zero_count += n // current_multiple
+            current_multiple *= 5
+        return zero_count
+
+    
+# a better brute force - O(n)
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        zero_count = 0
+        for i in range(5, n + 1, 5):
+            current = i
+            while current % 5 == 0:
+                zero_count += 1
+                current //= 5
+
+        return zero_count
+
+        
+# brute force - factorial calc is worse than O(n)
+def trailingZeroes(self, n: int) -> int:
+        
+    # Calculate n!
+    n_factorial = 1
+    for i in range(2, n + 1):
+        n_factorial *= i
+    
+    # Count how many 0's are on the end.
+    zero_count = 0
+    while n_factorial % 10 == 0:
+        zero_count += 1
+        n_factorial //= 10
+        
+    return zero_count
+```
+
+#### [67. Add Binary](https://leetcode.com/problems/add-binary/description/)
+```python
+# bit manipulation
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        # ex: a = '11', b = '1'
+        x, y = int(a, 2), int(b, 2) # x = 3, y = 1
+
+        while y:
+            print('x, y:', x, y)
+            answer = x ^ y
+            print('x ^ y:', answer)
+            carry = (x & y) << 1
+            print('x & y << 1:', carry)
+            x, y = answer, carry
+            
+        return bin(x)[2:]
+
+# Bit-by-bit computation      
+class Solution:
+    def addBinary(self, a, b) -> str:
+        n = max(len(a), len(b))
+        a, b = a.zfill(n), b.zfill(n)
+        
+        carry = 0
+        answer = []
+        for i in range(n - 1, -1, -1):
+            if a[i] == '1':
+                carry += 1
+            if b[i] == '1':
+                carry += 1
+                
+            if carry % 2 == 1:
+                answer.append('1')
+            else:
+                answer.append('0')
+            
+            carry //= 2
+        
+        if carry == 1:
+            answer.append('1')
+        answer.reverse()
+        
+        return ''.join(answer)
+```
+
+#### [415. Add Strings](https://leetcode.com/problems/add-strings/)
+```python
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        res = []
+
+        carry = 0
+        p1 = len(num1) - 1
+        p2 = len(num2) - 1
+        while p1 >= 0 or p2 >= 0:
+            x1 = ord(num1[p1]) - ord('0') if p1 >= 0 else 0
+            x2 = ord(num2[p2]) - ord('0') if p2 >= 0 else 0
+            
+            carry, value = divmod(x1 + x2 + carry, 10)
+            res.append(value)
+            
+            p1 -= 1
+            p2 -= 1
+        
+        if carry:
+            res.append(carry)
+        
+        return ''.join(str(x) for x in res[::-1])
+```
+
+
