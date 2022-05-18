@@ -1,10 +1,10 @@
 # Leetcode - Data Structure
-* [Two Pointers](#Two-Pointers)
-    * [167. Two Sum II](#167-Two-Sum-II)
+* [LinkedList](#LinkedList)
+    * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
 
 
-### Two Pointers
-#### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
+### LinkedList
+#### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
 ```python
 
 ```
