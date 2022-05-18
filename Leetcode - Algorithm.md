@@ -123,6 +123,9 @@
 	* [461. Hamming Distance](#461-Hamming-Distance)
 	* [136. Single Number](#136-Single-Number)
 	* [268. Missing Number](#268-Missing-Number)
+	* [exchange two integers without extra variables](#exchange-two-integers-without-extra-variables)
+	* [190. Reverse Bits](#190-Reverse-Bits)
+	* [231. Power of Two](#231-Power-of-Two)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3427,3 +3430,36 @@ class Solution:
         y = bitmask ^ x # filter out x
         return [x, y]
 ```
+
+#### exchange two integers without extra variables
+```python
+a = a ^ b
+b = a ^ b
+a = a ^ b
+```
+
+#### [190. Reverse Bits](https://leetcode.com/problems/reverse-bits/description/)
+```python
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        ret, power = 0, 31
+        while n:
+            ret += (n & 1) << power
+            n = n >> 1
+            power -= 1
+        return ret
+```
+
+#### [231. Power of Two](https://leetcode.com/problems/power-of-two/)
+a power of two in binary representation is one 1-bit, followed by some zeros, e.g., 2 = 10, 4 = 100, 8 = 1000.
+x & (-x) will keep the rightmost bit of '1' and set all other bits to 0s, where -x = ~x + 1.
+since a power of two contains just one 1-bit, this operation will result in the same x, i.e., x & (-x) == x. Other numbers have more than 1-bit in their binary representation and hence for them x & (-x) would not be equal to x itself.
+```python
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n == 0:
+            return False
+        
+        return n & (-n) == n
+```
+
