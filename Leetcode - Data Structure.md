@@ -16,7 +16,7 @@ Then, we just need to step the two pointers through the list, each time checking
 We can implement this algorithm through one pass: 
 
 Suppose that c is the shared part, and a, b are exclusive parts of list A and B, i.e. A = a + c, B = b + c. <br />
-Let's set two points to step through A + B = <u>(a + c) + (b</u> + c) and B + A = (b + c) + (a + c), <br />
+Let's set two points to step through A + B = (a + c) + (b + c) and B + A = (b + c) + (a + c), <br />
 Since a + c + b = b + c + a, the two pointers will meet at the start point of c, if there's intersection
 
 ```python
