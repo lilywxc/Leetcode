@@ -128,6 +128,7 @@
 	* [326. Power of Three](#326-Power-of-Three)
 	* [342. Power of Four](#342-Power-of-Four)
 	* [693. Binary Number with Alternating Bits](#693-Binary-Number-with-Alternating-Bits)
+	* [476. Number Complement](#476-Number-Complement)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3521,4 +3522,24 @@ class Solution:
         '''
         tmp = n ^ (n >> 1)
         return tmp & (tmp + 1) == 0
+```
+
+#### [476. Number Complement](https://leetcode.com/problems/number-complement/)
+detailed picture explanation: [approach 4](https://leetcode.com/problems/number-complement/solution/)
+```python
+class Solution:
+    def findComplement(self, num: int) -> int:
+        # construct 1...1 bitmask with same length as num
+        bitmask = num
+        bitmask |= (bitmask >> 1)
+        bitmask |= (bitmask >> 2)
+        bitmask |= (bitmask >> 4)
+        bitmask |= (bitmask >> 8)
+        bitmask |= (bitmask >> 16)
+
+        return bitmask ^ num
+    
+# a different way to create all-one mask with same length as num
+# n = floor(log2(num)) + 1        
+# bitmask = (1 << n) - 1
 ```
