@@ -2,7 +2,7 @@
 * [LinkedList](#LinkedList)
     * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
     * [206. Reverse Linked List](#206-Reverse-Linked-List)
-
+    * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -44,14 +44,14 @@ Note: In the case lists do not intersect, the pointers for A and B will still li
 python inline swap: a, b = b, a
 1. the right-hand side of '=', i.e. a, b, are created in memory. Note, no assignment is made yet
 2. the left-hand side of '=' are assigned values in the order of left-to-right, i.e a first and b next
-```pyhon
+```python
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 
-# iterative
+# iterative - O(n) time and O(1) space
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         prev, curr = None, head
@@ -62,7 +62,7 @@ class Solution:
         return prev
 ```
 ```python
-# recursive 1
+# recursive 1 - O(n) time and O(n) space
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         if (not head) or (not head.next):
@@ -85,4 +85,43 @@ class Solution:
         curr.next = prev
         
         return self.reverseList(new_head, curr)
+```
+
+### [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+```python
+# iterative - O(n) time and O(1) space
+class Solution:
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        curr = dummy = ListNode()
+
+        while l1 and l2:
+            if l1.val <= l2.val:
+                curr.next = l1
+                l1 = l1.next
+            else:
+                curr.next = l2
+                l2 = l2.next            
+            curr = curr.next
+
+        # append the rest of l1 or l2
+        curr.next = l1 or l2
+
+        return dummy.next
+```
+```python
+# recursive (dp) - O(n) time and O(n) space
+class Solution:
+    def mergeTwoLists(self, l1, l2):
+        if l1 is None:
+            return l2
+        
+        if l2 is None:
+            return l1
+        
+        if l1.val < l2.val:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.mergeTwoLists(l1, l2.next)
+            return l2        
 ```
