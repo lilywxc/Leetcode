@@ -119,13 +119,14 @@
 	* [168. Excel Sheet Column Title](#168-Excel-Sheet-Column-Title)
 	* [67. Add Binary](#67-Add-Binary)
 	* [415. Add Strings](#415-Add-Strings)
-	* [326. Power of Three](#326-Power-of-Three)
 	* [461. Hamming Distance](#461-Hamming-Distance)
 	* [136. Single Number](#136-Single-Number)
 	* [268. Missing Number](#268-Missing-Number)
 	* [exchange two integers without extra variables](#exchange-two-integers-without-extra-variables)
 	* [190. Reverse Bits](#190-Reverse-Bits)
 	* [231. Power of Two](#231-Power-of-Two)
+	* [326. Power of Three](#326-Power-of-Three)
+	* [342. Power of Four](#342-Power-of-Four)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3347,13 +3348,6 @@ class Solution:
         return ''.join(str(x) for x in res[::-1])
 ```
 
-#### [326. Power of Three](https://leetcode.com/problems/power-of-three/description/)
-```python
-class Solution:
-    def isPowerOfThree(self, n: int) -> bool:
-        return n > 0 and (3**19) % n == 0
-```
-
 #### [461. Hamming Distance](https://leetcode.com/problems/hamming-distance/)
 ```python
 class Solution:
@@ -3476,3 +3470,38 @@ class Solution:
         return n > 0 and bin(n).count("1") == 1
 ```
 
+
+#### [326. Power of Three](https://leetcode.com/problems/power-of-three/description/)
+```python
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+        return n > 0 and (3**19) % n == 0
+```
+
+#### [342. Power of Four](https://leetcode.com/problems/power-of-four/)
+Input number is known to be signed 32 bits integer, i.e. x <= 2^31 - 1. Hence the max power of four to be considered is log_4(2^31 - 1)] = 15. Voila, here is all 16 possible answers: 4^0, 4^1, ...4^15
+```python
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        max_power = 15
+        nums = [1] * (max_power + 1)
+        
+        for i in range(1, max_power + 1):
+            nums[i] = 4 * nums[i - 1]
+        
+        return n in nums
+```
+If num is a power of four x = 4^a, then a = log_4(x) = (1/2)*log_2(x) is an integer. Thus, we simply need to check if log_2(2) is even
+```python
+from math import log2
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        return num > 0 and log2(num) % 2 == 0
+```
+In the case of power of four, 1-bit is at even position: bit 0, bit 2, bit 4, etc. e.g., 4 = 100, 8 = 10000 <br />
+Hence, power of four would make a zero in a bitwise AND with number (101010...10)_2 = (aaaaaaaa)_16 = 0xaaaaaaaa
+```python
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        return num > 0 and num & (num - 1) == 0 and num & 0xaaaaaaaa == 0
+```
