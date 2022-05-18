@@ -119,6 +119,7 @@
 	* [67. Add Binary](#67-Add-Binary)
 	* [415. Add Strings](#415-Add-Strings)
 	* [326. Power of Three](#326-Power-of-Three)
+	* [461. Hamming Distance](#461-Hamming-Distance)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3340,4 +3341,37 @@ class Solution:
 class Solution:
     def isPowerOfThree(self, n: int) -> bool:
         return n > 0 and (3**19) % n == 0
+```
+
+#### [461. Hamming Distance](https://leetcode.com/problems/hamming-distance/)
+```python
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        return bin(x ^ y).count('1')
+```
+```python
+class Solution(object):
+    def hammingDistance(self, x, y):
+        xor = x ^ y
+        count = 0
+        while xor:
+            print(xor, bin(xor)[2:], xor&1)
+            if xor & 1:
+                count += 1
+            xor = xor >> 1
+            
+        return count
+```
+The bit operation x & (x - 1) removes the rightmost bit of '1'
+```python
+class Solution:
+    def hammingDistance(self, x, y):
+        xor = x ^ y
+        count = 0
+        while xor:
+            count += 1
+            # remove the rightmost bit of '1'
+            xor = xor & (xor - 1)
+            
+        return count
 ```
