@@ -127,6 +127,7 @@
 	* [231. Power of Two](#231-Power-of-Two)
 	* [326. Power of Three](#326-Power-of-Three)
 	* [342. Power of Four](#342-Power-of-Four)
+	* [693. Binary Number with Alternating Bits](#693-Binary-Number-with-Alternating-Bits)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3504,4 +3505,20 @@ Hence, power of four would make a zero in a bitwise AND with number (101010...10
 class Solution:
     def isPowerOfFour(self, num: int) -> bool:
         return num > 0 and num & (num - 1) == 0 and num & 0xaaaaaaaa == 0
+```
+
+#### [693. Binary Number with Alternating Bits](https://leetcode.com/problems/binary-number-with-alternating-bits)
+```python
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        '''
+        n =         1 0 1 0 1 0 1 0
+        n >> 1      0 1 0 1 0 1 0 1
+        n ^ n>>1    1 1 1 1 1 1 1 1
+        n           1 1 1 1 1 1 1 1
+        n + 1     1 0 0 0 0 0 0 0 0
+        n & (n+1)   0 0 0 0 0 0 0 0
+        '''
+        tmp = n ^ (n >> 1)
+        return tmp & (tmp + 1) == 0
 ```
