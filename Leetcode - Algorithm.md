@@ -3451,9 +3451,10 @@ class Solution:
 ```
 
 #### [231. Power of Two](https://leetcode.com/problems/power-of-two/)
-a power of two in binary representation is one 1-bit, followed by some zeros, e.g., 2 = 10, 4 = 100, 8 = 1000.
-x & (-x) will keep the rightmost bit of '1' and set all other bits to 0s, where -x = ~x + 1.
-since a power of two contains just one 1-bit, this operation will result in the same x, i.e., x & (-x) == x. Other numbers have more than 1-bit in their binary representation and hence for them x & (-x) would not be equal to x itself.
+a power of two in binary representation is one 1-bit, followed by some zeros, e.g., 2 = 10, 4 = 100, 8 = 1000. <br />
+x & (-x) will keep the rightmost bit of '1' and set all other bits to 0s, where -x = ~x + 1. <br />
+since a power of two contains just one 1-bit, this operation will result in the same x, i.e., x & (-x) == x. <br />
+Other numbers have more than 1-bit in their binary representation and hence for them x & (-x) would not be equal to x itself.
 ```python
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
