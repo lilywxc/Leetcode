@@ -75,7 +75,7 @@ class Solution:
         return p # p is always the last node in original list, or new head in new list
 ```
 ```python
-# recursive 2
+# recursive 2 - this is actually the same as the iterative solution
 class Solution:
     def reverseList(self, curr: Optional[ListNode], prev = None) -> Optional[ListNode]:
         if not curr:
