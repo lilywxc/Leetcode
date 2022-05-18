@@ -102,6 +102,7 @@
 		* [72. Edit Distance](#72-Edit-Distance)
 		* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
 		* [204. Count Primes](#204-Count-Primes)
+		* [260. Single Number III](#260-Single-Number-III)
 * [Math](#Math)
 	* [204. Count Primes](#204-Count-Primes)
 	* [Greatest Common Divisor](#Greatest-Common-Divisor)
@@ -120,6 +121,8 @@
 	* [415. Add Strings](#415-Add-Strings)
 	* [326. Power of Three](#326-Power-of-Three)
 	* [461. Hamming Distance](#461-Hamming-Distance)
+	* [136. Single Number](#136-Single-Number)
+	* [268. Missing Number](#268-Missing-Number)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3208,6 +3211,11 @@ x | 0s = x
 x | 1s = 1s
 x | x = x
 
+useful tricks:
+- x ^ x will remove all duplicates
+- x & (x - 1) removes the rightmost bit of '1'
+- x & (-x) will keep the rightmost bit of '1' and set all other bits to 0s, where -x = ~x + 1
+
 #### [504. Base 7](https://leetcode.com/problems/base-7/)
 7进制
 ```python
@@ -3362,7 +3370,7 @@ class Solution(object):
             
         return count
 ```
-The bit operation x & (x - 1) removes the rightmost bit of '1'
+x & (x - 1) removes the rightmost bit of '1'
 ```python
 class Solution:
     def hammingDistance(self, x, y):
@@ -3374,4 +3382,48 @@ class Solution:
             xor = xor & (xor - 1)
             
         return count
+```
+
+#### [136. Single Number](https://leetcode.com/problems/single-number/)
+x ^ x = 0, x ^ 0 = x, (a ^ b) ^ c = a ^ (b ^ c) = (a ^ c) ^ b
+```python
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        x = 0
+        for i in nums:
+            x = x ^ i
+        return x
+```
+
+#### [268. Missing Number](https://leetcode.com/problems/missing-number/)
+```python
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        for i, num in enumerate(nums):
+            n = n ^ i ^ num
+            
+        return n
+```
+
+#### [260. Single Number III](https://leetcode.com/problems/single-number-iii/description/)
+x & (-x) will keep the rightmost bit of '1' and set all other bits to 0s, where -x = ~x + 1
+```python
+class Solution:
+    def singleNumber(self, nums: int) -> List[int]:
+    
+        bitmask = 0
+        for num in nums:
+            bitmask = bitmask ^ num # filter out duplicates
+            
+        # rightmost 1-bit diff between x and y
+        diff = bitmask & (-bitmask)
+        
+        x = 0
+        for num in nums:
+            if num & diff:
+                x = x ^ num # filter out y and duplicates
+        
+        y = bitmask ^ x # filter out x
+        return [x, y]
 ```
