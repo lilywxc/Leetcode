@@ -130,6 +130,7 @@
 	* [693. Binary Number with Alternating Bits](#693-Binary-Number-with-Alternating-Bits)
 	* [476. Number Complement](#476-Number-Complement)
 	* [371. Sum of Two Integers](#371-Sum-of-Two-Integers)
+	* [318. Maximum Product of Word Lengths](#318-Maximum-Product-of-Word-Lengths)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3559,4 +3560,28 @@ class Solution:
             
         max_int = 0x7FFFFFFF
         return a if a < max_int else ~(a ^ mask)
+```
+
+#### [318. Maximum Product of Word Lengths](https://leetcode.com/problems/maximum-product-of-word-lengths/)
+```python
+from collections import defaultdict
+class Solution:
+    def maxProduct(self, words: List[str]) -> int:
+        hashmap = defaultdict(int)
+        bit_number = lambda ch : ord(ch) - ord('a')
+        
+        for word in words:
+            bitmask = 0
+            for ch in word:
+                bitmask |= 1 << bit_number(ch)
+            # there could be different words with the same bitmask, ex. ab and aabb. We store the longest length
+            hashmap[bitmask] = max(hashmap[bitmask], len(word))
+        
+        max_prod = 0
+        for word1 in hashmap:
+            for word2 in hashmap:
+                if word1 & word2 == 0:
+                    max_prod = max(max_prod, hashmap[word1] * hashmap[word2])
+                    
+        return max_prod
 ```
