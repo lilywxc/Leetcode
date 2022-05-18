@@ -3546,9 +3546,17 @@ class Solution:
 ```
 
 #### [371. Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
-similar question to [67. Add Binary]()
+similar question to [67. Add Binary](https://leetcode.com/problems/add-binary/description/)
 ```python
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        return a if b == 0 else self.getSum((a ^ b), (a & b) << 1)
+        mask = 0xFFFFFFFF # bitmask of 32 1-bits
+        while b != 0:
+            answer = (a ^ b) & mask
+            carry = ((a & b) << 1) & mask
+            
+            a, b = answer, carry
+            
+        max_int = 0x7FFFFFFF
+        return a if a < max_int else ~(a ^ mask)
 ```
