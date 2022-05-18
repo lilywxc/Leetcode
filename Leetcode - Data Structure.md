@@ -13,6 +13,12 @@ Then, we just need to step the two pointers through the list, each time checking
  
  <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/160.%20Intersection%20of%20Two%20Linked%20Lists.png" width="700">
 
+We can implement this algorithm through one pass: 
+
+Suppose that c is the shared part, and a, b are exclusive parts of list A and B, i.e. A = a + c, B = b + c. <br />
+Since a + c + b = b + c + a, we set two points to step through A + B = (a + c) + (b + c) and B + A = (b + c) + (a + c), <br />
+the two pointers will meet at the start point of c, if there's intersection
+
 ```python
 # Definition for singly-linked list.
 # class ListNode:
