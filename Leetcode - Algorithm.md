@@ -129,6 +129,7 @@
 	* [342. Power of Four](#342-Power-of-Four)
 	* [693. Binary Number with Alternating Bits](#693-Binary-Number-with-Alternating-Bits)
 	* [476. Number Complement](#476-Number-Complement)
+	* [371. Sum of Two Integers](#371-Sum-of-Two-Integers)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3542,4 +3543,12 @@ class Solution:
 # a different way to create all-one mask with same length as num
 # n = floor(log2(num)) + 1        
 # bitmask = (1 << n) - 1
+```
+
+#### [371. Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)
+similar question to [67. Add Binary]()
+```python
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        return a if b == 0 else self.getSum((a ^ b), (a & b) << 1)
 ```
