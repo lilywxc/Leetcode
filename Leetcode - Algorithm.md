@@ -131,6 +131,7 @@
 	* [476. Number Complement](#476-Number-Complement)
 	* [371. Sum of Two Integers](#371-Sum-of-Two-Integers)
 	* [318. Maximum Product of Word Lengths](#318-Maximum-Product-of-Word-Lengths)
+	* [338. Counting Bits](#338-Counting-Bits)
 
 ### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
@@ -3219,6 +3220,8 @@ x | 0s = x
 x | 1s = 1s
 x | x = x
 
+the number of bits in xx equals to logx + 1
+
 useful tricks:
 - x ^ x will remove all duplicates
 - x & (x - 1) removes the rightmost bit of '1'
@@ -3584,4 +3587,33 @@ class Solution:
                     max_prod = max(max_prod, hashmap[word1] * hashmap[word2])
                     
         return max_prod
+```
+
+#### [338. Counting Bits](https://leetcode.com/problems/counting-bits/)
+```python
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        dp = [0] * (n + 1)
+        
+        for x in range(1, n + 1):
+            dp[x] = dp[x & (x - 1)] + 1
+
+        return dp         
+```
+```python
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        
+        def pop_count(x: int) -> int:
+            count = 0
+            while x != 0:
+                x &= x - 1 # zeroing out the least significant nonzero bit
+                count += 1
+            return count
+            
+        ans = [0] * (n + 1)
+        for x in range(n + 1):
+            ans[x] = pop_count(x)
+    
+        return ans   
 ```
