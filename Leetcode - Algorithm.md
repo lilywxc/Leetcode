@@ -3192,6 +3192,21 @@ class Solution:
 ```
 
 ### Bit Computation
+**^**: 0^1 = 1, 1^1 = 0, 0^0 = 0
+x ^ 0s = x      
+x ^ 1s = ~x -> 位级反转     
+x ^ x = 0   -> 去重    
+
+**&**: 0&1 = 0, 1&1 = 1, 0&0 = 0 -> 掩码操作
+x & 0s = 0      
+x & 1s = x      
+x & x = x      
+
+**|**：0|1 = 1, 1|1 = 1, 0|0 = 0 -> 设值操作
+x | 0s = x
+x | 1s = 1s
+x | x = x
+
 #### [504. Base 7](https://leetcode.com/problems/base-7/)
 7进制
 ```python
