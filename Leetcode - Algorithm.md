@@ -3463,4 +3463,16 @@ class Solution:
         
         return n & (-n) == n
 ```
+```python
+class Solution(object):
+    def isPowerOfTwo(self, n):
+        if n == 0:
+            return False
+        return n & (n - 1) == 0
+```
+```python
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:  
+        return n > 0 and bin(n).count("1") == 1
+```
 
