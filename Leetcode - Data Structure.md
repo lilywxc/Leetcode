@@ -1,6 +1,7 @@
 # Leetcode - Data Structure
 * [LinkedList](#LinkedList)
     * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
+    * [206. Reverse Linked List](#206-Reverse-Linked-List)
 
 
 ### LinkedList
@@ -38,3 +39,50 @@ class Solution:
         return pA
 ```
 Note: In the case lists do not intersect, the pointers for A and B will still line up and reach their respective ends at the same time
+
+#### [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+python inline swap: a, b = b, a
+1. the right-hand side of '=', i.e. a, b, are created in memory. Note, no assignment is made yet
+2. the left-hand side of '=' are assigned values in the order of left-to-right, i.e a first and b next
+```pyhon
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# iterative
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev, curr = None, head
+        
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+            
+        return prev
+```
+```python
+# recursive 1
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if (not head) or (not head.next):
+            return head
+        
+        p = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+
+        return p # p is always the last node in original list, or new head in new list
+```
+```python
+# recursive 2
+class Solution:
+    def reverseList(self, curr: Optional[ListNode], prev = None) -> Optional[ListNode]:
+        if not curr:
+            return prev
+        
+        new_head = curr.next
+        curr.next = prev
+        
+        return self.reverseList(new_head, curr)
+```
