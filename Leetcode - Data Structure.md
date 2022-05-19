@@ -602,7 +602,37 @@ class Solution:
  #### [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/)
  use **prefix sum** to find number of continuous subarrays that sum to Target in one pass O(n): [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/submissions/)
  ```python
- 
+ # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        
+        def preorder(node: TreeNode, curr_sum) -> None:
+            nonlocal count
+            
+            if not node:
+                return 
+            
+            curr_sum += node.val
+            count += dic[curr_sum - targetSum]
+            dic[curr_sum] += 1
+            
+            preorder(node.left, curr_sum)
+            preorder(node.right, curr_sum)
+            
+            # remove the current sum from the hashmap when going one node back
+            dic[curr_sum] -= 1
+            
+        count = 0
+        dic = defaultdict(int)
+        dic[0] = 1
+        
+        preorder(root, 0)
+        return count
  ```
  
  #### [572. Subtree of Another Tree]()
