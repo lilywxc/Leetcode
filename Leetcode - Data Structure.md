@@ -599,8 +599,8 @@ class Solution:
         return False
 ```
 
- #### [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/)
- use **prefix sum** to find number of continuous subarrays that sum to Target in one pass O(n): [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/submissions/)
+#### [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/)
+use **prefix sum** to find number of continuous subarrays that sum to Target in one pass O(n): [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/submissions/)
  ```python
  # Definition for a binary tree node.
 # class TreeNode:
@@ -635,5 +635,30 @@ class Solution:
         return count
  ```
  
- #### [572. Subtree of Another Tree]()
+ #### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
+# O(m*n) time and O(logm) ~ O(m) space 
+class Solution:
+    def isSubtree(self, s: Optional[TreeNode], t: Optional[TreeNode]) -> bool:
+        if s is None:
+            return False
+        
+        return self.isSubtreeWithRoot(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t);
+
+    def isSubtreeWithRoot(self, s, t):
+        if t is None and s is None:
+            return True
+        if t is None or s is None: 
+            return False
+        if t.val != s.val:
+            return False
+        
+        return self.isSubtreeWithRoot(s.left, t.left) and self.isSubtreeWithRoot(s.right, t.right)
+```
