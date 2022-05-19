@@ -481,7 +481,7 @@ class Solution:
 
 #### [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/description/)
  
- <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/543.%20Diameter%20of%20Binary%20Tree.png" width="700">
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/543.%20Diameter%20of%20Binary%20Tree.png" width="500">
 
 ```python
 # Definition for a binary tree node.
@@ -511,4 +511,37 @@ class Solution:
         
         return diameter
 ```
+
+#### [226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/description/)
+```python
+# recursive - O(n) time and O(logn) ~ O(n) space
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None:
+            return None
+        
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+
+        return root
+```
+```python
+# iterative BFS - O(n) time and O(logn) ~ O(n) space
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None:
+            return None
+        
+        q = deque([root])
+        while q:
+            node = q.popleft() # changing it to pop() wil turn iit to DFS, which works too
+            if node:
+                node.left, node.right = node.right, node.left
+                q.append(node.left)
+                q.append(node.right)
+        
+        return root      
+```
+
+
+
 
