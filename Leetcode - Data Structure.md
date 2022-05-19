@@ -1,15 +1,18 @@
 # Leetcode - Data Structure
 * [LinkedList](#LinkedList)
-    * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
-    * [206. Reverse Linked List](#206-Reverse-Linked-List)
-    * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
-    * [83. Remove Duplicates from Sorted List](#83-Remove-Duplicates-from-Sorted-List)
-    * [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
-    * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
-    * [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
-    * [234. Palindrome Linked List](#234-Palindrome-Linked-List)
-    * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
-    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
+   * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
+   * [206. Reverse Linked List](#206-Reverse-Linked-List)
+   * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
+   * [83. Remove Duplicates from Sorted List](#83-Remove-Duplicates-from-Sorted-List)
+   * [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
+   * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
+   * [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
+   * [234. Palindrome Linked List](#234-Palindrome-Linked-List)
+   * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
+   * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
+* [Tree](#Tree)
+   * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-BinaryTree)
+   * 
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -357,3 +360,69 @@ class Solution:
         
         return head
 ```
+
+#### Tree
+
+#### [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# recursive DFS - O(n) time and O(logN) ~ O(N) space
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
+```
+```python 
+# iterative BFS - O(n) time and O(logN) ~ O(N) space
+from collections import deque
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        
+        q = deque([root])
+        num_node_level = 1
+        levels = 0
+        while q:
+            levels += 1
+            size = len(q)
+            
+            for _ in range(size):
+                node = q.popleft()
+
+                if node.left:
+                    q.append(node.left)
+
+                if node.right:
+                    q.append(node.right)
+                
+        return levels
+```
+```python
+# iterative DFS
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        stack = []
+        if root:
+            stack.append((1, root))
+        
+        depth = 0
+        while stack:
+            current_depth, root = stack.pop()
+            if root:
+                depth = max(depth, current_depth)
+                stack.append((current_depth + 1, root.left))
+                stack.append((current_depth + 1, root.right))
+        
+        return depth
+```
+
+
+
