@@ -3,6 +3,9 @@
     * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
     * [206. Reverse Linked List](#206-Reverse-Linked-List)
     * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
+    * [83. Remove Duplicates from Sorted List](#83-Remove-Duplicates-from-Sorted-List)
+    * [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
+    * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -124,4 +127,89 @@ class Solution:
         else:
             l2.next = self.mergeTwoLists(l1, l2.next)
             return l2        
+```
+
+#### [83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr = head
+        
+        while curr and curr.next:
+            if curr.next.val == curr.val:
+                curr.next = curr.next.next
+            else:
+                curr = curr.next
+                
+        return head
+```
+
+#### [19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        fast = slow = dummy = ListNode()
+        
+        dummy.next = head
+        for _ in range(n + 1):
+            fast = fast.next
+            
+        while fast:
+            fast = fast.next
+            slow = slow.next
+            
+        slow.next = slow.next.next
+        
+        return dummy.next
+```
+
+#### [24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# recursive
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+        # If the list has no node or has only one node left.
+        if not head or not head.next:
+            return head
+
+        first = head
+        second = head.next
+
+        first.next  = self.swapPairs(second.next)
+        second.next = first
+
+        return second
+```
+```python
+# iterative
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        dummy = prev = ListNode()
+        prev.next = head
+        
+        while prev.next and prev.next.next:
+            first = prev.next
+            second = first.next
+            
+            prev.next, second.next, first.next = second, first, second.next
+            prev = first
+            
+        return dummy.next
 ```
