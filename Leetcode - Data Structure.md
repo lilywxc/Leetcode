@@ -600,6 +600,7 @@ class Solution:
 ```
 
  #### [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/)
+ use **prefix sum** to find number of continuous subarrays that sum to Target in one pass O(n): [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/submissions/)
  ```python
  
  ```
