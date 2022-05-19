@@ -12,7 +12,7 @@
    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
 * [Tree](#Tree)
    * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
-   * 
+   * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -424,5 +424,52 @@ class Solution:
         return depth
 ```
 
+#### [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
+# top down (pre-order) - O(nlogn) time and O(n) space
+# each node at depth d is called d times, where d = height of the tree = logn
+class Solution:
+    def height(self, root: TreeNode) -> int:
+        if not root:
+            return -1
+        
+        return 1 + max(self.height(root.left), self.height(root.right))
+    
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        
+        left = self.height(root.left)
+        right = self.height(root.right)
+
+        return abs(left - right) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
+```
+```python
+# bottom up (post-order) - O(n) time and O(n) space
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        return self.isBalancedHelper(root)[0]
+            
+    def isBalancedHelper(self, root: TreeNode) -> (bool, int):
+        # An empty tree is balanced and has height -1
+        if not root:
+            return True, -1
+        
+        leftIsBalanced, leftHeight = self.isBalancedHelper(root.left)
+        if not leftIsBalanced:
+            return False, 0
+        
+        rightIsBalanced, rightHeight = self.isBalancedHelper(root.right)
+        if not rightIsBalanced:
+            return False, 0
+        
+        return (abs(leftHeight - rightHeight) <= 1), 1 + max(leftHeight, rightHeight)
+```
 
