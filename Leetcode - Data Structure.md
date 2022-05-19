@@ -533,7 +533,7 @@ class Solution:
         
         q = deque([root])
         while q:
-            node = q.popleft() # changing it to pop() wil turn iit to DFS, which works too
+            node = q.popleft() # changing it to pop() wil turn it to DFS, which works too
             if node:
                 node.left, node.right = node.right, node.left
                 q.append(node.left)
@@ -542,6 +542,24 @@ class Solution:
         return root      
 ```
 
-
+#### [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/submissions/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root1 and root2:
+            root = TreeNode(root1.val + root2.val)
+            root.left = self.mergeTrees(root1.left, root2.left)
+            root.right = self.mergeTrees(root1.right, root2.right)
+            
+            return root
+        else:
+            return root1 or root2
+```
 
 
