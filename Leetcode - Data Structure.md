@@ -562,4 +562,39 @@ class Solution:
             return root1 or root2
 ```
 
+#### [112. Path Sum](https://leetcode.com/problems/path-sum/description/)
+```python
+# recursive
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root: # this is initial check of input root, not base case
+            return False
 
+        targetSum -= root.val
+        
+        if not root.left and not root.right:  # reach a leaf
+            return targetSum == 0
+        
+        return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
+```
+```python
+# iterative
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root:
+            return False
+
+        stack = [(root, targetSum - root.val)]
+        while stack:
+            node, targetSum = stack.pop()
+            
+            if not node.left and not node.right and targetSum == 0:  
+                return True
+            
+            if node.right:
+                stack.append((node.right, targetSum - node.right.val))
+            if node.left:
+                stack.append((node.left, targetSum - node.left.val))
+                
+        return False
+```
