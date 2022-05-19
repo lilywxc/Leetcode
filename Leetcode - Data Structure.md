@@ -6,6 +6,8 @@
     * [83. Remove Duplicates from Sorted List](#83-Remove-Duplicates-from-Sorted-List)
     * [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
     * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
+    * [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
+    * [234. Palindrome Linked List](#234-Palindrome-Linked-List)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -212,4 +214,87 @@ class Solution:
             prev = first
             
         return dummy.next
+```
+
+#### [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/description/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        prev, curr = None, head
+        
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+            
+        return prev
+    
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        l1 = self.reverseList(l1)
+        l2 = self.reverseList(l2)
+        
+        prev = None
+        carry = 0
+        while l1 or l2:
+            x1 = l1.val if l1 else 0
+            x2 = l2.val if l2 else 0
+            
+            carry, val = divmod(carry + x1 + x2, 10)
+            
+            curr = ListNode(val)
+            curr.next = prev
+            prev = curr
+            
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+
+        if carry:
+            curr = ListNode(carry)
+            curr.next = prev
+            prev = curr
+
+        return prev
+```
+
+#### [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        if head is None:
+            return True
+
+        first_half_end = self.end_of_first_half(head)
+        second_half_start = self.reverse_list(first_half_end.next)
+
+        p1 = head
+        p2 = second_half_start
+        while p2: # l2 is equal to or smaller than l1
+            if p1.val != p2.val:
+                return False
+            p1 = p1.next
+            p2 = p2.next
+
+        return True    
+
+    def end_of_first_half(self, head):
+        fast = head
+        slow = head
+        while fast.next is not None and fast.next.next is not None:
+            fast = fast.next.next
+            slow = slow.next
+        return slow # if length of list is odd, slow will stop at the mid point
+    
+    def reverse_list(self, head):
+        prev, curr = None, head
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+        return prev
 ```
