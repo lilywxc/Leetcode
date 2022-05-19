@@ -8,6 +8,8 @@
     * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
     * [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
     * [234. Palindrome Linked List](#234-Palindrome-Linked-List)
+    * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
+    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -297,4 +299,61 @@ class Solution:
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
         return prev
+```
+
+#### [725. Split Linked List in Parts](725. Split Linked List in Parts)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def splitListToParts(self, root: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
+        curr, length = root, 0
+        while curr:
+            curr, length = curr.next, length + 1
+            
+        chunk_size, rest = length // k, length % k # distribute the rest to each chunk
+        res = [chunk_size + 1] * rest + [chunk_size] * (k - rest)
+        
+        prev, curr = None, root
+        for index, num in enumerate(res):
+
+            res[index] = curr
+            for i in range(num - 1):
+                curr = curr.next
+                
+            if curr:
+                curr.next, curr = None, curr.next
+                
+        return res
+```
+
+#### [328. Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/)
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        
+        odd = head 
+        even = head.next
+        even_head = even
+        
+        while even and even.next: 
+            odd.next = odd.next.next
+            even.next = even.next.next
+           
+            odd = odd.next
+            even = even.next
+        
+        odd.next = even_head
+        
+        return head
 ```
