@@ -11,7 +11,7 @@
    * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
 * [Tree](#Tree)
-   * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-BinaryTree)
+   * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
    * 
 
 ### LinkedList
