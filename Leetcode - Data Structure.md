@@ -13,6 +13,12 @@
 * [Tree](#Tree)
    * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
    * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
+   * [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
+   * [226. Invert Binary Tree](#226-Invert-Binary-Tree)
+   * [617. Merge Two Binary Trees](#617-Merge-Two-Binary-Trees)
+   * [112. Path Sum](#112-Path-Sum)
+   * [437. Path Sum III](#437-Path-Sum-III)
+   * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -471,5 +477,38 @@ class Solution:
             return False, 0
         
         return (abs(leftHeight - rightHeight) <= 1), 1 + max(leftHeight, rightHeight)
+```
+
+#### [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/description/)
+ 
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/543.%20Diameter%20of%20Binary%20Tree.png" width="700">
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+
+        def longest_path(node):
+            if not node:
+                return 0
+            
+            nonlocal diameter
+            
+            left_path = longest_path(node.left)
+            right_path = longest_path(node.right)
+
+            diameter = max(diameter, left_path + right_path)
+
+            return max(left_path, right_path) + 1
+
+        diameter = 0
+        longest_path(root)
+        
+        return diameter
 ```
 
