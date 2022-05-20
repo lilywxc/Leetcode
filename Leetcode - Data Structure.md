@@ -781,7 +781,7 @@ class Solution:
 #         self.left = left
 #         self.right = right
 
-# iterative DFS
+# iterative DFS (pre-order)
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
         if root is None: 
@@ -795,16 +795,16 @@ class Solution:
             if is_left and node.left is None and node.right is None:
                 total += node.val
                 
-            if node.left:
-                stack.append((node.left, True))
-                
             if node.right:
                 stack.append((node.right, False))
+                
+            if node.left:
+                stack.append((node.left, True))
 
         return total
 ```
 ```python
-# recursive DFS
+# recursive DFS (pre-order)
 class Solution:
     def sumOfLeftLeaves(self, root: TreeNode) -> int:
         if root is None:
