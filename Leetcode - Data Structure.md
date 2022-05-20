@@ -1139,5 +1139,35 @@ class Solution:
 #### [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/description/)
 post-order: left -> right-> root
 ```python
+# flag of visit
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        stack = [(root, False)]
+        while stack:
+            node, visited = stack.pop()
+            if node:
+                if visited:
+                    output.append(node.val)
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
 
+        return output
+```
+```python
+# modified preorder: post order is the reverse of right-first preorder (root -> right -> left)
+class Solution:
+    def postorderTraversal(self, root):
+        output = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                output.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+
+        return output[::-1]
 ```
