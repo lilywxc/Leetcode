@@ -11,20 +11,24 @@
    * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
 * [Tree](#Tree)
-   * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
-   * [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
-   * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
-   * [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
-   * [687. Longest Univalue Path](#687-Longest-Univalue-Path)
-   * [226. Invert Binary Tree](#226-Invert-Binary-Tree)
-   * [617. Merge Two Binary Trees](#617-Merge-Two-Binary-Trees)
-   * [112. Path Sum](#112-Path-Sum)
-   * [437. Path Sum III](#437-Path-Sum-III)
-   * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
-   * [101. Symmetric Tree](#101-Symmetric-Tree)
-   * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
-   * [337. House Robber III](#337-House-Robber-III)
-   * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
+   * [BFS](#Traversal)
+         * [637. Average of Levels in Binary Tree](#637-Average-of-Levels-in-Binary-Tree)
+         * [513. Find Bottom Left Tree Value](#513-Find-Bottom-Left-Tree-Value)
+   * [Recursion]
+         * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
+         * [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
+         * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
+         * [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
+         * [687. Longest Univalue Path](#687-Longest-Univalue-Path)
+         * [226. Invert Binary Tree](#226-Invert-Binary-Tree)
+         * [617. Merge Two Binary Trees](#617-Merge-Two-Binary-Trees)
+         * [112. Path Sum](#112-Path-Sum)
+         * [437. Path Sum III](#437-Path-Sum-III)
+         * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
+         * [101. Symmetric Tree](#101-Symmetric-Tree)
+         * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
+         * [337. House Robber III](#337-House-Robber-III)
+         * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
 
 
 ### LinkedList
@@ -376,6 +380,11 @@ class Solution:
 
 #### Tree
 
+
+
+
+
+#### Recursion
 #### [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 ```python
 # Definition for a binary tree node.
@@ -971,4 +980,82 @@ class Solution:
         traverse(root)
         
         return self.ans if self.ans < float('inf') else -1
+```
+
+#### BFS
+#### [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
+```python
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# BFS
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        if not root:
+            return 0
+        
+        res = []
+        q = deque([root])
+        while q:
+            size = len(q)
+            
+            level_sum = 0
+            for _ in range(size):
+                node = q.popleft()
+                
+                level_sum += node.val
+
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+                
+            res.append(level_sum/size)
+            
+        return res
+```
+```python
+# DFS
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+
+        def traverse(node, depth = 0):
+            if node:
+                if len(res) <= depth:
+                    res.append([0, 0])
+
+                res[depth][0] += node.val
+                res[depth][1] += 1
+
+                traverse(node.left, depth + 1)
+                traverse(node.right, depth + 1)
+                   
+        res = [] # [sum, number of nodes]
+        traverse(root)
+        return [s/n for s, n in res]
+```
+
+#### [513. Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+        
+        q = deque([root])
+        while q:
+            node = q.popleft()
+            if node.right:
+                q.append(node.right)
+            if node.left:
+                q.append(node.left)
+            
+        return node.val
 ```
