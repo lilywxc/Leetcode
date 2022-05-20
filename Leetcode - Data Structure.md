@@ -1228,3 +1228,21 @@ class Solution:
         
         return output 
 ```
+```python
+# flag of visit
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        stack = [(root, False)]
+        while stack:
+            node, visited = stack.pop()
+            if node:
+                if visited:
+                    output.append(node.val)
+                else:
+                    stack.append((node.right, False))
+                    stack.append((node, True))
+                    stack.append((node.left, False))
+
+        return output
+```
