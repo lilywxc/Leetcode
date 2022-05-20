@@ -1171,3 +1171,39 @@ class Solution:
 
         return output[::-1]
 ```
+```python
+# Morris Traversal
+class Solution:
+    def postorderTraversal(self, root):
+        output = []
+        curr = root
+        while curr:  
+            if not curr.right: 
+                output.append(curr.val)
+                curr = curr.left 
+            else: 
+                predecessor = curr.right 
+
+                # -- FIND PREDECESSOR --
+                while predecessor.left and predecessor.left is not curr: 
+                    predecessor = predecessor.left 
+
+                # -- CREATE VIRTUAL LINKS --
+                if not predecessor.left:
+                    output.append(curr.val)
+                    predecessor.left = curr  
+                    curr = curr.right  
+                    
+                # -- RESTORE TREE --
+                else:
+                    predecessor.left = None
+                    curr = curr.left         
+
+        return output[::-1]
+```
+```python
+# recursive
+class Solution:
+    def postorderTraversal(self, root):    
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
+```
