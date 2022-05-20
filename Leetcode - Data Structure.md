@@ -827,10 +827,10 @@ class Solution:
 ```
 Morris Traversal explanation tutorial: [Youtube](https://www.youtube.com/watch?v=BuI-EULsz0Y)
 
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Morris%20Traversal.png" width="700">
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Morris%20Traversal.png" width="350">
 
 ```python
-# Morris Traversal (pre-order)
+# Morris Traversal (pre-order) - O(n) time and O(1) space
 class Solution:
     def sumOfLeftLeaves(self, root):
         total_sum = 0
