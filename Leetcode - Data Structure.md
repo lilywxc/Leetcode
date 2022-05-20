@@ -1073,6 +1073,7 @@ class Solution:
  <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Traversal.png" width="500">
 
 #### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+pre-order: root -> left -> right
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -1093,8 +1094,8 @@ class Solution:
             node = stack.pop()
             if node:
                 output.append(node.val)
-                stack.append(node.right)
-                stack.append(node.left)
+                stack.append(node.right)  # append right first, left next
+                stack.append(node.left)   # so left comes out first when pop
         
         return output
 ```
@@ -1133,4 +1134,10 @@ class Solution:
                     curr = curr.right         
 
         return output
+```
+
+#### [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/description/)
+post-order: left -> right-> root
+```python
+
 ```
