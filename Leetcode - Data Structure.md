@@ -1068,6 +1068,10 @@ class Solution:
         return node.val
 ```
 
+#### DFS
+
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Traversal.png" width="500">
+
 #### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
 ```python
 # Definition for a binary tree node.
