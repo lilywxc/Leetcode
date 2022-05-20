@@ -824,5 +824,38 @@ class Solution:
             return total
         
         return process_subtree(root, False)
-
+```
+Morris Traversal explanation tutorial: [Youtube](https://www.youtube.com/watch?v=BuI-EULsz0Y)
+```python
+# Morris Traversal (pre-order)
+class Solution:
+    def sumOfLeftLeaves(self, root):
+        total_sum = 0
+        curr = root
+        while curr is not None:
+            # If there is no left child, we can simply explore the right subtree
+            # without worrying about keeping track of currentNode's other children.
+            if curr.left is None: 
+                curr = curr.right 
+            else: 
+                predecessor = curr.left 
+                
+                if predecessor.left is None and predecessor.right is None:
+                    total_sum += predecessor.val
+                    
+                # Find the inorder predecessor for currentNode (predecessor is the rightmost tree of left subtree)
+                while predecessor.right is not None and predecessor.right is not curr:
+                    predecessor = predecessor.right
+                
+                # -- CREATE VIRTUAL LINKS --
+                if predecessor.right is None:    # We've not yet visited the inorder predecessor
+                    predecessor.right = curr     # and we still need to explore currentNode's left subtree 
+                    curr = curr.left             # so we put a link to curr and get back to the right subtree later
+                    
+                # -- RESTORE TREE --
+                else:                            # We have already visited the inorder predecessor
+                    predecessor.right = None     # so we remove the virtual link we added
+                    curr = curr.right            # and move onto the right subtree and explore it
+                    
+        return total_sum
 ```
