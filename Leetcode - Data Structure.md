@@ -12,6 +12,7 @@
    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
 * [Tree](#Tree)
    * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
+   * [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
    * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
    * [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
    * [226. Invert Binary Tree](#226-Invert-Binary-Tree)
@@ -20,7 +21,6 @@
    * [437. Path Sum III](#437-Path-Sum-III)
    * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
    * [101. Symmetric Tree](#101-Symmetric-Tree)
-   * [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
    * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
    * [687. Longest Univalue Path](#687-Longest-Univalue-Path)
 
@@ -432,6 +432,67 @@ class Solution:
                 stack.append((current_depth + 1, root.right))
         
         return depth
+```
+
+#### [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+```python
+# recursive
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        if not root.left:
+            return 1 + self.minDepth(root.right)
+        if not root.right:
+            return 1 + self.minDepth(root.left)
+        
+        return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+```
+```python
+# iterative BFS
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        q = deque([root])
+        levels = 0
+        while q:
+            levels += 1
+            size = len(q)
+            
+            for _ in range(size):
+                node = q.popleft()
+                
+                if node:
+                    if not node.left and not node.right:
+                        return levels
+                    else:
+                        q.append(node.left)
+                        q.append(node.right)
+```
+```python
+# iterative DFS
+class Solution:
+    def minDepth(self, root):
+        if not root:
+            return 0
+        
+        stack = [(1, root)]
+        min_depth = float('inf')
+        
+        while stack:
+            depth, node = stack.pop()
+            
+            if node:
+                if not node.left and not node.right:
+                    min_depth = min(depth, min_depth)
+                else:
+                    stack.append((depth + 1, node.left))
+                    stack.append((depth + 1, node.right))
+        
+        return min_depth 
 ```
 
 #### [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
