@@ -33,6 +33,8 @@
        * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
        * [337. House Robber III](#337-House-Robber-III)
        * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
+    * [BST](#BST)
+       * [669. Trim a Binary Search Tree](#669-Trim-a-Binary-Search-Tree)
 
 
 ### LinkedList
@@ -442,12 +444,6 @@ class Solution:
 
 #### [513. Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
         
@@ -674,13 +670,6 @@ class Solution:
 #### Recursion
 #### [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
 # recursive DFS - O(n) time and O(logN) ~ O(N) space
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
@@ -795,13 +784,6 @@ class Solution:
 
 #### [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
 # top down (pre-order) - O(nlogn) time and O(n) space
 # each node at depth d is called d times, where d = height of the tree = logn
 class Solution:
@@ -847,12 +829,6 @@ class Solution:
  <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/543.%20Diameter%20of%20Binary%20Tree.png" width="500">
 
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
 
@@ -877,12 +853,6 @@ class Solution:
 
 #### [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def longestUnivaluePath(self, root: Optional[TreeNode]) -> int:
 
@@ -938,12 +908,6 @@ class Solution:
 
 #### [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/submissions/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
         if root1 and root2:
@@ -996,12 +960,6 @@ class Solution:
 #### [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/)
 use **prefix sum** to find number of continuous subarrays that sum to Target in one pass O(n): [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/submissions/)
  ```python
- # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         
@@ -1031,13 +989,6 @@ class Solution:
  
  #### [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
 # O(m*n) time and O(logm) ~ O(m) space 
 class Solution:
     def isSubtree(self, s: Optional[TreeNode], t: Optional[TreeNode]) -> bool:
@@ -1059,13 +1010,6 @@ class Solution:
 
 #### [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
 # recursive
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
@@ -1103,13 +1047,6 @@ class Solution:
 
 #### [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/description/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
 # iterative DFS (pre-order)
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
@@ -1250,12 +1187,6 @@ class Solution:
 
 #### [671. Second Minimum Node In a Binary Tree](https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/description/)
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
 
@@ -1271,4 +1202,25 @@ class Solution:
         traverse(root)
         
         return self.ans if self.ans < float('inf') else -1
+```
+
+#### BST
+
+#### [669. Trim a Binary Search Tree](https://leetcode.com/problems/trim-a-binary-search-tree/)
+```python
+class Solution:
+    def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
+        def trim(node):
+            if not node:
+                return None
+            elif node.val > high:
+                return trim(node.left)
+            elif node.val < low:
+                return trim(node.right)
+            else:
+                node.left = trim(node.left)
+                node.right = trim(node.right)
+                return node
+
+        return trim(root)
 ```
