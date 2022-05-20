@@ -15,6 +15,7 @@
    * [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
    * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
    * [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
+   * [687. Longest Univalue Path](#687-Longest-Univalue-Path)
    * [226. Invert Binary Tree](#226-Invert-Binary-Tree)
    * [617. Merge Two Binary Trees](#617-Merge-Two-Binary-Trees)
    * [112. Path Sum](#112-Path-Sum)
@@ -22,7 +23,6 @@
    * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
    * [101. Symmetric Tree](#101-Symmetric-Tree)
    * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
-   * [687. Longest Univalue Path](#687-Longest-Univalue-Path)
 
 
 ### LinkedList
