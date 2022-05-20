@@ -35,6 +35,7 @@
        * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
     * [BST](#BST)
        * [669. Trim a Binary Search Tree](#669-Trim-a-Binary-Search-Tree)
+       * 
 
 
 ### LinkedList
@@ -1205,6 +1206,7 @@ class Solution:
 ```
 
 #### BST
+left <= root <= right
 
 #### [669. Trim a Binary Search Tree](https://leetcode.com/problems/trim-a-binary-search-tree/)
 ```python
@@ -1224,3 +1226,4 @@ class Solution:
 
         return trim(root)
 ```
+
