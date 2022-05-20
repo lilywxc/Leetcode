@@ -399,7 +399,6 @@ class Solution:
             return 0
         
         q = deque([root])
-        num_node_level = 1
         levels = 0
         while q:
             levels += 1
