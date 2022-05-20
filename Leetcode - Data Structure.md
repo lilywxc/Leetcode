@@ -1075,13 +1075,12 @@ class Solution:
 #### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
 pre-order: root -> left -> right
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
+# recursive DFS
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) if root else []
+```
+```python
 # iterative DFS
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
@@ -1098,12 +1097,6 @@ class Solution:
                 stack.append(node.left)   # so left comes out first when pop
         
         return output
-```
-```python
-# recursive DFS
-class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) if root else []
 ```
 ```python
 # Morris Taversal
@@ -1206,4 +1199,32 @@ class Solution:
                     curr = curr.left         
 
         return output[::-1]
+```
+
+#### [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+[graph illustration](https://leetcode.com/problems/binary-tree-inorder-traversal/solution/)
+```python
+# recursive
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+         return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right) if root else []
+```
+```python        
+# iterative
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        stack = []
+        output = []
+        
+        curr = root
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+                
+            curr = stack.pop()
+            output.append(curr.val)
+            curr = curr.right
+        
+        return output 
 ```
