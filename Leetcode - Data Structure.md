@@ -577,6 +577,37 @@ class Solution:
         return diameter
 ```
 
+#### [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def longestUnivaluePath(self, root: Optional[TreeNode]) -> int:
+
+        def traversal(node):
+            if not node: 
+                return 0
+            
+            left_length = traversal(node.left)
+            right_length = traversal(node.right)
+            
+            # if curr value != child value, previous length should not be added, and we reset left/right to 0 
+            left = left_length + 1 if node.left and node.left.val == node.val else 0
+            right = right_length + 1 if node.right and node.right.val == node.val else 0
+            
+            self.max_length = max(self.max_length, left + right)
+            return max(left, right)
+
+        self.max_length = 0
+        traversal(root)
+        
+        return self.max_length
+```
+
 #### [226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/description/)
 ```python
 # recursive - O(n) time and O(logn) ~ O(n) space
@@ -862,3 +893,4 @@ class Solution:
                     
         return total_sum
 ```
+
