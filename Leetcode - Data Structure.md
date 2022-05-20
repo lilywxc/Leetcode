@@ -771,3 +771,58 @@ class Solution:
         
         return True
 ```
+
+#### [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/description/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# iterative DFS
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        if root is None: 
+            return 0
+
+        stack = [(root, False)]
+        total = 0
+        while stack:
+            node, is_left = stack.pop() # changing it to popleft() turns it to BFS
+            
+            if is_left and node.left is None and node.right is None:
+                total += node.val
+                
+            if node.left:
+                stack.append((node.left, True))
+                
+            if node.right:
+                stack.append((node.right, False))
+
+        return total
+```
+```python
+# recursive DFS
+class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+
+        def process_subtree(node, is_left):
+            if node.left is None and node.right is None:
+                return node.val if is_left else 0
+            
+            total = 0
+            if node.left:
+                total += process_subtree(node.left, True)
+                
+            if node.right:
+                total += process_subtree(node.right, False)
+                
+            return total
+        
+        return process_subtree(root, False)
+
+```
