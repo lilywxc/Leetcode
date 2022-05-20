@@ -1139,6 +1139,27 @@ class Solution:
 #### [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/description/)
 post-order: left -> right-> root
 ```python
+# recursive
+class Solution:
+    def postorderTraversal(self, root):    
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
+```
+```python
+# modified preorder: post order is the reverse of right-first preorder (root -> right -> left)
+class Solution:
+    def postorderTraversal(self, root):
+        output = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                output.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+
+        return output[::-1]
+```
+```python
 # flag of visit
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
@@ -1155,21 +1176,6 @@ class Solution:
                     stack.append((node.left, False))
 
         return output
-```
-```python
-# modified preorder: post order is the reverse of right-first preorder (root -> right -> left)
-class Solution:
-    def postorderTraversal(self, root):
-        output = []
-        stack = [root]
-        while stack:
-            node = stack.pop()
-            if node:
-                output.append(node.val)
-                stack.append(node.left)
-                stack.append(node.right)
-
-        return output[::-1]
 ```
 ```python
 # Morris Traversal
@@ -1200,10 +1206,4 @@ class Solution:
                     curr = curr.left         
 
         return output[::-1]
-```
-```python
-# recursive
-class Solution:
-    def postorderTraversal(self, root):    
-        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
 ```
