@@ -384,9 +384,292 @@ class Solution:
 
 #### Tree
 
+#### BFS
+#### [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
+```python
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
+# BFS
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        if not root:
+            return 0
+        
+        res = []
+        q = deque([root])
+        while q:
+            size = len(q)
+            
+            level_sum = 0
+            for _ in range(size):
+                node = q.popleft()
+                
+                level_sum += node.val
 
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+                
+            res.append(level_sum/size)
+            
+        return res
+```
+```python
+# DFS
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
 
+        def traverse(node, depth = 0):
+            if node:
+                if len(res) <= depth:
+                    res.append([0, 0])
+
+                res[depth][0] += node.val
+                res[depth][1] += 1
+
+                traverse(node.left, depth + 1)
+                traverse(node.right, depth + 1)
+                   
+        res = [] # [sum, number of nodes]
+        traverse(root)
+        return [s/n for s, n in res]
+```
+
+#### [513. Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+        
+        q = deque([root])
+        while q:
+            node = q.popleft()
+            if node.right:
+                q.append(node.right)
+            if node.left:
+                q.append(node.left)
+            
+        return node.val
+```
+
+#### DFS
+
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Traversal.png" width="500">
+
+#### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+pre-order: root -> left -> right
+```python
+# recursive DFS
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) if root else []
+```
+```python
+# iterative DFS
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        stack = [root]
+        output = []
+        while stack:
+            node = stack.pop()
+            if node:
+                output.append(node.val)
+                stack.append(node.right)  # append right first, left next
+                stack.append(node.left)   # so left comes out first when pop
+        
+        return output
+```
+```python
+# Morris Taversal
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        curr = root
+        while curr:  
+            if not curr.left: 
+                output.append(curr.val)
+                curr = curr.right 
+            else: 
+                predecessor = curr.left 
+
+                # -- FIND PREDECESSOR --
+                while predecessor.right and predecessor.right is not curr: 
+                    predecessor = predecessor.right 
+
+                # -- CREATE VIRTUAL LINKS --
+                if not predecessor.right:
+                    output.append(curr.val)
+                    predecessor.right = curr  
+                    curr = curr.left  
+                    
+                # -- RESTORE TREE --
+                else:
+                    predecessor.right = None
+                    curr = curr.right         
+
+        return output
+```
+
+#### [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/description/)
+post-order: left -> right-> root
+```python
+# recursive
+class Solution:
+    def postorderTraversal(self, root):    
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
+```
+```python
+# modified preorder: post order is the reverse of right-first preorder (root -> right -> left)
+class Solution:
+    def postorderTraversal(self, root):
+        output = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                output.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+
+        return output[::-1]
+```
+```python
+# flag of visit
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        stack = [(root, False)]
+        while stack:
+            node, visited = stack.pop()
+            if node:
+                if visited:
+                    output.append(node.val)
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+
+        return output
+```
+```python
+# Morris Traversal
+class Solution:
+    def postorderTraversal(self, root):
+        output = []
+        curr = root
+        while curr:  
+            if not curr.right: 
+                output.append(curr.val)
+                curr = curr.left 
+            else: 
+                predecessor = curr.right 
+
+                # -- FIND PREDECESSOR --
+                while predecessor.left and predecessor.left is not curr: 
+                    predecessor = predecessor.left 
+
+                # -- CREATE VIRTUAL LINKS --
+                if not predecessor.left:
+                    output.append(curr.val)
+                    predecessor.left = curr  
+                    curr = curr.right  
+                    
+                # -- RESTORE TREE --
+                else:
+                    predecessor.left = None
+                    curr = curr.left         
+
+        return output[::-1]
+```
+
+#### [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+[graph illustration](https://leetcode.com/problems/binary-tree-inorder-traversal/solution/)
+```python
+# recursive
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+         return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right) if root else []
+```
+```python        
+# iterative
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        stack = []
+        output = []
+        
+        curr = root
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+                
+            curr = stack.pop()
+            output.append(curr.val)
+            curr = curr.right
+        
+        return output 
+```
+```python
+# flag of visit
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        stack = [(root, False)]
+        while stack:
+            node, visited = stack.pop()
+            if node:
+                if visited:
+                    output.append(node.val)
+                else:
+                    stack.append((node.right, False))
+                    stack.append((node, True))
+                    stack.append((node.left, False))
+
+        return output
+```
+```python
+# Morris Traversal
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        curr = root
+        while curr:
+            if not curr.left:
+                output.append(curr.val)
+                curr = curr.right
+            else:
+                predecessor = curr.left
+                
+                # -- FIND PREDECESSOR --
+                while predecessor.right and predecessor.right is not curr:
+                    predecessor = predecessor.right
+                    
+                # -- CREATE VIRTUAL LINKS --
+                if not predecessor.right:
+                    predecessor.right = curr
+                    curr = curr.left
+                    
+                # -- RESTORE TREE --
+                else:
+                    output.append(curr.val)
+                    predecessor.right = None
+                    curr = curr.right
+                
+        return output
+```
 
 #### Recursion
 #### [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
@@ -988,291 +1271,4 @@ class Solution:
         traverse(root)
         
         return self.ans if self.ans < float('inf') else -1
-```
-
-#### BFS
-#### [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
-```python
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-# BFS
-class Solution:
-    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
-        if not root:
-            return 0
-        
-        res = []
-        q = deque([root])
-        while q:
-            size = len(q)
-            
-            level_sum = 0
-            for _ in range(size):
-                node = q.popleft()
-                
-                level_sum += node.val
-
-                if node.left:
-                    q.append(node.left)
-                if node.right:
-                    q.append(node.right)
-                
-            res.append(level_sum/size)
-            
-        return res
-```
-```python
-# DFS
-class Solution:
-    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
-
-        def traverse(node, depth = 0):
-            if node:
-                if len(res) <= depth:
-                    res.append([0, 0])
-
-                res[depth][0] += node.val
-                res[depth][1] += 1
-
-                traverse(node.left, depth + 1)
-                traverse(node.right, depth + 1)
-                   
-        res = [] # [sum, number of nodes]
-        traverse(root)
-        return [s/n for s, n in res]
-```
-
-#### [513. Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)
-```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-class Solution:
-    def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
-        
-        q = deque([root])
-        while q:
-            node = q.popleft()
-            if node.right:
-                q.append(node.right)
-            if node.left:
-                q.append(node.left)
-            
-        return node.val
-```
-
-#### DFS
-
- <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Traversal.png" width="500">
-
-#### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
-pre-order: root -> left -> right
-```python
-# recursive DFS
-class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) if root else []
-```
-```python
-# iterative DFS
-class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        if not root:
-            return []
-        
-        stack = [root]
-        output = []
-        while stack:
-            node = stack.pop()
-            if node:
-                output.append(node.val)
-                stack.append(node.right)  # append right first, left next
-                stack.append(node.left)   # so left comes out first when pop
-        
-        return output
-```
-```python
-# Morris Taversal
-class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        output = []
-        curr = root
-        while curr:  
-            if not curr.left: 
-                output.append(curr.val)
-                curr = curr.right 
-            else: 
-                predecessor = curr.left 
-
-                # -- FIND PREDECESSOR --
-                while predecessor.right and predecessor.right is not curr: 
-                    predecessor = predecessor.right 
-
-                # -- CREATE VIRTUAL LINKS --
-                if not predecessor.right:
-                    output.append(curr.val)
-                    predecessor.right = curr  
-                    curr = curr.left  
-                    
-                # -- RESTORE TREE --
-                else:
-                    predecessor.right = None
-                    curr = curr.right         
-
-        return output
-```
-
-#### [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/description/)
-post-order: left -> right-> root
-```python
-# recursive
-class Solution:
-    def postorderTraversal(self, root):    
-        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
-```
-```python
-# modified preorder: post order is the reverse of right-first preorder (root -> right -> left)
-class Solution:
-    def postorderTraversal(self, root):
-        output = []
-        stack = [root]
-        while stack:
-            node = stack.pop()
-            if node:
-                output.append(node.val)
-                stack.append(node.left)
-                stack.append(node.right)
-
-        return output[::-1]
-```
-```python
-# flag of visit
-class Solution:
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        output = []
-        stack = [(root, False)]
-        while stack:
-            node, visited = stack.pop()
-            if node:
-                if visited:
-                    output.append(node.val)
-                else:
-                    stack.append((node, True))
-                    stack.append((node.right, False))
-                    stack.append((node.left, False))
-
-        return output
-```
-```python
-# Morris Traversal
-class Solution:
-    def postorderTraversal(self, root):
-        output = []
-        curr = root
-        while curr:  
-            if not curr.right: 
-                output.append(curr.val)
-                curr = curr.left 
-            else: 
-                predecessor = curr.right 
-
-                # -- FIND PREDECESSOR --
-                while predecessor.left and predecessor.left is not curr: 
-                    predecessor = predecessor.left 
-
-                # -- CREATE VIRTUAL LINKS --
-                if not predecessor.left:
-                    output.append(curr.val)
-                    predecessor.left = curr  
-                    curr = curr.right  
-                    
-                # -- RESTORE TREE --
-                else:
-                    predecessor.left = None
-                    curr = curr.left         
-
-        return output[::-1]
-```
-
-#### [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
-[graph illustration](https://leetcode.com/problems/binary-tree-inorder-traversal/solution/)
-```python
-# recursive
-class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-         return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right) if root else []
-```
-```python        
-# iterative
-class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        stack = []
-        output = []
-        
-        curr = root
-        while stack or curr:
-            while curr:
-                stack.append(curr)
-                curr = curr.left
-                
-            curr = stack.pop()
-            output.append(curr.val)
-            curr = curr.right
-        
-        return output 
-```
-```python
-# flag of visit
-class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        output = []
-        stack = [(root, False)]
-        while stack:
-            node, visited = stack.pop()
-            if node:
-                if visited:
-                    output.append(node.val)
-                else:
-                    stack.append((node.right, False))
-                    stack.append((node, True))
-                    stack.append((node.left, False))
-
-        return output
-```
-```python
-# Morris Traversal
-class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        output = []
-        curr = root
-        while curr:
-            if not curr.left:
-                output.append(curr.val)
-                curr = curr.right
-            else:
-                predecessor = curr.left
-                
-                # -- FIND PREDECESSOR --
-                while predecessor.right and predecessor.right is not curr:
-                    predecessor = predecessor.right
-                    
-                # -- CREATE VIRTUAL LINKS --
-                if not predecessor.right:
-                    predecessor.right = curr
-                    curr = curr.left
-                    
-                # -- RESTORE TREE --
-                else:
-                    output.append(curr.val)
-                    predecessor.right = None
-                    curr = curr.right
-                
-        return output
 ```
