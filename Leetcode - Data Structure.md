@@ -1246,3 +1246,33 @@ class Solution:
 
         return output
 ```
+```python
+# Morris Traversal
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        curr = root
+        while curr:
+            if not curr.left:
+                output.append(curr.val)
+                curr = curr.right
+            else:
+                predecessor = curr.left
+                
+                # -- FIND PREDECESSOR --
+                while predecessor.right and predecessor.right is not curr:
+                    predecessor = predecessor.right
+                    
+                # -- CREATE VIRTUAL LINKS --
+                if not predecessor.right:
+                    predecessor.right = curr
+                    curr = curr.left
+                    
+                # -- RESTORE TREE --
+                else:
+                    output.append(curr.val)
+                    predecessor.right = None
+                    curr = curr.right
+                
+        return output
+```
