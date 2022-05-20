@@ -826,6 +826,9 @@ class Solution:
         return process_subtree(root, False)
 ```
 Morris Traversal explanation tutorial: [Youtube](https://www.youtube.com/watch?v=BuI-EULsz0Y)
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Morris%20Traversal.png" width="700">
+
 ```python
 # Morris Traversal (pre-order)
 class Solution:
