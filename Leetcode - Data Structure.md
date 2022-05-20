@@ -876,15 +876,15 @@ Morris Traversal explanation tutorial: [Youtube](https://www.youtube.com/watch?v
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Morris%20Traversal.png" width="350">
 
 ```python
-# Morris Traversal (pre-order) - O(n) time and O(1) space
+# Morris Traversal (pre-order)
 class Solution:
     def sumOfLeftLeaves(self, root):
         total_sum = 0
         curr = root
-        while curr is not None:
+        while curr:
             # If there is no left child, we can simply explore the right subtree
             # without worrying about keeping track of currentNode's other children.
-            if curr.left is None: 
+            if not curr.left: 
                 curr = curr.right 
             else: 
                 predecessor = curr.left 
@@ -893,18 +893,22 @@ class Solution:
                     total_sum += predecessor.val
                     
                 # Find the inorder predecessor for currentNode (predecessor is the rightmost tree of left subtree)
-                while predecessor.right is not None and predecessor.right is not curr:
+                while predecessor.right and predecessor.right is not curr:
                     predecessor = predecessor.right
                 
                 # -- CREATE VIRTUAL LINKS --
-                if predecessor.right is None:    # We've not yet visited the inorder predecessor
-                    predecessor.right = curr     # and we still need to explore currentNode's left subtree 
-                    curr = curr.left             # so we put a link to curr and get back to the right subtree later
+                # We've not yet visited the inorder predecessor, so we still need to explore currentNode's left subtree.
+                # Before that, we will put a link back so that we can get back to the right subtree later
+                if not predecessor.right:
+                    predecessor.right = curr  
+                    curr = curr.left 
                     
                 # -- RESTORE TREE --
-                else:                            # We have already visited the inorder predecessor
-                    predecessor.right = None     # so we remove the virtual link we added
-                    curr = curr.right            # and move onto the right subtree and explore it
+                # We have already visited the inorder predecessor, so we remove the virtual link we added
+                # and then move onto the right subtree and explore it.
+                else:
+                    predecessor.right = None
+                    curr = curr.right
                     
         return total_sum
 ```
@@ -1062,4 +1066,67 @@ class Solution:
                 q.append(node.left)
             
         return node.val
+```
+
+#### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# iterative DFS
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        stack = [root]
+        output = []
+        while stack:
+            node = stack.pop()
+            if node:
+                output.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
+        
+        return output
+```
+```python
+# recursive DFS
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) if root else []
+```
+```python
+# Morris Taversal
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        curr = root
+        while curr:  
+            if not curr.left: 
+                output.append(curr.val)
+                curr = curr.right 
+            else: 
+                predecessor = curr.left 
+
+                # -- FIND PREDECESSOR --
+                while predecessor.right and predecessor.right is not curr: 
+                    predecessor = predecessor.right 
+
+                # -- CREATE VIRTUAL LINKS --
+                if not predecessor.right:
+                    output.append(curr.val)
+                    predecessor.right = curr  
+                    curr = curr.left  
+                    
+                # -- RESTORE TREE --
+                else:
+                    predecessor.right = None
+                    curr = curr.right         
+
+        return output
 ```
