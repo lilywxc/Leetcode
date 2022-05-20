@@ -23,6 +23,8 @@
    * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
    * [101. Symmetric Tree](#101-Symmetric-Tree)
    * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
+   * [337. House Robber III](#337-House-Robber-III)
+   * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
 
 
 ### LinkedList
@@ -894,3 +896,79 @@ class Solution:
         return total_sum
 ```
 
+#### [337. House Robber III](https://leetcode.com/problems/house-robber-iii/)
+```python
+# bottom up
+class Solution:
+    def rob(self, root: Optional[TreeNode]) -> int:
+        def helper(node):
+            if not node:
+                return (0, 0)
+            
+            left = helper(node.left)
+            right = helper(node.right)
+            
+            
+            rob = node.val + left[1] + right[1] # if we rob this node, we cannot rob its children
+            not_rob = max(left) + max(right) # else we could choose to either rob its children or not
+            
+            return [rob, not_rob]
+
+        return max(helper(root))
+```
+```python
+# top down with memo
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+        rob_saved = {}
+        not_rob_saved = {}
+
+        def helper(node, parent_robbed):
+            if not node:
+                return 0
+
+            if parent_robbed:
+                if node in rob_saved:
+                    return rob_saved[node]
+                
+                best = helper(node.left, False) + helper(node.right, False)
+                rob_saved[node] = best
+                return best
+            else:
+                if node in not_rob_saved:
+                    return not_rob_saved[node]
+                
+                rob = node.val + helper(node.left, True) + helper(node.right, True)
+                not_rob = helper(node.left, False) + helper(node.right, False)
+                
+                best = max(rob, not_rob)
+                not_rob_saved[node] = best
+                return best
+
+        return helper(root, False)
+```
+
+#### [671. Second Minimum Node In a Binary Tree](https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/description/)
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
+
+        def traverse(node):
+            if node:
+                if root.val < node.val < self.ans:
+                    self.ans = node.val
+                elif node.val == root.val:
+                    traverse(node.left)
+                    traverse(node.right)
+
+        self.ans = float('inf')
+        traverse(root)
+        
+        return self.ans if self.ans < float('inf') else -1
+```
