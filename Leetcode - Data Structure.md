@@ -47,7 +47,7 @@
        * [653. Two Sum IV Input is a BST](#653-Two-Sum-IV-Input-is-a-BST)
        * [530. Minimum Absolute Difference in BST](#530-Minimum-Absolute-Difference-in-BST)
        * [501. Find Mode in Binary Search Tree](#501-Find-Mode-in-Binary-Search-Tree)
-   * [Trie](#Trie)
+    * [Trie](#Trie)
        * [208. Implement Trie](#208-Implement-Trie)
        * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
     
