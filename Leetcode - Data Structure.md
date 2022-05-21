@@ -3,7 +3,7 @@
     * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
     * [206. Reverse Linked List](#206-Reverse-Linked-List)
     * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
-    * [83. Remove Duplicates from Sorted List](#83-Remove-Duplicates-from-Sorted-List)
+    * [83. Remove Duplicates from Sorted List](#83-Remove-Duplsrcicates-from-Sorted-List)
     * [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
     * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
     * [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
@@ -47,9 +47,9 @@
        * [653. Two Sum IV Input is a BST](#653-Two-Sum-IV-Input-is-a-BST)
        * [530. Minimum Absolute Difference in BST](#530-Minimum-Absolute-Difference-in-BST)
        * [501. Find Mode in Binary Search Tree](#501-Find-Mode-in-Binary-Search-Tree)
-* [Trie](#Trie)
-    * [208. Implement Trie](#208-Implement-Trie)
-    * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
+   * [Trie](#Trie)
+       * [208. Implement Trie](#208-Implement-Trie)
+       * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
     
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1724,6 +1724,8 @@ class Solution:
 ```
 
 #### Trie
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Trie.jfif" width="700">
 
 #### [208. Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/description/)
 ```python
