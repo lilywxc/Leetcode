@@ -41,6 +41,8 @@
        * [1382. Balance a Binary Search Tree](#1382-Balance-a-Binary-Search-Tree)
        * [538. Convert BST to Greater Tree](#538-Convert-BST-to-Greater-Tree)
        * [235. Lowest Common Ancestor of a Binary Search Tree](#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree)
+       * [236. Lowest Common Ancestor of a Binary Tree](#236-Lowest-Common-Ancestor-of-a-Binary-Tree)
+       * [108. Convert Sorted Array to Binary Search Tree](#108-Convert-Sorted-Array-to-Binary-Search-Tree)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1364,7 +1366,7 @@ class Solution:
             
             mid = len(sort_array) // 2
             root = TreeNode(sort_array[mid])
-            root.left = build_tree(sort_array[:mid])
+            root.left = build_tree(sort_array[:mid]) # using pointers instead of passing the array will be more efficient
             root.right = build_tree(sort_array[mid + 1:])
             
             return root
@@ -1424,8 +1426,7 @@ class Solution:
         else:
             return root
 ```
-```python[
-](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+```python
 # iterative
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
@@ -1436,4 +1437,68 @@ class Solution:
                 root = root.left
             else:
                 return root
+```
+
+#### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+```python
+# recursive - O(n) time and O(n) space
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None:
+            return None
+        
+        left_res = self.lowestCommonAncestor(root.left, p, q)
+        right_res = self.lowestCommonAncestor(root.right, p, q)
+        
+        if (left_res and right_res) or (root in [p, q]):
+            return root
+        else:
+            return left_res or right_res
+```
+```python
+# recursive - O(n) time and O(n) space
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        stack = [root]
+        parent = {root: None}
+        # look for p and q
+        while p not in parent or q not in parent:
+            node = stack.pop()
+            if node.left:
+                parent[node.left] = node
+                stack.append(node.left)
+            if node.right:
+                parent[node.right] = node
+                stack.append(node.right)
+                
+        ancestors = set()
+        # put p and ancestors of p to the ancestors set
+        while p:
+            ancestors.add(p)
+            p = parent[p]
+        
+        # walk through ancestors of q until that ancestor is also ancestor of p
+        while q not in ancestors:
+            q = parent[q]
+            
+        return q
+```
+
+#### [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+```python
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        
+        def preorder(left, right):
+            if left > right:
+                return None
+
+            p = left + (right - left) // 2
+
+            root = TreeNode(nums[p])
+            root.left = preorder(left, p - 1)
+            root.right = preorder(p + 1, right)
+            return root
+        
+        return preorder(0, len(nums) - 1)
 ```
