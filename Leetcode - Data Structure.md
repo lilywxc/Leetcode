@@ -1687,5 +1687,35 @@ class Solution:
 
 #### [501. Find Mode in Binary Search Tree](https://leetcode.com/problems/find-mode-in-binary-search-tree/description/)
 ```python
-
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        def inOrder(node):
+            if node is None:
+                return
+            
+            inOrder(node.left)
+            if self.preNode:
+                if self.preNode.val == node.val: 
+                    self.curCnt += 1
+                else:
+                    self.curCnt = 1
+        
+            if self.curCnt > self.maxCnt:
+                self.maxCnt = self.curCnt
+                self.maxCntNums.clear()
+                self.maxCntNums.append(node.val)
+            elif self.curCnt == self.maxCnt:
+                self.maxCntNums.append(node.val)
+                
+            self.preNode = node
+            inOrder(node.right)
+            
+            
+        self.maxCntNums = []
+        self.curCnt = 1
+        self.maxCnt = 1
+        self.preNode = None
+        inOrder(root)
+        
+        return self.maxCntNums
 ```
