@@ -47,7 +47,10 @@
        * [653. Two Sum IV Input is a BST](#653-Two-Sum-IV-Input-is-a-BST)
        * [530. Minimum Absolute Difference in BST](#530-Minimum-Absolute-Difference-in-BST)
        * [501. Find Mode in Binary Search Tree](#501-Find-Mode-in-Binary-Search-Tree)
-
+* [Trie](#Trie)
+    * [208. Implement Trie](#208-Implement-Trie)
+    * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
+    
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
 Imagine that we have two linked lists, A and B, and we know that their lengths are N and M respectively, where M = 8 > N = 5. <br />
@@ -1718,4 +1721,16 @@ class Solution:
         inOrder(root)
         
         return self.maxCntNums
+```
+
+#### Trie
+
+#### [208. Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/description/)
+```python
+
+```
+
+#### [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/description/)
+```python
+
 ```
