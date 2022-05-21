@@ -40,6 +40,7 @@
        * [450. Delete Node in a BST](#450-Delete-Node-in-a-BST)
        * [1382. Balance a Binary Search Tree](#1382-Balance-a-Binary-Search-Tree)
        * [538. Convert BST to Greater Tree](#538-Convert-BST-to-Greater-Tree)
+       * [235. Lowest Common Ancestor of a Binary Search Tree](#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1409,4 +1410,30 @@ class Solution:
             curr = curr.left
         
         return root 
+```
+
+#### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+```python
+# recursive
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if p.val > root.val and q.val > root.val:    
+            return self.lowestCommonAncestor(root.right, p, q)    
+        elif p.val < root.val and q.val < root.val:    
+            return self.lowestCommonAncestor(root.left, p, q)
+        else:
+            return root
+```
+```python[
+](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+# iterative
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        while root:
+            if p.val > root.val and q.val > root.val:    
+                root = root.right  
+            elif p.val < root.val and q.val < root.val:    
+                root = root.left
+            else:
+                return root
 ```
