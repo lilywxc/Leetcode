@@ -1502,3 +1502,80 @@ class Solution:
         
         return preorder(0, len(nums) - 1)
 ```
+
+#### [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)
+```python
+# recursive and two pointers - O(nlogn) time and O(logn) space
+class Solution:
+    def findMiddle(self, head):
+        # 12345 -> 12/3/45
+        # 123456 -> 123/4/56
+        prev = None
+        slow = fast = head
+        
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+
+        if prev:
+            prev.next = None
+
+        return slow
+
+
+    def sortedListToBST(self, head):
+        if not head:
+            return None
+        
+        # Base case: there is just one element in the linked list
+        if head.next is None:
+            return TreeNode(head.val)
+
+        mid = self.findMiddle(head)
+        node = TreeNode(mid.val)
+
+        node.left = self.sortedListToBST(head)
+        node.right = self.sortedListToBST(mid.next)
+        
+        return node
+```
+an alternative solution will be converting the linkedlist to an array first, and then solve it the same way as Question [108. Convert Sorted Array to Binary Search Tree](#108-Convert-Sorted-Array-to-Binary-Search-Tree), which has O(n) time and O(n) space. These two solutions form a typical time-space tradeoff.
+
+[Graph illustration](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/)
+```python
+# inorder traversal
+class Solution:    
+    def getSize(self, head):
+        ptr = head
+        c = 0
+        while ptr:
+            ptr = ptr.next
+            c += 1
+        return c
+
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        size = self.getSize(head)
+
+        def inorder(l, r):
+            nonlocal head
+
+            if l > r:
+                return None
+
+            mid = l + (r - l) // 2
+
+            left = inorder(l, mid - 1)
+
+            node = TreeNode(head.val)   
+            node.left = left
+
+            head = head.next
+
+            node.right = inorder(mid + 1, r)
+            
+            return node
+        
+        return inorder(0, size - 1)
+```
+note that we don't really find out the middle node of the linked list. We just have a variable telling us the index of the middle element. We simply need this to make recursive calls on the two halves.
