@@ -1232,7 +1232,7 @@ class Solution:
 
 #### [230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 ```python
-# recursive inorder  - O(N) time and O(N) space
+# recursive inorder - O(N) time and O(N) space
 class Solution:
     def kthSmallest(self, root, k):
         def inorder(r):
@@ -1240,7 +1240,7 @@ class Solution:
     
         return inorder(root)[k - 1]
 ```
-``python
+```python
 # recursive inorder with early stop
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
