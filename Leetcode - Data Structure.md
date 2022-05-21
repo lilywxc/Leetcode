@@ -43,6 +43,10 @@
        * [235. Lowest Common Ancestor of a Binary Search Tree](#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree)
        * [236. Lowest Common Ancestor of a Binary Tree](#236-Lowest-Common-Ancestor-of-a-Binary-Tree)
        * [108. Convert Sorted Array to Binary Search Tree](#108-Convert-Sorted-Array-to-Binary-Search-Tree)
+       * [109. Convert Sorted List to Binary Search Tree](#109-Convert-Sorted-List-to-Binary-Search-Tree)
+       * [653. Two Sum IV Input is a BST](#653-Two-Sum-IV-Input-is-a-BST)
+       * [530. Minimum Absolute Difference in BST](#530-Minimum-Absolute-Difference-in-BST)
+       * [501. Find Mode in Binary Search Tree](#501-Find-Mode-in-Binary-Search-Tree)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1542,7 +1546,7 @@ class Solution:
 ```
 an alternative solution will be converting the linkedlist to an array first, and then solve it the same way as Question [108. Convert Sorted Array to Binary Search Tree](#108-Convert-Sorted-Array-to-Binary-Search-Tree), which has O(n) time and O(n) space. These two solutions form a typical time-space tradeoff.
 
-[Graph illustration](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/)
+Inorder traversal simulation: [Graph illustration](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/)
 ```python
 # inorder traversal
 class Solution:    
@@ -1579,3 +1583,81 @@ class Solution:
         return inorder(0, size - 1)
 ```
 note that we don't really find out the middle node of the linked list. We just have a variable telling us the index of the middle element. We simply need this to make recursive calls on the two halves.
+
+#### [653. Two Sum IV Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/)
+```python
+# set - O(n) time and O(n) space
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        node_set = set()
+        queue = [root]
+        while queue:
+            node = queue.pop()
+            if node:
+                if node.val in node_set:
+                    return True
+
+                node_set.add(k - node.val)
+                queue.append(node.right)
+                queue.append(node.left)
+
+        return False     
+```
+```python
+# inorder sorted array and two pointers - O(n) time and O(n) space
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        def inorder(root):
+            return inorder(root.left) + [root.val] + inorder(root.right) if root else []
+       
+        numbers = inorder(root)
+        
+        l, r = 0, len(numbers) - 1
+        while l < r:
+            s = numbers[l] + numbers[r]
+            if s == k:
+                return True
+            elif s > k:
+                r -= 1
+            else:
+                l += 1
+```
+```python
+# inorder traversal space optimziation - O(n) time and O(logn) space
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        def pushLeft(st, root):
+            while root:
+                st.append(root)
+                root = root.left
+
+        def pushRight(st, root):
+            while root:
+                st.append(root)
+                root = root.right
+
+        def nextLeft(st):
+            node = st.pop()
+            pushLeft(st, node.right)
+            return node.val
+
+        def nextRight(st):
+            node = st.pop()
+            pushRight(st, node.left)
+            return node.val
+
+        stLeft, stRight = [], [] # stack
+        pushLeft(stLeft, root)
+        pushRight(stRight, root)
+
+        left, right = nextLeft(stLeft), nextRight(stRight)
+        while left < right:
+            if left + right == k: 
+                return True
+            if left + right < k:
+                left = nextLeft(stLeft)
+            else:
+                right = nextRight(stRight)
+                
+        return False
+```
