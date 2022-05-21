@@ -334,7 +334,7 @@ class Solution:
         return prev
 ```
 
-#### [725. Split Linked List in Parts](725. Split Linked List in Parts)
+#### [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/)
 ```python
 # Definition for singly-linked list.
 # class ListNode:
