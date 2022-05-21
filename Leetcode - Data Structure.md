@@ -39,7 +39,7 @@
        * [701. Insert into a Binary Search Tree](#701-Insert-into-a-Binary-Search-Tree)
        * [450. Delete Node in a BST](#450-Delete-Node-in-a-BST)
        * [1382. Balance a Binary Search Tree](#1382-Balance-a-Binary-Search-Tree)
-       * 
+       * [538. Convert BST to Greater Tree](#538-Convert-BST-to-Greater-Tree)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1372,4 +1372,41 @@ class Solution:
         inorder(root)
         
         return build_tree(sort_array)
+```
+
+#### [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/)
+```python
+# recursive
+class Solution:
+    def __init__(self):
+        self.total = 0
+
+    def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root:
+            self.convertBST(root.right)
+            self.total += root.val
+            root.val = self.total
+            self.convertBST(root.left)
+            
+        return root
+```
+```python
+# iterative
+class Solution:
+     def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        stack = []
+        total = 0
+        
+        curr = root
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.right
+                
+            curr = stack.pop()
+            total += curr.val
+            curr.val = total
+            curr = curr.left
+        
+        return root 
 ```
