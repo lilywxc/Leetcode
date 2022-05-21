@@ -35,8 +35,11 @@
        * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
     * [BST](#BST)
        * [669. Trim a Binary Search Tree](#669-Trim-a-Binary-Search-Tree)
+       * [230. Kth Smallest Element in a BST](#230-Kth-Smallest-Element-in-a-BST)
+       * [701. Insert into a Binary Search Tree](#701-Insert-into-a-Binary-Search-Tree)
+       * [450. Delete Node in a BST](#450-Delete-Node-in-a-BST)
+       * [1382. Balance a Binary Search Tree](#1382-Balance-a-Binary-Search-Tree)
        * 
-
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1227,3 +1230,146 @@ class Solution:
         return trim(root)
 ```
 
+#### [230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+```python
+# recursive inorder  - O(N) time and O(N) space
+class Solution:
+    def kthSmallest(self, root, k):
+        def inorder(r):
+            return inorder(r.left) + [r.val] + inorder(r.right) if r else []
+    
+        return inorder(root)[k - 1]
+```
+``python
+# recursive inorder with early stop
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        def inorder(node):
+            if node:
+                inorder(node.left)
+                self.k -= 1
+                if self.k == 0:
+                    self.val = node.val
+                    return
+
+                inorder(node.right)
+        
+        self.k, self.val = k, 0
+        inorder(root)
+        return self.val
+```
+``python        
+# iterative inorder - O(H) time and O(H) space, where H is the tree height
+class Solution:
+    def kthSmallest(self, root, k):
+        stack = []
+        curr = root
+        while True:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+                
+            curr = stack.pop()
+            
+            k -= 1
+            if k == 0:
+                return curr.val
+            
+            curr = curr.right
+```    
+
+#### [701. Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
+```python
+# recursive
+class Solution:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            return TreeNode(val)
+        
+        if val > root.val:
+            root.right = self.insertIntoBST(root.right, val)
+        else:
+            root.left = self.insertIntoBST(root.left, val)
+            
+        return root
+```
+```python
+# iterative
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        node = root
+        while node:
+            # insert into the right subtree
+            if val > node.val:
+                if not node.right:
+                    node.right = TreeNode(val)
+                    return root
+                else:
+                    node = node.right
+            # insert into the left subtree
+            else:
+                if not node.left:
+                    node.left = TreeNode(val)
+                    return root
+                else:
+                    node = node.left
+        return TreeNode(val)
+```
+
+#### [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
+```python
+class Solution:
+    def find_min(self, root):
+        root = root.right
+        while root.left:
+            root = root.left
+        return root
+    
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        if not root:
+            return None
+        
+        if key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        elif key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        else:
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            else:
+                smallest = self.find_min(root)
+                smallest.left = root.left
+                
+                return root.right
+            
+        return root
+```
+
+#### [1382. Balance a Binary Search Tree](https://leetcode.com/problems/balance-a-binary-search-tree/)
+```python
+class Solution:
+    def balanceBST(self, root: TreeNode) -> TreeNode:
+        def inorder(node):
+            if node:
+                inorder(node.left)
+                sort_array.append(node.val)
+                inorder(node.right)
+        
+        def build_tree(sort_array):
+            if not sort_array:
+                return None
+            
+            mid = len(sort_array) // 2
+            root = TreeNode(sort_array[mid])
+            root.left = build_tree(sort_array[:mid])
+            root.right = build_tree(sort_array[mid + 1:])
+            
+            return root
+        
+        sort_array = []
+        inorder(root)
+        
+        return build_tree(sort_array)
+```
