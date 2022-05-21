@@ -1661,3 +1661,31 @@ class Solution:
                 
         return False
 ```
+
+#### [530. Minimum Absolute Difference in BST](https://leetcode.com/problems/minimum-absolute-difference-in-bst/)
+```python
+class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        def inorder(node):
+            if not node:
+                return
+            
+            inorder(node.left)
+            
+            if self.prev:
+                self.min_diff = min(self.min_diff, node.val - self.prev.val)
+            self.prev = node
+
+            inorder(node.right)
+
+        self.min_diff = float('inf')
+        self.prev = None
+        inorder(root)
+        
+        return self.min_diff
+```
+
+#### [501. Find Mode in Binary Search Tree](https://leetcode.com/problems/find-mode-in-binary-search-tree/description/)
+```python
+
+```
