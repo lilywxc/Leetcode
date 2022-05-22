@@ -50,8 +50,8 @@
     * [Trie](#Trie)
        * [208. Implement Trie](#208-Implement-Trie)
        * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
-    * [Stack and Queue](#Stack-and-Queue)    
-       * [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
+* [Stack and Queue](#Stack-and-Queue) 
+    * [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
