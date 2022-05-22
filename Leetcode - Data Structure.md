@@ -52,6 +52,11 @@
        * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
 * [Stack and Queue](#Stack-and-Queue) 
     * [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
+    * [225. Implement Stack using Queues](#225-Implement-Stack-using-Queues)
+    * [155. Min Stack](#155-Min-Stack)
+    * [20. Valid Parentheses](#20-Valid-Parentheses)
+    * [739. Daily Temperatures](#739-Daily-Temperatures)
+    * [503. Next Greater Element II](#503-Next-Greater-Element-II)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -1842,3 +1847,72 @@ class MyQueue:
 # param_3 = obj.peek()
 # param_4 = obj.empty()
 ```
+
+#### [225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
+```python
+class MyStack:
+
+    def __init__(self):
+        self._queue = collections.deque()
+
+    def push(self, x):
+        q = self._queue
+        q.append(x)
+        for _ in range(len(q) - 1):
+            q.append(q.popleft())
+        
+    def pop(self):
+        return self._queue.popleft()
+
+    def top(self):
+        return self._queue[0]
+    
+    def empty(self):
+        return not len(self._queue)
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
+```
+
+#### [155. Min Stack](https://leetcode.com/problems/min-stack/description/)
+```python
+class MinStack(object):
+    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2]
+    def __init__(self):
+        self.stack = []
+        
+    def push(self, x):
+        self.stack.append((x, min(self.getMin(), x))) 
+           
+    def pop(self):
+        self.stack.pop()
+
+    def top(self):
+        if self.stack:
+            return self.stack[-1][0]
+        
+    def getMin(self):
+        if self.stack:
+            return self.stack[-1][1]
+        return float('inf') # depends on what interviewer asks for
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+```
+an alternative solution: use a min_tracker stack to store the previous min and count [approach    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2]    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2]    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2] 3](https://leetcode.com/problems/min-stack/solution/)
+
+#### [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/)
+
+#### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/)
+
+#### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/)
+
