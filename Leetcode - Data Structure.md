@@ -1782,7 +1782,7 @@ class MapSum:
         self.map = defaultdict(int)
 
     def insert(self, key: str, val: int) -> None:
-        # if the same key is inserted with different value
+        # if the same key is inserted with different value, it should be updated
         diff = val - self.map[key] 
         curr = self.trieRoot
         for c in key:
@@ -1798,7 +1798,11 @@ class MapSum:
         return curr.sum
 
 # Your MapSum object will be instantiated and called as such:
-# obj = MapSum()
-# obj.insert(key,val)
-# param_2 = obj.sum(prefix)
+# mapSum = MapSum()
+# mapSum.insert("apple", 3)
+# mapSum.sum("ap");           // return 3 (apple = 3)
+# mapSum.insert("app", 2)    
+# mapSum.sum("ap");           // return 5 (apple + app = 3 + 2 = 5)
+# mapSum.insert("apple", 5)    
+# mapSum.sum("ap")           // return 7 (apple + app = 5 + 2 = 7)
 ```
