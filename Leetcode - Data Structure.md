@@ -1771,5 +1771,34 @@ class Trie:
 
 #### [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/description/)
 ```python
+class TrieNode:
+    def __init__(self):
+        self.children = defaultdict(TrieNode)
+        self.sum = 0  # Store the sum of values of all strings go through this node.
 
+class MapSum:
+    def __init__(self):
+        self.trieRoot = TrieNode()
+        self.map = defaultdict(int)
+
+    def insert(self, key: str, val: int) -> None:
+        # if the same key is inserted with different value
+        diff = val - self.map[key] 
+        curr = self.trieRoot
+        for c in key:
+            curr = curr.children[c]
+            curr.sum += diff
+        self.map[key] = val
+
+    def sum(self, prefix: str) -> int:
+        curr = self.trieRoot
+        for c in prefix:
+            if c not in curr.children: return 0
+            curr = curr.children[c]
+        return curr.sum
+
+# Your MapSum object will be instantiated and called as such:
+# obj = MapSum()
+# obj.insert(key,val)
+# param_2 = obj.sum(prefix)
 ```
