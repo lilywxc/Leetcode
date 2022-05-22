@@ -1908,7 +1908,7 @@ class MinStack(object):
 # param_3 = obj.top()
 # param_4 = obj.getMin()
 ```
-an alternative solution: use a min_tracker stack to store the previous min and count [approach    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2]    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2]    # e.g. [12,12], [30,12], [7,7], [6,6], [45,6], [2,2], [11,2] 3](https://leetcode.com/problems/min-stack/solution/)
+an alternative solution: use a min_tracker stack to store the previous min and count [approach 3](https://leetcode.com/problems/min-stack/solution/)
 
 #### [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/)
 
