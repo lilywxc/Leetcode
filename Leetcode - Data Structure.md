@@ -50,7 +50,9 @@
     * [Trie](#Trie)
        * [208. Implement Trie](#208-Implement-Trie)
        * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
-    
+    * [Stack and Queue](#Stack-and-Queue)    
+       * [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
+
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
 Imagine that we have two linked lists, A and B, and we know that their lengths are N and M respectively, where M = 8 > N = 5. <br />
@@ -1805,4 +1807,38 @@ class MapSum:
 # mapSum.sum("ap");           // return 5 (apple + app = 3 + 2 = 5)
 # mapSum.insert("apple", 5)    
 # mapSum.sum("ap")           // return 7 (apple + app = 5 + 2 = 7)
+```
+
+#### Stack and Queue
+
+#### [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
+```python
+class MyQueue:
+    def __init__(self):
+        self.s1 = []
+        self.s2 = []
+
+    def push(self, x):
+        self.s1.append(x)
+
+    def pop(self):
+        self.peek()
+        return self.s2.pop()
+
+    def peek(self):
+        if not self.s2: # it's important that we dump only if s2 is not empty
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2[-1]        
+
+    def empty(self):
+        return not self.s1 and not self.s2
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
 ```
