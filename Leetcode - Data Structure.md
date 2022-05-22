@@ -1725,11 +1725,48 @@ class Solution:
 
 #### Trie
 
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Trie.jfif" width="700">
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Trie.jfif" width="350">
 
 #### [208. Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/description/)
 ```python
+class TrieNode:
+    def __init__(self):
+        self.children = collections.defaultdict(TrieNode)
+        self.is_word = False
 
+class Trie:
+
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word):
+        cur = self.root
+        for ch in word:
+            cur = cur.children[ch]
+        cur.is_word = True
+
+    def search(self, word):
+        cur = self.root
+        for ch in word:
+            cur = cur.children.get(ch)
+            if cur is None:
+                return False
+        return cur.is_word
+
+    def startsWith(self, prefix):
+        cur = self.root
+        for ch in prefix:
+            cur = cur.children.get(ch)
+            if cur is None:
+                return False
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
 ```
 
 #### [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/description/)
