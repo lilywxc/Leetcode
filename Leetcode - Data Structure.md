@@ -1911,8 +1911,67 @@ class MinStack(object):
 an alternative solution: use a min_tracker stack to store the previous min and count [approach 3](https://leetcode.com/problems/min-stack/solution/)
 
 #### [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/)
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        dic = {'}':'{', ']':'[', ')':'('}
+        for char in s:
+            if char in dic.values():
+                stack.append(char)
+            elif char in dic.keys():
+                if stack == [] or dic[char] != stack.pop() :
+                    return False
+            else:
+                return False
+        
+        return stack == []
+```
 
 #### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/)
+```python
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        n = len(temperatures)
+        answer = [0] * n
+        stack = []
+        
+        for curr_day, curr_temp in enumerate(temperatures):
+            while stack and temperatures[stack[-1]] < curr_temp:
+                prev_day = stack.pop()
+                answer[prev_day] = curr_day - prev_day
+            stack.append(curr_day)
+        
+        return answer
+```
+e.g. [73, 74, 75, 71, 69, 72, 76, 73]. Iterating backwards, after 5 days we have: answer = [0, 0, 0, 2, 1, 1, 0, 0].  <br />
+The next day to calculate is the day at index 2 with temperature 75. First check the next day at index 3 - a temperature of 71, which is not warmer.  <br />
+answer[3] = 2 tells us that the day at index 3 will see a warmer temperature on day 3 + 2 = 5.  <br />
+A temperature warmer than 75 must also be warmer than 71 - so we should check temperatures[5] = 72 < 75.  <br />
+Again, we know from answer[5] that we will not have a warmer temperature than 72 for 1 day.  <br />
+Therefore, the next day to check is temperatures[5 + answer[5]] = temperatures[6] = 76, which is warmer - we found our day.
+```python
+# O(1) space
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        n = len(temperatures)
+        hottest = 0
+        answer = [0] * n
+        
+        for curr_day in range(n - 1, -1, -1):
+            curr_temp = temperatures[curr_day]
+            if curr_temp >= hottest:
+                hottest = curr_temp
+                continue
+            
+            days = 1
+            while temperatures[curr_day + days] <= curr_temp:  
+                days += answer[curr_day + days]
+            answer[curr_day] = days
+
+        return answer
+```
+
 
 #### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/)
 
