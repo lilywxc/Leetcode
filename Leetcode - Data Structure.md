@@ -58,6 +58,11 @@
     * [496. Next Greater Element I](#496-Next-Greater-Element-I)
     * [739. Daily Temperatures](#739-Daily-Temperatures)
     * [503. Next Greater Element II](#503-Next-Greater-Element-II)
+* [HashMap](#HashMap)
+    * [1. Two Sum](#1-Two-Sum)
+    * [217. Contains Duplicate](#217-Contains-Duplicate)
+    * [594. Longest Harmonious Subsequence](#594-Longest-Harmonious-Subsequence)
+    * [128. Longest Consecutive Sequence](#128-Longest-Consecutive-Sequence)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2012,4 +2017,69 @@ class Solution:
                 stack.append(idx)
 
         return res
+```
+
+#### HashMap
+
+#### [1. Two Sum](https://leetcode.com/problems/two-sum/description/)
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        dic = {}
+        for i, val in enumerate(nums):
+            if val in dic:
+                return [dic[val], i]
+            else:
+                dic[target - val] = i
+```
+
+#### [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/description/)
+```python
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        num_set = set()
+        
+        for num in nums:
+            if num in num_set:
+                return True
+            else:
+                num_set.add(num)
+                
+        return False
+```
+alternatives: sort it first and check for nums[i] and nums[i-1] with O(nlogn) time and O(1) space
+
+#### [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/description/)
+```python
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        dic = defaultdict(int)
+        
+        count = 0
+        for num in nums:
+            dic[num] += 1
+            
+        for num in dic:
+            if num + 1 in dic:
+                count = max(count, dic[num] + dic[num + 1])
+        
+        return count
+```
+
+#### [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/description/)
+```python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        numSet = set(nums)
+        length = 0
+        for x in numSet:
+            if x - 1 in numSet:
+                continue
+                
+            end = x + 1
+            while end in numSet:
+                end += 1
+            length = max(length, end - x)
+                
+        return length
 ```
