@@ -1998,5 +1998,18 @@ class Solution:
 
 #### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/)
 ```python
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        res = [-1] * n
+        stack = deque([])
+        
+        for idx in range(2 * n):
+            num = nums[idx % n]
+            while stack and nums[stack[-1]] < num:
+                res[stack.pop()] = num
+            if idx < n:
+                stack.append(idx)
 
+        return res
 ```
