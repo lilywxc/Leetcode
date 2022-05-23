@@ -55,6 +55,7 @@
     * [225. Implement Stack using Queues](#225-Implement-Stack-using-Queues)
     * [155. Min Stack](#155-Min-Stack)
     * [20. Valid Parentheses](#20-Valid-Parentheses)
+    * [496. Next Greater Element I](#496-Next-Greater-Element-I)
     * [739. Daily Temperatures](#739-Daily-Temperatures)
     * [503. Next Greater Element II](#503-Next-Greater-Element-II)
 
@@ -1928,6 +1929,28 @@ class Solution:
         return stack == []
 ```
 
+#### [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
+We use a stack to keep a decreasing sub-sequence, thus element on top, i.e. stack[-1], is the smallest value in the stack <br />
+whenever we see a number x greater than stack[-1] we pop all elements less than x <br /> and then append x <br />
+for all the popped ones, their next greater element is x <br />
+For example [9, 8, 7, 3, 2, 1, 6] <br />
+The stack will first contain [9, 8, 7, 3, 2, 1] and then we see 6 which is greater than 1 so we pop 1 2 3 whose next greater element should be 6 <br />
+```python
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        dic = {}
+        stack = deque([])
+        for num in nums2:
+            while stack and stack[-1] < num:
+                dic[stack.pop()] = num
+            stack.append(num)
+ 
+        for i, x in enumerate(nums1):
+            nums1[i] = dic.get(x, -1)
+        
+        return nums1
+```
+
 #### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/)
 ```python
 class Solution:
@@ -1945,7 +1968,8 @@ class Solution:
         return answer
 ```
 e.g. [73, 74, 75, 71, 69, 72, 76, 73]. Iterating backwards, after 5 days we have: answer = [0, 0, 0, 2, 1, 1, 0, 0].  <br />
-The next day to calculate is the day at index 2 with temperature 75. First check the next day at index 3 - a temperature of 71, which is not warmer.  <br />
+The next day to calculate is the day at index 2 with temperature 75.  <br />
+First check the next day at index 3 - a temperature of 71, which is not warmer.  <br />
 answer[3] = 2 tells us that the day at index 3 will see a warmer temperature on day 3 + 2 = 5.  <br />
 A temperature warmer than 75 must also be warmer than 71 - so we should check temperatures[5] = 72 < 75.  <br />
 Again, we know from answer[5] that we will not have a warmer temperature than 72 for 1 day.  <br />
@@ -1972,6 +1996,7 @@ class Solution:
         return answer
 ```
 
-
 #### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/)
+```python
 
+```
