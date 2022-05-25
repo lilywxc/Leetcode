@@ -63,6 +63,14 @@
     * [217. Contains Duplicate](#217-Contains-Duplicate)
     * [594. Longest Harmonious Subsequence](#594-Longest-Harmonious-Subsequence)
     * [128. Longest Consecutive Sequence](#128-Longest-Consecutive-Sequence)
+* [String](#String)
+    * [242. Valid Anagram](#242-Valid-Anagram)
+    * [409. Longest Palindrome](#409-Longest-Palindrome)
+    * [205. Isomorphic Strings](#205-Isomorphic-Strings)
+    * [647. Palindromic Substrings](#647-Palindromic-Substrings)
+    * [9. Palindrome Number](#9-Palindrome-Number)
+    * [696. Count Binary Substrings](#696-Count-Binary-Substrings)
+
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2082,4 +2090,88 @@ class Solution:
             length = max(length, end - x)
                 
         return length
+```
+
+#### String
+
+#### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return collections.Counter(s) == collections.Counter(t)
+```
+
+#### [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/description/)
+```python
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        odds = sum(v & 1 for v in collections.Counter(s).values()) # v & 1 is equivalent to v%2==1
+        return len(s) - odds + bool(odds)
+```
+
+#### [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/description/)
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        mapping_s_t = {}
+        mapping_t_s = {}
+        
+        for c1, c2 in zip(s, t):
+            if (c1 not in mapping_s_t) and (c2 not in mapping_t_s):
+                mapping_s_t[c1] = c2
+                mapping_t_s[c2] = c1          
+            elif mapping_s_t.get(c1) != c2 or mapping_t_s.get(c2) != c1:
+                return False
+            
+        return True
+```
+For paper, the transformed string will be 01034. <br />
+For title. The transformed string would be 01034, which is the same as that for paper
+```python
+class Solution: 
+    def encode(self, s: str) -> str:
+        index_mapping = {}
+        encoded = []
+        
+        for i, c in enumerate(s):
+            if c not in index_mapping:
+                index_mapping[c] = str(i)
+            encoded.append(index_mapping[c])
+        
+        return " ".join(encoded)
+    
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return self.encode(s) == self.encode(t)
+```
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(zip(s, t))) == len(set(s)) == len(set(t))
+```
+Follow up question <br />
+input: ['aab', 'xxy', 'xyz', 'abc', 'def', 'xyx'] 
+
+return: <br />
+[<br />
+['xyx'], <br />
+['xyz', 'abc', 'def'], <br />
+['aab', 'xxy']<br />
+]
+```python
+def groupIsomorphic(strs)
+        def encode(s):
+            d = {}
+            encoded = []
+            for c in s:
+                if c not in d:
+                    d[c] = len(d)
+                encoded.append(d[c])
+            return str(encoded)
+
+        groups = {}
+        for s in strs:
+            encoded = encode(s)
+            groups.get(encoded, []).append(s)
+
+        return list(groups.values())
 ```
