@@ -2252,3 +2252,35 @@ class Solution:
         return x == reverted or x == reverted //10 
         # if x is single center, e.g. 12321
 ```
+
+#### [696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/)
+```python
+class Solution:
+    def countBinarySubstrings(self, s: str) -> int:
+        # group, e.g. if s = "110001111000000", then groups = [2, 3, 4, 6]
+        groups = [1]
+        for i in range(1, len(s)):
+            if s[i-1] != s[i]:
+                groups.append(1)
+            else:
+                groups[-1] += 1
+
+        ans = 0
+        for i in range(1, len(groups)):
+            ans += min(groups[i-1], groups[i])
+        return ans
+```
+```python
+# space optimization
+class Solution(object):
+    def countBinarySubstrings(self, s):
+        ans, prev, cur = 0, 0, 1
+        for i in range(1, len(s)):
+            if s[i-1] != s[i]:
+                ans += min(prev, cur)
+                prev, cur = cur, 1
+            else:
+                cur += 1
+
+        return ans + min(prev, cur)
+```
