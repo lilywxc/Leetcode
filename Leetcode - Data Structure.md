@@ -68,6 +68,7 @@
     * [409. Longest Palindrome](#409-Longest-Palindrome)
     * [205. Isomorphic Strings](#205-Isomorphic-Strings)
     * [647. Palindromic Substrings](#647-Palindromic-Substrings)
+    * [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
     * [9. Palindrome Number](#9-Palindrome-Number)
     * [696. Count Binary Substrings](#696-Count-Binary-Substrings)
 
@@ -2183,6 +2184,8 @@ a[i], a[i+1], ..., a[j-1], a[j] is a palindrome if a[i] == a[j] and <br />
    - i = j: we have only 1 character
    - i + 1 = j: we have 2 repeated character a[i] = a[j]
    - i + 2 = j: we have 2 repeated character a[i] = a[j] wrapping around one character (does not matter what it is)
+We use dp[i+1][j-1] to calculate dp[i][j] because i is in descending order and j is in ascending order. <>br /
+Thus we know the value of dp[i+1][j-1] before dp[i][j]
 ```python
 class Solution:
     def countSubstrings(self, s: str) -> int:
@@ -2215,4 +2218,21 @@ class Solution:
             r += 1
             
         return count
+```
+
+#### [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+```python
+class Solution:
+    def longestPalindrome(self, s):
+        n = len(s)
+        dp = [[0] * n for _ in range(n)]
+        
+        longest_palindrom = ''
+        for i in range(n - 1, -1, -1):
+            for j in range(i, n):  
+                if s[i] == s[j] and (j - i < 3 or dp[i+1][j-1]):
+                        dp[i][j] = 1
+                        longest_palindrom = max(longest_palindrom, s[i:j+1], key = len)
+                
+        return longest_palindrom
 ```
