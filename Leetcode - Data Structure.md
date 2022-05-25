@@ -2175,3 +2175,44 @@ def groupIsomorphic(strs)
 
         return list(groups.values())
 ```
+
+#### []()
+a[i], a[i+1], ..., a[j-1], a[j] is a palindrome if a[i] == a[j] and <br />
+1. a[i+1], ..., a[j-1] is a palindrome, or 
+2. j-i < 3
+   - i = j: we have only 1 character
+   - i + 1 = j: we have 2 repeated character a[i] = a[j]
+   - i + 2 = j: we have 2 repeated character a[i] = a[j] wrapping around one character (does not matter what it is)
+```python
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        n = len(s)
+        dp = [[0] * n for _ in range(n)]
+        
+        res = 0
+        for i in range(n-1, -1, -1):
+            for j in range(i, n):
+                dp[i][j] = s[i] == s[j] and (j-i < 3 or dp[i+1][j-1])
+                res += dp[i][j]
+        return res
+```
+```python
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        count = 0
+        for i in range(len(s)):
+            count += self.EAC(s, i, i) # single character center
+            count += self.EAC(s, i, i+1) # two characters center
+        
+        return count
+            
+    # Expand Around Center
+    def EAC(self, s, l, r,):
+        count = 0
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            count += 1
+            l -= 1
+            r += 1
+            
+        return count
+```
