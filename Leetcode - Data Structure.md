@@ -2176,7 +2176,7 @@ def groupIsomorphic(strs)
         return list(groups.values())
 ```
 
-#### []()
+#### [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/description/)
 a[i], a[i+1], ..., a[j-1], a[j] is a palindrome if a[i] == a[j] and <br />
 1. a[i+1], ..., a[j-1] is a palindrome, or 
 2. j-i < 3
