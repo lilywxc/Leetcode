@@ -2365,3 +2365,20 @@ class Solution:
         
         return search(0, len(matrix[0]) - 1, 0, len(matrix) - 1)
 ```
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # start our "pointer" in the bottom-left
+        row = len(matrix) - 1
+        col = 0
+
+        while col < len(matrix[0]) and row >= 0:
+            if matrix[row][col] > target:
+                row -= 1
+            elif matrix[row][col] < target:
+                col += 1
+            else:
+                return True
+        
+        return False
+```
