@@ -71,7 +71,8 @@
     * [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
     * [9. Palindrome Number](#9-Palindrome-Number)
     * [696. Count Binary Substrings](#696-Count-Binary-Substrings)
-
+* [Array and Matrix](#Array-and-Matrix)
+    * [283. Move Zeroes](#283-Move-Zeroes)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2284,3 +2285,27 @@ class Solution(object):
 
         return ans + min(prev, cur)
 ```
+
+#### Array and Matrix
+
+#### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+```python
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if nums is None or len(nums) == 0:
+            return     
+
+        insertPos = 0
+        for num in nums:
+            if num != 0:
+                nums[insertPos] = num    
+                insertPos += 1
+
+        while insertPos < len(nums):
+            nums[insertPos] = 0
+            insertPos += 1
+```
+    
