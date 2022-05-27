@@ -73,6 +73,7 @@
     * [696. Count Binary Substrings](#696-Count-Binary-Substrings)
 * [Array and Matrix](#Array-and-Matrix)
     * [283. Move Zeroes](#283-Move-Zeroes)
+    * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2309,3 +2310,23 @@ class Solution:
             insertPos += 1
 ```
     
+#### [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/)
+```python
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        m, n = len(mat), len(mat[0])
+        
+        if r * c != m * n: 
+            return mat 
+        
+        count = 0
+        ans = [[0] * c for _ in range(r)]
+        for i in range(m):
+            for j in range(n):
+                row, col = divmod(count, c) 
+                ans[row][col] = mat[i][j]
+                count += 1
+                
+        return ans
+# numpy has a function reshape: np.reshape(nums, (r, c)).tolist()
+```
