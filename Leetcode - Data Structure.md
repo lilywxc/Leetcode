@@ -74,6 +74,7 @@
 * [Array and Matrix](#Array-and-Matrix)
     * [283. Move Zeroes](#283-Move-Zeroes)
     * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
+    * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2329,4 +2330,38 @@ class Solution:
                 
         return ans
 # numpy has a function reshape: np.reshape(nums, (r, c)).tolist()
+```
+
+#### [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
+
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/240.%20Search%20a%202D%20Matrix%20II.png" width="700">
+
+we seek along the matrix's middle column for an index row such that matrix[row-1][mid] < target < matrix[row][mid] <br /> 
+The existing matrix can be partitioned into four submatrice around this index:
+- the top-left and bottom-right submatrice cannot contain target, so we ignore
+- the bottom-left and top-right submatrice are sorted two-dimensional matrices, so we can recursively apply this algorithm to them
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        
+        def search(left, right, up, down):
+            # base case: zero are
+            if left > right or up > down:
+                return False
+            
+            # base case: smaller than smallest or larger than largest matrix value
+            if target < matrix[up][left] or target > matrix[down][right]:
+                return False
+            
+            mid = left + (right - left) // 2
+            
+            row = up
+            while row <= down and matrix[row][mid] <= target:
+                if matrix[row][mid] == target:
+                    return True
+                row += 1
+                
+            return search(left, mid - 1, row, down) or search(mid + 1, right, up, row - 1)
+        
+        return search(0, len(matrix[0]) - 1, 0, len(matrix) - 1)
 ```
