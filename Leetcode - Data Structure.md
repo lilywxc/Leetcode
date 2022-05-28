@@ -78,6 +78,7 @@
     * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
     * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
     * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
+    * [645. Set Mismatch](#645-Set-Mismatch)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2516,4 +2517,27 @@ class Solution:
                 start = mid_idx + 1
                 
         return False
+```
+
+#### [645. Set Mismatch](https://leetcode.com/problems/set-mismatch/)
+```python
+# Solution 1: O(N) time and O(N) space
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        return [sum(nums) - sum(set(nums)), sum(range(1, len(nums)+1)) - sum(set(nums))]
+```
+```python
+# Solution 2: swap to right place
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        for i in range(len(nums)):
+            while nums[i] != i + 1 and nums[nums[i] - 1] != nums[i]:
+                right_pos = nums[i] - 1
+                nums[i], nums[right_pos] = nums[right_pos], nums[i]
+                
+        for i in range(len(nums)):
+            if nums[i] != i + 1:
+                return [nums[i], i + 1]
+            
+# Solution 3: sort and iterate
 ```
