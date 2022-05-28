@@ -2398,7 +2398,7 @@ This problem can be reframed as finding the K smallest elements from amongst N s
 . . . . . . .
 ```
 ```python
-# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements. O(X) space
+# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time and O(X) space
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         heap = []
