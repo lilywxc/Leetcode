@@ -2498,6 +2498,7 @@ class Solution:
 
 #### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 ```python
+# O(log(mn)) time and O(1) space
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         n = len(matrix[0])
