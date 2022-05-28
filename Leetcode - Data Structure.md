@@ -2387,6 +2387,15 @@ class Solution:
 #### [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
 A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
 This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
+```
+# # # # # ? . .
+# # # ? . . . .
+# ? . . . . . .   "#" means pair already in the output
+# ? . . . . . .   "?" means pair currently in the queue
+# ? . . . . . .
+? . . . . . . .
+. . . . . . . .
+```
 ```python
 # let X = min(K, N), it's O(X + KlogX), 
 # O(X): heap construction
