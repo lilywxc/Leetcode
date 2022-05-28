@@ -2498,5 +2498,21 @@ class Solution:
 
 #### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 ```python
-
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        n = len(matrix[0])
+        start, end = 0, n * len(matrix) - 1
+        
+        while start <= end:
+            mid_idx = start + (end - start) // 2
+            mid_element = matrix[mid_idx // n][mid_idx % n]
+            
+            if target == mid_element:
+                return True
+            elif target < mid_element:
+                end = mid_idx - 1
+            else:
+                start = mid_idx + 1
+                
+        return False
 ```
