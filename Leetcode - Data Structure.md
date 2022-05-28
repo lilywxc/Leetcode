@@ -77,6 +77,7 @@
     * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
     * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
     * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
+    * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2493,4 +2494,9 @@ class Solution:
             k -= 1
                 
         return res
+```
+
+#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+```python
+
 ```
