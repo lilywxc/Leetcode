@@ -2398,7 +2398,7 @@ This problem can be reframed as finding the K smallest elements from amongst N s
 . . . . . . .
 ```
 ```python
-# let X = min(K, len(matrix)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
+# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements. O(X) space
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         heap = []
@@ -2418,6 +2418,46 @@ class Solution:
             k -= 1
 
         return element
+```
+```python
+# Solution 2: binary search
+# let N = len(matrix), it's O(Nlog(max-min)) time and O(1) space
+class Solution:
+    def countLessEqual(self, matrix, mid, smaller, larger):
+        n = len(matrix)
+        row, col = n - 1, 0
+        
+        count = 0
+        while row >= 0 and col < n:
+            if matrix[row][col] >= mid:
+                larger = min(larger, matrix[row][col])
+                row -= 1
+            else:
+                smaller = max(smaller, matrix[row][col])
+                count += row + 1
+                col += 1
+
+        return count, smaller, larger
+    
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n = len(matrix)
+        start, end = matrix[0][0], matrix[n - 1][n - 1]
+        while start < end:
+            mid = start + (end - start) / 2
+            
+            smaller = matrix[0][0]  # track the biggest number less than or equal to the mid
+            larger = matrix[n - 1][n - 1] # track the smallest number greater than the mid
+
+            count, smaller, larger = self.countLessEqual(matrix, mid, smaller, larger)
+
+            if count == k:
+                return smaller
+            if count < k:
+                start = larger  # search higher
+            else:
+                end = smaller  # search lower
+
+        return start
 ```
 
 #### [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
