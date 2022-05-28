@@ -76,6 +76,7 @@
     * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
     * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
     * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+    * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2388,36 +2389,68 @@ class Solution:
 A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
 This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
 ```
-# # # # # ? . .
-# # # ? . . . .
-# ? . . . . . .   "#" means pair already in the output
-# ? . . . . . .   "?" means pair currently in the queue
-# ? . . . . . .
-? . . . . . . .
-. . . . . . . .
+# # # # # ? .
+# # # ? . . .
+# ? . . . . .   "#" means pair already in the output
+# ? . . . . .   "?" means pair currently in the queue
+# ? . . . . .
+? . . . . . .
+. . . . . . .
 ```
 ```python
-# let X = min(K, N), it's O(X + KlogX), 
-# O(X): heap construction
-# O(KlogX): K iterations of popping and pushing from a heap of X elements
+# let X = min(K, len(matrix)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        N = len(matrix)
+        heap = []
         
-        minHeap = []
-        for r in range(min(k, N)):
-            minHeap.append((matrix[r][0], r, 0))
-        
-        heapq.heapify(minHeap)    
-        
+        def push(i, j):
+            if i < len(matrix) and j < len(matrix[0]):
+                heapq.heappush(heap, [matrix[i][j], i, j])
+
+        push(0, 0)
         while k:
+            element, i, j = heapq.heappop(heap)
+            push(i, j + 1)
             
-            element, r, c = heapq.heappop(minHeap)
-            
-            if c < N - 1:
-                heapq.heappush(minHeap, (matrix[r][c + 1], r, c + 1))
-            
+            if j == 0:
+                push(i + 1, 0)
+
             k -= 1
+
+        return element
+```
+
+#### [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+This problem can be visualized as a m x n matrix. For example, for nums1=[1,7,11], and nums2=[2,4,6]
+```
+      2   4   6
+   +------------
+ 1 |  3   5   7
+ 7 |  9  11  13
+11 | 13  15  17
+```
+Then it becomes the same problem as [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+```python
+# let X = min(K, len(nums1)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        heap = []
         
-        return element  
+        def push(i, j):
+            if i < len(nums1) and j < len(nums2):
+                heapq.heappush(heap, [nums1[i] + nums2[j], i, j])
+                
+        push(0, 0)
+        res = []
+        while heap and k:
+            _, i, j = heapq.heappop(heap)
+            res.append([nums1[i], nums2[j]])
+            push(i, j + 1)
+            
+            if j == 0:
+                push(i + 1, 0)
+                
+            k -= 1
+                
+        return res
 ```
