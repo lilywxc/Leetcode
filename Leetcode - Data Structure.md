@@ -75,6 +75,7 @@
     * [283. Move Zeroes](#283-Move-Zeroes)
     * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
     * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
+    * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2381,4 +2382,33 @@ class Solution:
                 return True
         
         return False
+```
+
+#### [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
+This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
+```python
+# let X = min(K, N), it's O(X + KlogX), 
+# O(X): heap construction
+# O(KlogX): K iterations of popping and pushing from a heap of X elements
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        N = len(matrix)
+        
+        minHeap = []
+        for r in range(min(k, N)):
+            minHeap.append((matrix[r][0], r, 0))
+        
+        heapq.heapify(minHeap)    
+        
+        while k:
+            
+            element, r, c = heapq.heappop(minHeap)
+            
+            if c < N - 1:
+                heapq.heappush(minHeap, (matrix[r][c + 1], r, c + 1))
+            
+            k -= 1
+        
+        return element  
 ```
