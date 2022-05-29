@@ -84,6 +84,7 @@
     * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
     * [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
     * [697. Degree of an Array](#697-Degree-of-an-Array)
+    * [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2727,4 +2728,28 @@ class Solution:
                 min_length = min(min_length, i - first[num] + 1)
                 
         return min_length
+```
+
+#### [766. Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/)
+```python
+# brute force: O(MN) time and O(M + N) space
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        # on the same diagonal, r1 - c1 == r2 - c2.
+        groups = {}
+        for r, row in enumerate(matrix):
+            for c, val in enumerate(row):
+                if r - c not in groups:
+                    groups[r - c] = val
+                elif groups[r - c] != val:
+                    return False
+        return True
+    
+# space optimization
+class Solution(object):
+    def isToeplitzMatrix(self, matrix):
+        return all(r == 0 or c == 0 or 
+                   matrix[r - 1][c - 1] == val
+                   for r, row in enumerate(matrix)
+                   for c, val in enumerate(row))
 ```
