@@ -85,6 +85,8 @@
     * [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
     * [697. Degree of an Array](#697-Degree-of-an-Array)
     * [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
+    * [565. Array Nesting](#565-Array-Nesting)
+    * [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2774,4 +2776,19 @@ class Solution:
             longest = max(longest, cnt)
                 
         return longest
+```
+
+#### [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted/)
+find some splitting line so that numbers on the left are smaller than numbers on the right. The idea is very similar to quick sort.
+```python
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        chunks = 0
+        left_max = arr[0]
+        for idx in range(len(arr)):
+            left_max = max(left_max, arr[idx])
+            if left_max == idx:
+                chunks += 1
+        
+        return chunks
 ```
