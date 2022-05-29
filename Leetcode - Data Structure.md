@@ -83,6 +83,7 @@
     * [41. First Missing Positive](#41-First-Missing-Positive)
     * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
     * [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
+    * [697. Degree of an Array](#697-Degree-of-an-Array)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2705,4 +2706,25 @@ class Solution:
             res[i] = i + 1
             
         return res
+```
+
+#### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/)
+```python
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        first = {} # index of first occurance of this number
+        count = defaultdict(int)
+        
+        min_length = degree = 0
+        for i, num in enumerate(nums):
+            first.setdefault(num, i) # assign i to nums only if nums does not exist
+            count[num] += 1
+            
+            if count[num] > degree:
+                degree = count[num]
+                min_length = i - first[num] + 1
+            elif count[num] == degree:
+                min_length = min(min_length, i - first[num] + 1)
+                
+        return min_length
 ```
