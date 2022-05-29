@@ -79,6 +79,7 @@
     * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
     * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
     * [645. Set Mismatch](#645-Set-Mismatch)
+    * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2561,7 +2562,62 @@ class Solution:
 # Solution 4: sort and iterate
 ```
 
-#### []()
+#### [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
 ```python
+# Solution 1: negative marking - O(n) time and O(1) space
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        for num in nums:
+            cur = abs(num)
+            if nums[cur] < 0:
+                duplicate = cur
+                break
+            nums[cur] = - nums[cur]
 
+        # Restore numbers
+        for i in range(len(nums)):
+            nums[i] = abs(nums[i])
+
+        return duplicate
+```
+```python
+# Solution 2: binary search - O(nlog) time and O (1) sapce
+# e.g. count(1,2,3,4,5,6,7)= (1,2,3,6,7,8,8)
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        low = 1
+        high = len(nums) - 1
+        
+        while low <= high:
+            mid = low + (high - low) // 2
+
+            # Count numbers less than or equal to 'mid'
+            count = sum(num <= mid for num in nums)
+            if count > mid:
+                duplicate = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+                
+        return duplicate
+```
+```python
+# Solution 3: Floyd's Tortoise and Hare (Cycle Detection)
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        # phrase 1
+        slow = fast = nums[0]
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        
+        # phrase 2
+        slow = nums[0]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        
+        return fast    
 ```
