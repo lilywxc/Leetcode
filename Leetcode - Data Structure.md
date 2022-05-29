@@ -2954,8 +2954,8 @@ union(u, v) connects the components with id find(u) and find(v) together. If it 
 # Solution 2: Union Find
 class UnionFind:
     def __init__(self, n):
-        self.parent = [x for x in range(n)]
-        self.rank = [0] * n
+        self.parent = [i for i in range(n)]
+        self.size = [1] * n
         
     def find(self, x):
         if x != self.parent[x]:
@@ -2964,23 +2964,45 @@ class UnionFind:
     
     def union(self, u, v):
         pu, pv = self.find(u), self.find(v)
-
+        
         if pu == pv: 
             return False  # u and v are already union
         
-        if self.rank[pu] < self.rank[pv]:
-            self.parent[pu] = pv
-            self.rank[pv] += 1
-        else:
+        if self.size[pu] > self.size[pv]: # Union by larger size
             self.parent[pv] = pu
-            self.rank[pu] += 1
+            self.size[pu] += self.size[pv]
+        else:
+            self.parent[pu] = pv
+            self.size[pv] += self.size[pu]
             
         return True
 
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        uf = UnionFind(len(edges))
+        n = len(edges)
+        uf = UnionFind(n)
         for u, v in edges:
             if not uf.union(u-1, v-1): 
                 return [u, v]
+```
+the self.size also tells us the size of each disjoint set. If we don't need to know that, we can also use "rank"
+```python
+self.rank = [0] * n
+
+def union(self, u, v):
+    pu, pv = self.find(u), self.find(v)
+
+    if pu == pv: 
+        return False  # u and v are already union
+
+    if self.rank[pu] < self.rank[pv]:
+        self.parent[pu] = pv
+        self.rank[pv] += 1
+    else:
+        self.parent[pv] = pu
+        self.rank[pu] += 1
+
+    return True
+    
+# everything else the same
 ```
