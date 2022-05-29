@@ -287,19 +287,18 @@ class Solution:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        if head is None:
+        if not head or not head.next:
             return False
         
-        slow = head
-        fast = head.next
-        
-        while slow is not fast:
-            if fast is None or fast.next is None:
-                return False
+        slow = fast = head
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-        
-        return True
+            
+            if fast and slow and slow == fast:
+                return True
+            
+        return False
 ```
 Time complexity : O(n), where n is the total number of nodes in the linked list. 
 Consider the following two cases separately.
