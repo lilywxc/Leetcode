@@ -2527,7 +2527,7 @@ class Solution:
         return [sum(nums) - sum(set(nums)), sum(range(1, len(nums)+1)) - sum(set(nums))]
 ```
 ```python
-# Solution 2: swap to right place
+# Solution 2: swap to right place (allow to modify the input)
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
         for i in range(len(nums)):
@@ -2538,6 +2538,30 @@ class Solution:
         for i in range(len(nums)):
             if nums[i] != i + 1:
                 return [nums[i], i + 1]
-            
-# Solution 3: sort and iterate
+```
+```python
+# Solution 3: negative marking (NOT allow to modify the input)
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        for num in nums:
+            cur = abs(num)
+            if nums[cur - 1] < 0:
+                duplicate = cur
+            else:
+                nums[cur - 1] *= -1
+
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                missing = i + 1
+            else:
+                nums[i] = abs(nums[i]) # restore numbers
+
+        return [duplicate, missing]
+
+# Solution 4: sort and iterate
+```
+
+#### []()
+```python
+
 ```
