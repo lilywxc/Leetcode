@@ -2755,7 +2755,9 @@ class Solution(object):
 ```
 
 #### [565. Array Nesting](https://leetcode.com/problems/array-nesting/)
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/565.%20Array%20Nesting.png" width="350">
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/565.%20Array%20Nesting.png" width="500">
+
 ```python
 class Solution:
     def arrayNesting(self, nums: List[int]) -> int:
