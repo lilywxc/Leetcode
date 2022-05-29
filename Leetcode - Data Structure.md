@@ -2948,7 +2948,7 @@ class Solution:
             adj_list[x].append(y)
             adj_list[y].append(x)
 ```
-find(u) outputs a unique id so that two nodes have the same id if and only if they are in the same connected component.
+find(u) outputs a unique id so that two nodes have the same id if and only if they are in the same connected component. <br />
 union(u, v) connects the components with id find(u) and find(v) together. If it already connected then return False, else return True.
 ```python
 # Solution 2: Union Find
@@ -2968,12 +2968,12 @@ class UnionFind:
         if pu == pv: 
             return False  # u and v are already union
         
-        if self.size[pu] > self.size[pv]: # Union by larger size
-            self.parent[pv] = pu
-            self.size[pu] += self.size[pv]
-        else:
+        if self.size[pu] < self.size[pv]: # Union by larger size
             self.parent[pu] = pv
             self.size[pv] += self.size[pu]
+        else:
+            self.parent[pv] = pu
+            self.size[pu] += self.size[pv]
             
         return True
 
