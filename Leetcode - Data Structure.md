@@ -82,6 +82,7 @@
     * [645. Set Mismatch](#645-Set-Mismatch)
     * [41. First Missing Positive](#41-First-Missing-Positive)
     * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
+    * [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2679,4 +2680,29 @@ class Solution:
             fast = nums[fast]
         
         return fast    
+```
+
+#### [667. Beautiful Arrangement II](https://leetcode.com/problems/beautiful-arrangement-ii/)
+use first k+1 elements to create list of k distinct diff, i.e. 1, 1+k, 2, k, 3, k-1, ...
+e.g. [1,4,2,3,5,6] -> [1,4,2,3,5,6]
+```python
+class Solution:
+    def constructArray(self, n: int, k: int) -> List[int]:
+        res = [0] * n
+        res[0] = 1
+        
+        i = 1
+        intv = k
+        while i <= k:
+            if i % 2 == 1:
+                res[i] = res[i - 1] + intv
+            else:
+                res[i] = res[i - 1] - intv
+            i += 1
+            intv -= 1
+        
+        for i in range(k + 1, n):
+            res[i] = i + 1
+            
+        return res
 ```
