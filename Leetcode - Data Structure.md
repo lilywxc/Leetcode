@@ -418,7 +418,7 @@ class Solution:
             fast = fast.next.next
             if slow is fast:
                 break
-        else: fast or fast.next is None
+        else: # fast or fast.next is None
             return None
         
         # phrase 2
@@ -429,6 +429,8 @@ class Solution:
         
         return fast
 ```
+If the condition of the "while" loop becomes False, it will enter the "else" statement <br />
+But if the "break" condition is met first, "else" statment won't be executed
 
 #### Tree
 
