@@ -2753,3 +2753,23 @@ class Solution(object):
                    for r, row in enumerate(matrix)
                    for c, val in enumerate(row))
 ```
+
+#### [565. Array Nesting](https://leetcode.com/problems/array-nesting/)
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/565.%20Array%20Nesting.png" width="350">
+```python
+class Solution:
+    def arrayNesting(self, nums: List[int]) -> int:
+        longest = 0
+        for curr in nums:
+            if curr == -1: 
+                continue
+                
+            cnt = 0
+            while nums[curr] != -1:
+                cnt += 1
+                nums[curr], curr = -1, nums[curr] # be careful with order
+                
+            longest = max(longest, cnt)
+                
+        return longest
+```
