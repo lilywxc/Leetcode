@@ -10,6 +10,7 @@
     * [234. Palindrome Linked List](#234-Palindrome-Linked-List)
     * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
     * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
+    * [142. Linked List Cycle II](#142-Linked-List-Cycle-II)
 * [Tree](#Tree)
     * [BFS](#BFS)
        * [637. Average of Levels in Binary Tree](#637-Average-of-Levels-in-Binary-Tree)
@@ -205,11 +206,6 @@ class Solution:
 
 #### [83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         curr = head
@@ -225,11 +221,6 @@ class Solution:
 
 #### [19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         fast = slow = dummy = ListNode()
@@ -249,12 +240,6 @@ class Solution:
 
 #### [24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-
 # recursive
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -290,11 +275,6 @@ class Solution:
 
 #### [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/description/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         prev, curr = None, head
@@ -333,11 +313,6 @@ class Solution:
 
 #### [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         if head is None:
@@ -373,11 +348,6 @@ class Solution:
 
 #### [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def splitListToParts(self, root: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
         curr, length = root, 0
@@ -402,11 +372,6 @@ class Solution:
 
 #### [328. Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/)
 ```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head:
@@ -426,6 +391,43 @@ class Solution:
         odd.next = even_head
         
         return head
+```
+
+#### [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+In **Phrase 1**, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
+```
+2 * (F + a) = F + nC + a, where n is some contant
+```
+Solving the eq. gives us
+```
+F + n = nC
+```
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/142.%20Linked%20List%20Cycle%20II.png" width="500">
+   
+In **Phrase 2**, let slow pointer start at the head and fast start at the intersection point, and they move at the same speed. They will meet at the entrance of cycle. To prove:
+- The slow pointer started at zero, so its position after F steps is F.
+- The faster pointer started at the intersection point F + a = nC, so its position after F steps is nC + F, that is the same point as F.
+```python
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # phrase 1
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow is fast:
+                break
+        else: fast or fast.next is None
+            return None
+        
+        # phrase 2
+        slow = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+        
+        return fast
 ```
 
 #### Tree
@@ -2601,6 +2603,7 @@ class Solution:
                 
         return duplicate
 ```
+We can rephrase the problem as finding the entrance point of a cyclic linkedlist, which is the same as [142. Linked List Cycle II](#142-Linked-List-Cycle-II)
 In **Phrase 1**, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
 ```
 2 * (F + a) = F + nC + a, where n is some contant
