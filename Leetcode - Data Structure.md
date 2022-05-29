@@ -80,6 +80,7 @@
     * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
     * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
     * [645. Set Mismatch](#645-Set-Mismatch)
+    * [41. First Missing Positive](#41-First-Missing-Positive)
     * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
 
 ### LinkedList
@@ -2564,6 +2565,45 @@ class Solution:
         return [duplicate, missing]
 
 # Solution 4: sort and iterate
+```
+
+#### [41. First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
+```python
+# Solution 1: swap
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        for i in range(n):
+            while nums[i] > 0 and nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+                right_pos = nums[i] - 1
+                nums[i], nums[right_pos] = nums[right_pos], nums[i]
+                
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+            
+        return n + 1
+```
+```python
+# Solution 2: negative marking
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        for i in range(n):
+            if nums[i] <= 0: # remove useless elements
+                nums[i] = n + 1
+                
+        for num in nums:
+            curr = abs(num)
+            if curr <= n and nums[curr - 1] > 0:
+                nums[curr - 1] *= -1
+            
+        for i in range(n):
+            if nums[i] >= 0:
+                return i + 1
+            
+        return n + 1
 ```
 
 #### [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
