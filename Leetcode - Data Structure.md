@@ -2601,6 +2601,16 @@ class Solution:
                 
         return duplicate
 ```
+In Phrase 1, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
+```
+2 * (F + a) = F + nC + a, where n is some contant
+```
+Solving the eq. gives us
+```
+
+```
+
+
 ```python
 # Solution 3: Floyd's Tortoise and Hare (Cycle Detection)
 class Solution:
