@@ -2831,13 +2831,13 @@ class Solution:
             prereq[i].append(pre)
             
         def dfs(i):
-            if visit[i] == -1: # if we visit i again, there's a cycle
+            if visit[i] == -1: # cycle detected as we visit i again
                 return False
             
-            if visit[i] == 1: # 1 = visited before, skip
+            if visit[i] == 1: # visited before, skip
                 return True
             
-            visit[i] = -1 
+            visit[i] = -1 # mark as visited
             for pre in prereq[i]:
                 if not dfs(pre):
                     return False
