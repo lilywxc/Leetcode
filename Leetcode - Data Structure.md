@@ -87,6 +87,12 @@
     * [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
     * [565. Array Nesting](#565-Array-Nesting)
     * [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
+* [Graph](#Graph)
+    * [785. Is Graph Bipartite](#785-Is-Graph-Bipartite)
+    * [207. Course Schedule](#207-Course-Schedule)
+    * [210. Course Schedule II](#210-Course-Schedule-II)
+    * [684. Redundant Connection](#684-Redundant-Connection)
+
 
 ### LinkedList
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
@@ -2791,4 +2797,68 @@ class Solution:
                 chunks += 1
         
         return chunks
+```
+
+#### Graph
+#### [785. Is Graph Bipartite](https://leetcode.com/problems/is-graph-bipartite/description/)
+```python
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        color = {}
+        for node in range(len(graph)):
+            if node not in color:
+                stack = [node]
+                color[node] = 0
+                while stack:
+                    u = stack.pop()
+                    for v in graph[u]:
+                        if v not in color:
+                            stack.append(v)
+                            color[v] = color[u] ^ 1
+                        elif color[v] == color[u]:
+                            return False
+        return True
+```
+
+#### [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)
+```python
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        prereq = [[] for _ in range(numCourses)]
+        visit = [0 for _ in range(numCourses)] # 0 = unvisited
+        
+        for i, pre in prerequisites:
+            prereq[i].append(pre)
+            
+        def dfs(i):
+            if visit[i] == -1: # if we visit i again, there's a cycle
+                return False
+            
+            if visit[i] == 1: # 1 = visited before, skip
+                return True
+            
+            visit[i] = -1 
+            for pre in prereq[i]:
+                if not dfs(pre):
+                    return False
+                
+            visit[i] = 1
+            return True
+        
+        for i in range(numCourses):
+            if not dfs(i):
+                return False
+            
+        return True
+```
+
+#### [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)
+Topological 
+```python
+
+```
+
+#### [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/description/)
+```python
+
 ```
