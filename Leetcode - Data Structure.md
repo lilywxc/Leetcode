@@ -2601,16 +2601,20 @@ class Solution:
                 
         return duplicate
 ```
-In Phrase 1, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
+In **Phrase 1**, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
 ```
 2 * (F + a) = F + nC + a, where n is some contant
 ```
 Solving the eq. gives us
 ```
-
+F + n = nC
 ```
 
-
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/287.%20Find%20the%20Duplicate%20Number.png" width="500">
+   
+In **Phrase 2**, let slow pointer start at the head and fast start at the intersection point, and they move at the same speed. They will meet at the entrance of cycle. To prove:
+- The slow pointer started at zero, so its position after F steps is F.
+- The faster pointer started at the intersection point F + a = nC, so its position after F steps is nC + F, that is the same point as F.
 ```python
 # Solution 3: Floyd's Tortoise and Hare (Cycle Detection)
 class Solution:
