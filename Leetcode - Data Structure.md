@@ -2853,12 +2853,134 @@ class Solution:
 ```
 
 #### [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)
-Topological 
+Topological Order
 ```python
+# Solution 1: BFS
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        adj_list = [[] for _ in range(numCourses)]
+        indegree = [0 for _ in range(numCourses)]
+        res = []
+        
+        for i, pre in prerequisites:
+            adj_list[pre].append(i)
+            indegree[i] = indegree[i] + 1
 
+        zero_indegree_queue = deque([i for i in range(numCourses) if indegree[i] == 0])
+        
+        while zero_indegree_queue:
+            i = zero_indegree_queue.popleft()
+            res.append(i)
+
+            # Reduce in-degree for all the neighbors
+            for nei in adj_list[i]:
+                indegree[nei] -= 1
+
+                # Add neighbor to Q if in-degree becomes 0
+                if indegree[nei] == 0:
+                    zero_indegree_queue.append(nei)
+
+        return res if len(res) == numCourses else []
+```
+graph illustration of DFS approach: [DFS](https://leetcode.com/problems/course-schedule-ii/solution/)
+```python
+# Solution 2: DFS - O(V + E) time and O(V + E) space
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        prereq = [[] for _ in range(numCourses)]
+        visit = [0 for _ in range(numCourses)] # DAG detection 
+        res = []
+        
+        for i, pre in prerequisites:
+            prereq[i].append(pre) 
+    
+        def dfs(i):
+            if visit[i] == -1:  # cycle detected as we visit i again
+                return False
+            
+            if visit[i] == 1: # visited before and added to res already, skip
+                return True
+            
+            visit[i] = -1 # mark as visited
+            for pre in prereq[i]:
+                if not dfs(pre):
+                    return False
+                
+            visit[i] = 1
+            res.append(i)
+            return True
+        
+        for i in range(numCourses):
+            if not dfs(i):
+                return []
+            
+        return res
 ```
 
 #### [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/description/)
+DFS approach: We build the tree from scratch by adding edges [u, v] to adj_list. Before we add the edge, we do dfs to see if we can reach v from u through a path in existing graph. If we can, then adding [u,v] will form a cycle.
 ```python
+# Solution 1: DFS - O(N^2) time and O(N) space 
+# In the worst case, for every edge we include, we have to search every previously-occurring edge of the graph
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        
+        def is_already_connected(x, y):
+            if x in visited:
+                return False
+            
+            if x == y:
+                return True
+            
+            visited.add(x)
+            for nei in adj_list[x]:
+                if is_already_connected(nei, y):
+                        return True
+            return False
+        
+        adj_list = defaultdict(list)
+        for x, y in edges:
+            visited = set()
+        
+            if is_already_connected(x, y):
+                return [x, y]
+            
+            adj_list[x].append(y)
+            adj_list[y].append(x)
+```
+find(u) outputs a unique id so that two nodes have the same id if and only if they are in the same connected component.
+union(u, v) connects the components with id find(u) and find(v) together. If it already connected then return False, else return True.
+```python
+# Solution 2: Union Find
+class UnionFind:
+    def __init__(self, n):
+        self.parent = [x for x in range(n)]
+        self.rank = [0] * n
+        
+    def find(self, x):
+        if x != self.parent[x]:
+            self.parent[x] = self.find(self.parent[x]) # Path compression
+        return self.parent[x]
+    
+    def union(self, u, v):
+        pu, pv = self.find(u), self.find(v)
 
+        if pu == pv: 
+            return False  # u and v are already union
+        
+        if self.rank[pu] < self.rank[pv]:
+            self.parent[pu] = pv
+            self.rank[pv] += 1
+        else:
+            self.parent[pv] = pu
+            self.rank[pu] += 1
+            
+        return True
+
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        uf = UnionFind(len(edges))
+        for u, v in edges:
+            if not uf.union(u-1, v-1): 
+                return [u, v]
 ```
