@@ -21,23 +21,23 @@ This is a **2-way** discussion on approaches to take for the question, including
 
 ### 3. Code out your solution while talking through it
 Do **not** start coding until the interviewer gives you the green light<br />
-    - Explain what you are trying to achieve as you are coding / writing. Compare different coding approaches where relevant. (*e.g. choice of array vs dictionary. In so doing, demonstrate mastery of your chosen programming language.*)
-    - Code at a reasonable speed so you can talk through it - but not too slow.
-    - Use variable names that explain your code.
-    - Ask for permission to use trivial functions without having to implement them. (*e.g. sort(), Counter()*)
-    - Write in a modular fashion, going from higher-level functions and breaking them down into smaller helper functions.
-    - If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting. (*e.g. "Under non-interview settings, I would write a regex to parse this string rather than using split() which may not cover certain edge cases."*)
-    - use comments if necessary, but not too many as your code should be self-explanatory.
+1. Explain what you are trying to achieve as you are coding / writing. Compare different coding approaches where relevant. (*e.g. choice of array vs dictionary. In so doing, demonstrate mastery of your chosen programming language.*)
+2. Code at a reasonable speed so you can talk through it - but not too slow.
+3. Use variable names that explain your code.
+4. Ask for permission to use trivial functions without having to implement them. (*e.g. sort(), Counter()*)
+5. Write in a modular fashion, going from higher-level functions and breaking them down into smaller helper functions.
+6. If you are cutting corners in your code, state that out loud to your interviewer and say what you would do in a non-interview setting. (*e.g. "Under non-interview settings, I would write a regex to parse this string rather than using split() which may not cover certain edge cases."*)
+7. use comments if necessary, but not too many as your code should be self-explanatory.
     
 ### 4. After coding, check your code and add test cases
 Once you are done coding, do **not** announce that you are done. <br />
 Interviewers expect you to start scanning for mistakes and adding test cases to improve on your code.
-    - Read through your code for mistakes, as if it's your first time seeing a piece of code written by someone else, and talk through your process of finding mistakes.
-    - Step through your code with a few test cases. 
-    - Brainstorm edge cases with the interviewer and add additional test cases.
-    - Look out for places where you can refactor.
-    - Reiterate the time and space complexity of your code.(*This allows you to remind yourself to spot issues within your code that could deviate from the original time and space complexity*) 
-    - Explain trade-offs and how the code / approach can be improved if given more time.
+1. Read through your code for mistakes, as if it's your first time seeing a piece of code written by someone else, and talk through your process of finding mistakes.
+2. Step through your code with a few test cases. 
+3. Brainstorm edge cases with the interviewer and add additional test cases.
+4. Look out for places where you can refactor.
+5. Reiterate the time and space complexity of your code.(*This allows you to remind yourself to spot issues within your code that could deviate from the original time and space complexity*) 
+6. Explain trade-offs and how the code / approach can be improved if given more time.
 
 
 Side notes: 
