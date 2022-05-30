@@ -15,33 +15,8 @@
 * [Search](#Search)
 * [Dynamic Programming](#Dynamic-Programming)
 * [Math](#Math)
-	* [204. Count Primes](#204-Count-Primes)
-	* [Greatest Common Divisor](#Greatest-Common-Divisor)
-	* [Least Common Multiple](#Least-Common-Multiple)
-	* [172. Factorial Trailing Zeroes](#172-Factorial-Trailing-Zeroes)
-	* [462. Minimum Moves to Equal Array Elements II](#462-Minimum-Moves-to-Equal-Array-Elements-II)
-	* [169. Majority Element](#169-Majority-Element)
-	* [367. Valid Perfect Square](#367-Valid-Perfect-Square)
-	* [628. Maximum Product of Three Numbers](#628-Maximum-Product-of-Three-Numbers)
 * [Bit Computation](#Bit-Computation)
-	* [504. Base 7](#504-Base-7)
-	* [405. Convert a Number to Hexadecimal](#405-Convert-a-Number-to-Hexadecimal)
-	* [168. Excel Sheet Column Title](#168-Excel-Sheet-Column-Title)
-	* [67. Add Binary](#67-Add-Binary)
-	* [415. Add Strings](#415-Add-Strings)
-	* [461. Hamming Distance](#461-Hamming-Distance)
-	* [136. Single Number](#136-Single-Number)
-	* [268. Missing Number](#268-Missing-Number)
-	* [exchange two integers without extra variables](#exchange-two-integers-without-extra-variables)
-	* [190. Reverse Bits](#190-Reverse-Bits)
-	* [231. Power of Two](#231-Power-of-Two)
-	* [326. Power of Three](#326-Power-of-Three)
-	* [342. Power of Four](#342-Power-of-Four)
-	* [693. Binary Number with Alternating Bits](#693-Binary-Number-with-Alternating-Bits)
-	* [476. Number Complement](#476-Number-Complement)
-	* [371. Sum of Two Integers](#371-Sum-of-Two-Integers)
-	* [318. Maximum Product of Word Lengths](#318-Maximum-Product-of-Word-Lengths)
-	* [338. Counting Bits](#338-Counting-Bits)
+
 
 ## LinkedList
 * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
@@ -6132,7 +6107,17 @@ class Solution:
         return ans
 ```
 
-### Math
+
+## Math
+* [204. Count Primes](#204-Count-Primes)
+* [Greatest Common Divisor](#Greatest-Common-Divisor)
+* [Least Common Multiple](#Least-Common-Multiple)
+* [172. Factorial Trailing Zeroes](#172-Factorial-Trailing-Zeroes)
+* [462. Minimum Moves to Equal Array Elements II](#462-Minimum-Moves-to-Equal-Array-Elements-II)
+* [169. Majority Element](#169-Majority-Element)
+* [367. Valid Perfect Square](#367-Valid-Perfect-Square)
+* [628. Maximum Product of Three Numbers](#628-Maximum-Product-of-Three-Numbers)
+
 
 #### [204. Count Primes](https://leetcode.com/problems/count-primes/)
 ```python
@@ -6369,7 +6354,27 @@ class Solution:
         return max(min1 * min2 * max1, max1 * max2 * max3)
 ```
 
-### Bit Computation
+## Bit Computation
+* [504. Base 7](#504-Base-7)
+* [405. Convert a Number to Hexadecimal](#405-Convert-a-Number-to-Hexadecimal)
+* [168. Excel Sheet Column Title](#168-Excel-Sheet-Column-Title)
+* [67. Add Binary](#67-Add-Binary)
+* [415. Add Strings](#415-Add-Strings)
+* [461. Hamming Distance](#461-Hamming-Distance)
+* [136. Single Number](#136-Single-Number)
+* [268. Missing Number](#268-Missing-Number)
+* [exchange two integers without extra variables](#exchange-two-integers-without-extra-variables)
+* [190. Reverse Bits](#190-Reverse-Bits)
+* [231. Power of Two](#231-Power-of-Two)
+* [326. Power of Three](#326-Power-of-Three)
+* [342. Power of Four](#342-Power-of-Four)
+* [693. Binary Number with Alternating Bits](#693-Binary-Number-with-Alternating-Bits)
+* [476. Number Complement](#476-Number-Complement)
+* [371. Sum of Two Integers](#371-Sum-of-Two-Integers)
+* [318. Maximum Product of Word Lengths](#318-Maximum-Product-of-Word-Lengths)
+* [338. Counting Bits](#338-Counting-Bits)
+
+
 **^**: 0^1 = 1, 1^1 = 0, 0^0 = 0
 x ^ 0s = x      
 x ^ 1s = ~x -> 位级反转     
