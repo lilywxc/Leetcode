@@ -30,8 +30,16 @@ Do **not** start coding until the interviewer gives you the green light<br />
     - use comments if necessary, but not too many as your code should be self-explanatory.
     
 ### 4. After coding, check your code and add test cases
-    - Read through your code for mistakes - as if it's your first time seeing a piece of code written by someone else, and talk through your process of finding mistakes.
+Once you are done coding, do **not** announce that you are done. <br />
+Interviewers expect you to start scanning for mistakes and adding test cases to improve on your code.
+    - Read through your code for mistakes, as if it's your first time seeing a piece of code written by someone else, and talk through your process of finding mistakes.
     - Step through your code with a few test cases. 
     - Brainstorm edge cases with the interviewer and add additional test cases.
     - Look out for places where you can refactor.
     - Reiterate the time and space complexity of your code.(*This allows you to remind yourself to spot issues within your code that could deviate from the original time and space complexity*) 
+    - Explain trade-offs and how the code / approach can be improved if given more time.
+
+
+Side notes: 
+- before you are given the question, give interviewer a 2 minute self-introduction
+- after solving the questions, ask good final questions ([examples](https://www.techinterviewhandbook.org/final-questions/))that are tailored to the company and thanks the interviewer
