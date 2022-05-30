@@ -92,6 +92,8 @@
     * [207. Course Schedule](#207-Course-Schedule)
     * [210. Course Schedule II](#210-Course-Schedule-II)
     * [684. Redundant Connection](#684-Redundant-Connection)
+    * [1319. Number of Operations to Make Network Connected](#1319-Number-of-Operations-to-Make-Network-Connected)
+    * [721. Accounts Merge](#721-Accounts-Merge)
 
 
 ### LinkedList
@@ -3005,4 +3007,98 @@ def union(self, u, v):
     return True
     
 # everything else the same
+```
+
+#### [1319. Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/)
+The trick is, if we have enough cables, we don't need to worry about where we can get the cable from <br />
+The number of operations we need = the number of connected networks - 1 <br />
+Then the problem becomes, finding the number of connected components
+```python
+class Solution:
+    def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+        if len(connections) < n - 1: 
+            return -1 # we need at least n - 1 cables to connect n nodes (like a tree)
+        
+        adj_list = [[] for _ in range(n)]
+        for i, j in connections:
+            adj_list[i].append(j)
+            adj_list[j].append(i)
+            
+        seen = [0] * n
+        def dfs(i):
+            if seen[i]: 
+                return 0
+            
+            seen[i] = 1
+            
+            for j in adj_list[i]: 
+                dfs(j)
+                
+            return 1
+
+        return sum(dfs(i) for i in range(n)) - 1
+```
+
+#### [721. Accounts Merge](https://leetcode.com/problems/accounts-merge/)
+```python
+# Solution 1: DFS
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        visited_accounts = [False] * len(accounts)
+        email_acc_map = defaultdict(list) # key=emails, value=account Id
+        res = []
+
+        for Id, acc in enumerate(accounts):
+            for email in acc[1:]:
+                email_acc_map[email].append(Id)
+                
+        def dfs(Id):           
+            visited_accounts[Id] = True
+            for email in accounts[Id][1:]:
+                if email in seen:
+                    continue
+                    
+                seen.add(email)
+                for acc_Id in email_acc_map[email]:
+                    if not visited_accounts[acc_Id]:
+                        dfs(acc_Id)
+                    
+        for Id, acc in enumerate(accounts):
+            if visited_accounts[Id]:
+                continue
+            seen = set()
+            dfs(Id)
+            res.append([acc[0]] + sorted(seen))
+        return res
+```
+```python
+# Solution 2: Union Find
+class UF:
+    def __init__(self, N):
+        self.parents = list(range(N))
+    def union(self, u, v):
+        pu, pv = self.find(u), self.find(v)
+        self.parents[pu] = pv
+    def find(self, x):
+        if x != self.parents[x]:
+            self.parents[x] = self.find(self.parents[x])
+        return self.parents[x]
+    
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        uf = UF(len(accounts))
+        
+        # Creat unions between indexes
+        seen = {}
+        for Id, emails in enumerate(accounts):
+            for email in emails[1:]:
+                if email in seen:
+                    uf.union(Id, seen[email]) # union Ids
+                seen[email] = Id
+        
+        ans = collections.defaultdict(list)
+        for email, Id in seen.items():
+            ans[uf.find(Id)].append(email)
+        
+        return [[accounts[i][0]] + sorted(emails) for i, emails in ans.items()]
 ```
