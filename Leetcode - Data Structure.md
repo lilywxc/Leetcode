@@ -72,21 +72,22 @@
     * [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
     * [9. Palindrome Number](#9-Palindrome-Number)
     * [696. Count Binary Substrings](#696-Count-Binary-Substrings)
-* [Array and Matrix](#Array-and-Matrix)
+* [Array](#Array)
     * [283. Move Zeroes](#283-Move-Zeroes)
-    * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
-    * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
-    * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
-    * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
-    * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
     * [645. Set Mismatch](#645-Set-Mismatch)
     * [41. First Missing Positive](#41-First-Missing-Positive)
     * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
     * [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
     * [697. Degree of an Array](#697-Degree-of-an-Array)
-    * [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
     * [565. Array Nesting](#565-Array-Nesting)
     * [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
+* [Matrix](#Matrix)
+    * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
+    * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
+    * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+    * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
+    * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
+    * [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
 * [Graph](#Graph)
     * [785. Is Graph Bipartite](#785-Is-Graph-Bipartite)
     * [207. Course Schedule](#207-Course-Schedule)
@@ -2311,7 +2312,7 @@ class Solution(object):
         return ans + min(prev, cur)
 ```
 
-#### Array and Matrix
+#### Array 
 
 #### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
 ```python
@@ -2332,210 +2333,6 @@ class Solution:
         while insertPos < len(nums):
             nums[insertPos] = 0
             insertPos += 1
-```
-    
-#### [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/)
-```python
-class Solution:
-    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
-        m, n = len(mat), len(mat[0])
-        
-        if r * c != m * n: 
-            return mat 
-        
-        count = 0
-        ans = [[0] * c for _ in range(r)]
-        for i in range(m):
-            for j in range(n):
-                row, col = divmod(count, c) 
-                ans[row][col] = mat[i][j]
-                count += 1
-                
-        return ans
-# numpy has a function reshape: np.reshape(nums, (r, c)).tolist()
-```
-
-#### [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
-
- <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/240.%20Search%20a%202D%20Matrix%20II.png" width="300">
-
-we seek along the matrix's middle column for an index row such that matrix[row-1][mid] < target < matrix[row][mid] <br /> 
-The existing matrix can be partitioned into four submatrice around this index:
-- the top-left and bottom-right submatrice cannot contain target, so we ignore
-- the bottom-left and top-right submatrice are sorted two-dimensional matrices, so we can recursively apply this algorithm to them
-```python
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        
-        def search(left, right, up, down):
-            # base case: zero are
-            if left > right or up > down:
-                return False
-            
-            # base case: smaller than smallest or larger than largest matrix value
-            if target < matrix[up][left] or target > matrix[down][right]:
-                return False
-            
-            mid = left + (right - left) // 2
-            
-            row = up
-            while row <= down and matrix[row][mid] <= target:
-                if matrix[row][mid] == target:
-                    return True
-                row += 1
-                
-            return search(left, mid - 1, row, down) or search(mid + 1, right, up, row - 1)
-        
-        return search(0, len(matrix[0]) - 1, 0, len(matrix) - 1)
-```
-```python
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        # start our "pointer" in the bottom-left
-        row = len(matrix) - 1
-        col = 0
-
-        while col < len(matrix[0]) and row >= 0:
-            if matrix[row][col] > target:
-                row -= 1
-            elif matrix[row][col] < target:
-                col += 1
-            else:
-                return True
-        
-        return False
-```
-
-#### [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
-A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
-This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
-```
-# # # # # ? .
-# # # ? . . .
-# ? . . . . .   "#" means pair already in the output
-# ? . . . . .   "?" means pair currently in the queue
-# ? . . . . .
-? . . . . . .
-. . . . . . .
-```
-```python
-# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time and O(X) space
-class Solution:
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        heap = []
-        
-        def push(i, j):
-            if i < len(matrix) and j < len(matrix[0]):
-                heapq.heappush(heap, [matrix[i][j], i, j])
-
-        push(0, 0)
-        while k:
-            element, i, j = heapq.heappop(heap)
-            push(i, j + 1)
-            
-            if j == 0:
-                push(i + 1, 0)
-
-            k -= 1
-
-        return element
-```
-```python
-# Solution 2: binary search
-# let N = len(matrix), it's O(Nlog(max-min)) time and O(1) space
-class Solution:
-    def countLessEqual(self, matrix, mid, smaller, larger):
-        n = len(matrix)
-        row, col = n - 1, 0
-        
-        count = 0
-        while row >= 0 and col < n:
-            if matrix[row][col] >= mid:
-                larger = min(larger, matrix[row][col])
-                row -= 1
-            else:
-                smaller = max(smaller, matrix[row][col])
-                count += row + 1
-                col += 1
-
-        return count, smaller, larger
-    
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        n = len(matrix)
-        start, end = matrix[0][0], matrix[n - 1][n - 1]
-        while start < end:
-            mid = start + (end - start) / 2
-            
-            smaller = matrix[0][0]  # track the biggest number less than or equal to the mid
-            larger = matrix[n - 1][n - 1] # track the smallest number greater than the mid
-
-            count, smaller, larger = self.countLessEqual(matrix, mid, smaller, larger)
-
-            if count == k:
-                return smaller
-            if count < k:
-                start = larger  # search higher
-            else:
-                end = smaller  # search lower
-
-        return start
-```
-
-#### [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
-This problem can be visualized as a m x n matrix. For example, for nums1=[1,7,11], and nums2=[2,4,6]
-```
-      2   4   6
-   +------------
- 1 |  3   5   7
- 7 |  9  11  13
-11 | 13  15  17
-```
-Then it becomes the same problem as [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
-```python
-# let X = min(K, len(nums1)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
-class Solution:
-    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
-        heap = []
-        
-        def push(i, j):
-            if i < len(nums1) and j < len(nums2):
-                heapq.heappush(heap, [nums1[i] + nums2[j], i, j])
-                
-        push(0, 0)
-        res = []
-        while heap and k:
-            _, i, j = heapq.heappop(heap)
-            res.append([nums1[i], nums2[j]])
-            push(i, j + 1)
-            
-            if j == 0:
-                push(i + 1, 0)
-                
-            k -= 1
-                
-        return res
-```
-
-#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
-```python
-# O(log(mn)) time and O(1) space
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        n = len(matrix[0])
-        start, end = 0, n * len(matrix) - 1
-        
-        while start <= end:
-            mid_idx = start + (end - start) // 2
-            mid_element = matrix[mid_idx // n][mid_idx % n]
-            
-            if target == mid_element:
-                return True
-            elif target < mid_element:
-                end = mid_idx - 1
-            else:
-                start = mid_idx + 1
-                
-        return False
 ```
 
 #### [645. Set Mismatch](https://leetcode.com/problems/set-mismatch/)
@@ -2740,30 +2537,6 @@ class Solution:
         return min_length
 ```
 
-#### [766. Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/)
-```python
-# brute force: O(MN) time and O(M + N) space
-class Solution:
-    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-        # on the same diagonal, r1 - c1 == r2 - c2.
-        groups = {}
-        for r, row in enumerate(matrix):
-            for c, val in enumerate(row):
-                if r - c not in groups:
-                    groups[r - c] = val
-                elif groups[r - c] != val:
-                    return False
-        return True
-    
-# space optimization
-class Solution(object):
-    def isToeplitzMatrix(self, matrix):
-        return all(r == 0 or c == 0 or 
-                   matrix[r - 1][c - 1] == val
-                   for r, row in enumerate(matrix)
-                   for c, val in enumerate(row))
-```
-
 #### [565. Array Nesting](https://leetcode.com/problems/array-nesting/)
 
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/565.%20Array%20Nesting.png" width="500">
@@ -2800,6 +2573,239 @@ class Solution:
         
         return chunks
 ```
+
+
+
+#### Matrix
+ 
+#### [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/)
+```python
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        m, n = len(mat), len(mat[0])
+        
+        if r * c != m * n: 
+            return mat 
+        
+        count = 0
+        ans = [[0] * c for _ in range(r)]
+        for i in range(m):
+            for j in range(n):
+                row, col = divmod(count, c) 
+                ans[row][col] = mat[i][j]
+                count += 1
+                
+        return ans
+# numpy has a function reshape: np.reshape(nums, (r, c)).tolist()
+```
+
+#### [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
+
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/240.%20Search%20a%202D%20Matrix%20II.png" width="300">
+
+we seek along the matrix's middle column for an index row such that matrix[row-1][mid] < target < matrix[row][mid] <br /> 
+The existing matrix can be partitioned into four submatrice around this index:
+- the top-left and bottom-right submatrice cannot contain target, so we ignore
+- the bottom-left and top-right submatrice are sorted two-dimensional matrices, so we can recursively apply this algorithm to them
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        
+        def search(left, right, up, down):
+            # base case: zero are
+            if left > right or up > down:
+                return False
+            
+            # base case: smaller than smallest or larger than largest matrix value
+            if target < matrix[up][left] or target > matrix[down][right]:
+                return False
+            
+            mid = left + (right - left) // 2
+            
+            row = up
+            while row <= down and matrix[row][mid] <= target:
+                if matrix[row][mid] == target:
+                    return True
+                row += 1
+                
+            return search(left, mid - 1, row, down) or search(mid + 1, right, up, row - 1)
+        
+        return search(0, len(matrix[0]) - 1, 0, len(matrix) - 1)
+```
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # start our "pointer" in the bottom-left
+        row = len(matrix) - 1
+        col = 0
+
+        while col < len(matrix[0]) and row >= 0:
+            if matrix[row][col] > target:
+                row -= 1
+            elif matrix[row][col] < target:
+                col += 1
+            else:
+                return True
+        
+        return False
+```
+
+#### [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
+This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
+```
+# # # # # ? .
+# # # ? . . .
+# ? . . . . .   "#" means pair already in the output
+# ? . . . . .   "?" means pair currently in the queue
+# ? . . . . .
+? . . . . . .
+. . . . . . .
+```
+```python
+# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time and O(X) space
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        heap = []
+        
+        def push(i, j):
+            if i < len(matrix) and j < len(matrix[0]):
+                heapq.heappush(heap, [matrix[i][j], i, j])
+
+        push(0, 0)
+        while k:
+            element, i, j = heapq.heappop(heap)
+            push(i, j + 1)
+            
+            if j == 0:
+                push(i + 1, 0)
+
+            k -= 1
+
+        return element
+```
+```python
+# Solution 2: binary search
+# let N = len(matrix), it's O(Nlog(max-min)) time and O(1) space
+class Solution:
+    def countLessEqual(self, matrix, mid, smaller, larger):
+        n = len(matrix)
+        row, col = n - 1, 0
+        
+        count = 0
+        while row >= 0 and col < n:
+            if matrix[row][col] >= mid:
+                larger = min(larger, matrix[row][col])
+                row -= 1
+            else:
+                smaller = max(smaller, matrix[row][col])
+                count += row + 1
+                col += 1
+
+        return count, smaller, larger
+    
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n = len(matrix)
+        start, end = matrix[0][0], matrix[n - 1][n - 1]
+        while start < end:
+            mid = start + (end - start) / 2
+            
+            smaller = matrix[0][0]  # track the biggest number less than or equal to the mid
+            larger = matrix[n - 1][n - 1] # track the smallest number greater than the mid
+
+            count, smaller, larger = self.countLessEqual(matrix, mid, smaller, larger)
+
+            if count == k:
+                return smaller
+            if count < k:
+                start = larger  # search higher
+            else:
+                end = smaller  # search lower
+
+        return start
+```
+
+#### [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+This problem can be visualized as a m x n matrix. For example, for nums1=[1,7,11], and nums2=[2,4,6]
+```
+      2   4   6
+   +------------
+ 1 |  3   5   7
+ 7 |  9  11  13
+11 | 13  15  17
+```
+Then it becomes the same problem as [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+```python
+# let X = min(K, len(nums1)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        heap = []
+        
+        def push(i, j):
+            if i < len(nums1) and j < len(nums2):
+                heapq.heappush(heap, [nums1[i] + nums2[j], i, j])
+                
+        push(0, 0)
+        res = []
+        while heap and k:
+            _, i, j = heapq.heappop(heap)
+            res.append([nums1[i], nums2[j]])
+            push(i, j + 1)
+            
+            if j == 0:
+                push(i + 1, 0)
+                
+            k -= 1
+                
+        return res
+```
+
+#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+```python
+# O(log(mn)) time and O(1) space
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        n = len(matrix[0])
+        start, end = 0, n * len(matrix) - 1
+        
+        while start <= end:
+            mid_idx = start + (end - start) // 2
+            mid_element = matrix[mid_idx // n][mid_idx % n]
+            
+            if target == mid_element:
+                return True
+            elif target < mid_element:
+                end = mid_idx - 1
+            else:
+                start = mid_idx + 1
+                
+        return False
+```
+
+#### [766. Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/)
+```python
+# brute force: O(MN) time and O(M + N) space
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        # on the same diagonal, r1 - c1 == r2 - c2.
+        groups = {}
+        for r, row in enumerate(matrix):
+            for c, val in enumerate(row):
+                if r - c not in groups:
+                    groups[r - c] = val
+                elif groups[r - c] != val:
+                    return False
+        return True
+    
+# space optimization
+class Solution(object):
+    def isToeplitzMatrix(self, matrix):
+        return all(r == 0 or c == 0 or 
+                   matrix[r - 1][c - 1] == val
+                   for r, row in enumerate(matrix)
+                   for c, val in enumerate(row))
+```
+
 
 #### Graph
 #### [785. Is Graph Bipartite](https://leetcode.com/problems/is-graph-bipartite/description/)
