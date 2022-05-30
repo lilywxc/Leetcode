@@ -41,5 +41,9 @@ Interviewers expect you to start scanning for mistakes and adding test cases to 
 
 
 Side notes: 
-- before you are given the question, give interviewer a 2 minute self-introduction
-- after solving the questions, ask good final questions ([examples](https://www.techinterviewhandbook.org/final-questions/))that are tailored to the company and thanks the interviewer
+- before you are given the question, give interviewer a 2 minute self-introduction.
+- after solving the questions, ask good final questions ([examples](https://www.techinterviewhandbook.org/final-questions/)) that are tailored to the company and thanks the interviewer.
+- send a thank you email later
+
+
+[Resume](https://www.techinterviewhandbook.org/resume/)
