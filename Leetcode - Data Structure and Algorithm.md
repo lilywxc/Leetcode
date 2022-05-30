@@ -2,154 +2,18 @@
 * [LinkedList](#LinkedList)
 * [Tree](#Tree)
 * [Stack and Queue](#Stack-and-Queue) 
-    * [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
-    * [225. Implement Stack using Queues](#225-Implement-Stack-using-Queues)
-    * [155. Min Stack](#155-Min-Stack)
-    * [20. Valid Parentheses](#20-Valid-Parentheses)
-    * [496. Next Greater Element I](#496-Next-Greater-Element-I)
-    * [739. Daily Temperatures](#739-Daily-Temperatures)
-    * [503. Next Greater Element II](#503-Next-Greater-Element-II)
 * [HashMap](#HashMap)
-    * [1. Two Sum](#1-Two-Sum)
-    * [217. Contains Duplicate](#217-Contains-Duplicate)
-    * [594. Longest Harmonious Subsequence](#594-Longest-Harmonious-Subsequence)
-    * [128. Longest Consecutive Sequence](#128-Longest-Consecutive-Sequence)
 * [String](#String)
-    * [242. Valid Anagram](#242-Valid-Anagram)
-    * [409. Longest Palindrome](#409-Longest-Palindrome)
-    * [205. Isomorphic Strings](#205-Isomorphic-Strings)
-    * [647. Palindromic Substrings](#647-Palindromic-Substrings)
-    * [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
-    * [9. Palindrome Number](#9-Palindrome-Number)
-    * [696. Count Binary Substrings](#696-Count-Binary-Substrings)
 * [Array](#Array)
-    * [283. Move Zeroes](#283-Move-Zeroes)
-    * [645. Set Mismatch](#645-Set-Mismatch)
-    * [41. First Missing Positive](#41-First-Missing-Positive)
-    * [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
-    * [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
-    * [697. Degree of an Array](#697-Degree-of-an-Array)
-    * [565. Array Nesting](#565-Array-Nesting)
-    * [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
-    * [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
 * [Matrix](#Matrix)
-    * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
-    * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
-    * [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
-    * [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
-    * [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
-    * [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
 * [Graph](#Graph)
-    * [785. Is Graph Bipartite](#785-Is-Graph-Bipartite)
-    * [207. Course Schedule](#207-Course-Schedule)
-    * [210. Course Schedule II](#210-Course-Schedule-II)
-    * [684. Redundant Connection](#684-Redundant-Connection)
-    * [1319. Number of Operations to Make Network Connected](#1319-Number-of-Operations-to-Make-Network-Connected)
-    * [721. Accounts Merge](#721-Accounts-Merge)
 * [Two Pointers](#Two-Pointers)
-    * [167. Two Sum II](#167-Two-Sum-II)
-    * [633. Sum of Square Numbers](#633-Sum-of-Square-Numbers)
-    * [345. Reverse Vowels of a String](#345-Reverse-Vowels-of-a-String)
-    * [680. Valid Palindrome II](#680-Valid-Palindrome-II)
-    * [88. Merge Sorted Array](#88-Merge-Sorted-Array)
-    * [141. Linked List Cycle](#141-Linked-List-Cycle)
-    * [524. Longest Word in Dictionary through Deleting](#524-Longest-Word-in-Dictionary-through-Deleting)
 * [Sorting](#Sorting)
-    * [215. Kth Largest Element in an Array](#215-Kth-Largest-Element-in-an-Array)
-    * [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
-    * [451. Sort Characters By Frequency](#451-Sort-Characters-By-Frequency)
-    * [75. Sort Colors](#75-Sort-Colors)
 * [Greedy](#Greedy)
-    * [455. Assign Cookies](#455-Assign-Cookies)
-    * [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
-    * [452. Minimum Number of Arrows to Burst Balloons](#452-Minimum-Number-of-Arrows-to-Burst-Balloons)
-    * [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
-    * [121. Best Time to Buy and Sell Stock](#121-Best-Time-to-Buy-and-Sell-Stock)
-    * [122. Best Time to Buy and Sell Stock II](#122-Best-Time-to-Buy-and-Sell-Stock-II)
-    * [392. Is Subsequence](#392-Is-Subsequence)
-    * [665. Non decreasing Array](#665-Non-decreasing-Array)
-    * [53. Maximum Subarray](#53-Maximum-Subarray)
-    * [763. Partition Labels](#763-Partition-Labels)
 * [Divide and Conquer](#Divide-and-Conquer)
-    * [241. Different Ways to Add Parentheses](#241-Different-Ways-to-Add-Parentheses)
-    * [96. Unique Binary Search Trees]([#96-Unique-Binary-Search-Trees)
-    * [95. Unique Binary Search Trees II](#95-Unique-Binary-Search-Trees-II)
 * [Binary Search](#Binary-Search)
-    * [69. Sqrt x](#69-Sqrt-x)
-    * [744. Find Smallest Letter Greater Than Target](#744-Find-Smallest-Letter-Greater-Than-Target)
-    * [540. Single Element in a Sorted Array](#540-Single-Element-in-a-Sorted-Array)
-    * [278. First Bad Version](#278-First-Bad-Version)
-    * [153. Find Minimum in Rotated Sorted Array](#153-Find-Minimum-in-Rotated-Sorted-Array)
-    * [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
 * [Search](#Search)
-	* [BFS](#BFS)
-		* [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
-		* [279. Perfect Squares](#279-Perfect-Squares) 
-		* [127. Word Ladder](#127-Word-Ladder)
-	* [DFS](#DFS)
-		* [695. Max Area of Island](#695-Max-Area-of-Island)
-		* [200. Number of Islands](#200-Number-of-Islands)
-		* [547. Number of Provinces](#547-Number-of-Provinces)
-		* [130. Surrounded Regions](#130-Surrounded-Regions)
-		* [417. Pacific Atlantic Water Flow](#417-Pacific-Atlantic-Water-Flow)
-	* [Backtracking](#Backtracking)
-		* [17. Letter Combinations of a Phone Number](#17-Letter-Combinations-of-a-Phone-Number)
-		* [78. Subsets](#78-Subsets)
-		* [90. Subsets II](#90-Subsets-II)
-		* [77. Combinations](#77-Combinations)
-		* [39. Combination Sum](#39-Combination-Sum)
-		* [40. Combination Sum II](#40-Combination-Sum-II)
-		* [216. Combination Sum III](#216-Combination-Sum-III)
-		* [46. Permutations](#46-Permutations)
-		* [47. Permutations II](#47-Permutations-II)
-		* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
-		* [267. Palindrome Permutation II](#267-Palindrome-Permutation-II)
-		* [93. Restore IP Addresses](#93-Restore-IP-Addresses)
-		* [79. Word Search](#79-Word-Search)
-		* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
-		* [37. Sudoku Solver](#37-Sudoku-Solver)
-		* [51. N Queens](#51-N-Queens)
 * [Dynamic Programming](#Dynamic-Programming)
-	* [Fibonacci](#Fibonacci)
-		* [70. Climbing Stairs](#70-Climbing-Stairs)
-		* [198. House Robber](#198-House-Robber)
-		* [213. House Robber II](#213-House-Robber-II)
-		* [Mail Misalignment](#Mail-Misalignment)
-		* [Cow](#Cow)
-	* [Matrix Path](#Matrix-Path) 
-		* [64. Minimum Path Sum](#64-Minimum-Path-Sum)
-		* [62. Unique Paths](#62-Unique-Paths)
-	* [Range](#Range)
-		* [303. Range Sum Query](#303-Range-Sum-Query)
-		* [413. Arithmetic Slices](#413-Arithmetic-Slices)
-	* [Breakdown Number](#Breakdown-Number)
-		* [343. Integer Break](#343-Integer-Break)
-		* [279. Perfect Squares dup](#279-Perfect-Squares-dup) 
-		* [91. Decode Ways](#91-Decode-Ways)
-	* [Subsequence](#Subsequence)
-		* [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
-		* [646. Maximum Length of Pair Chain](#646-Maximum-Length-of-Pair-Chain)
-		* [376. Wiggle Subsequence](#376-Wiggle-Subsequence)
-		* [1143. Longest Common Subsequence](#1143-Longest-Common-Subsequence)
-	* [01 Bag](#01-Bag)
-		* [416. Partition Equal Subset Sum](#416-Partition-Equal-Subset-Sum)
-		* [494. Target Sum](#494-Target-Sum)
-		* [474. Ones and Zeroes](#474-Ones-and-Zeroes)
-		* [322. Coin Change](#322-Coin-Change)
-		* [518. Coin Change 2](#518-Coin-Change-2)
-		* [377. Combination Sum IV](#377-Combination-Sum-IV)
-		* [139. Word Break](#139-Word-Break)
-	* [Stock Trade](#Stock-Trade)
-		* [309. Best Time to Buy and Sell Stock with Cooldown](#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown)
-		* [714. Best Time to Buy and Sell Stock with Transaction Fee](#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee)
-		* [123. Best Time to Buy and Sell Stock III](#123-Best-Time-to-Buy-and-Sell-Stock-III)
-		* [188. Best Time to Buy and Sell Stock IV](#188-Best-Time-to-Buy-and-Sell-Stock-IV)
-	* [String Operations](#String-Operations)
-		* [583. Delete Operation for Two Strings](#583-Delete-Operation-for-Two-Strings)
-		* [72. Edit Distance](#72-Edit-Distance)
-		* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
-		* [204. Count Primes](#204-Count-Primes)
-		* [260. Single Number III](#260-Single-Number-III)
 * [Math](#Math)
 	* [204. Count Primes](#204-Count-Primes)
 	* [Greatest Common Divisor](#Greatest-Common-Divisor)
@@ -1990,7 +1854,15 @@ class MapSum:
 # mapSum.sum("ap")           // return 7 (apple + app = 5 + 2 = 7)
 ```
 
-#### Stack and Queue
+## Stack and Queue
+* [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
+* [225. Implement Stack using Queues](#225-Implement-Stack-using-Queues)
+* [155. Min Stack](#155-Min-Stack)
+* [20. Valid Parentheses](#20-Valid-Parentheses)
+* [496. Next Greater Element I](#496-Next-Greater-Element-I)
+* [739. Daily Temperatures](#739-Daily-Temperatures)
+* [503. Next Greater Element II](#503-Next-Greater-Element-II)
+
 
 #### [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
 ```python
@@ -2189,7 +2061,13 @@ class Solution:
         return res
 ```
 
-#### HashMap
+
+## HashMap
+* [1. Two Sum](#1-Two-Sum)
+* [217. Contains Duplicate](#217-Contains-Duplicate)
+* [594. Longest Harmonious Subsequence](#594-Longest-Harmonious-Subsequence)
+* [128. Longest Consecutive Sequence](#128-Longest-Consecutive-Sequence)
+
 
 #### [1. Two Sum](https://leetcode.com/problems/two-sum/description/)
 ```python
@@ -2254,7 +2132,16 @@ class Solution:
         return length
 ```
 
-#### String
+
+## String
+* [242. Valid Anagram](#242-Valid-Anagram)
+* [409. Longest Palindrome](#409-Longest-Palindrome)
+* [205. Isomorphic Strings](#205-Isomorphic-Strings)
+* [647. Palindromic Substrings](#647-Palindromic-Substrings)
+* [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
+* [9. Palindrome Number](#9-Palindrome-Number)
+* [696. Count Binary Substrings](#696-Count-Binary-Substrings)
+
 
 #### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 ```python
@@ -2446,7 +2333,17 @@ class Solution(object):
         return ans + min(prev, cur)
 ```
 
-#### Array 
+## Array 
+* [283. Move Zeroes](#283-Move-Zeroes)
+* [645. Set Mismatch](#645-Set-Mismatch)
+* [41. First Missing Positive](#41-First-Missing-Positive)
+* [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
+* [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
+* [697. Degree of an Array](#697-Degree-of-an-Array)
+* [565. Array Nesting](#565-Array-Nesting)
+* [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
+* [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
+    
 
 Things to look out during an interview:
 1. Clarify if there are duplicate values in the array. Would the presence of duplicate values affect the answer? Does it make the question simpler or harder?
@@ -2783,8 +2680,15 @@ class Solution:
 ```
 
 
-#### Matrix
- 
+## Matrix
+* [566. Reshape the Matrix](#566-Reshape-the-Matrix)
+* [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
+* [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+* [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
+* [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
+* [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
+    
+    
 #### [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/)
 ```python
 class Solution:
@@ -3014,7 +2918,15 @@ class Solution(object):
 ```
 
 
-#### Graph
+## Graph
+* [785. Is Graph Bipartite](#785-Is-Graph-Bipartite)
+* [207. Course Schedule](#207-Course-Schedule)
+* [210. Course Schedule II](#210-Course-Schedule-II)
+* [684. Redundant Connection](#684-Redundant-Connection)
+* [1319. Number of Operations to Make Network Connected](#1319-Number-of-Operations-to-Make-Network-Connected)
+* [721. Accounts Merge](#721-Accounts-Merge)
+
+
 #### [785. Is Graph Bipartite](https://leetcode.com/problems/is-graph-bipartite/description/)
 ```python
 class Solution:
@@ -3317,9 +3229,16 @@ class Solution:
 ```
 
 
+## Two Pointers
+* [167. Two Sum II](#167-Two-Sum-II)
+* [633. Sum of Square Numbers](#633-Sum-of-Square-Numbers)
+* [345. Reverse Vowels of a String](#345-Reverse-Vowels-of-a-String)
+* [680. Valid Palindrome II](#680-Valid-Palindrome-II)
+* [88. Merge Sorted Array](#88-Merge-Sorted-Array)
+* [141. Linked List Cycle](#141-Linked-List-Cycle)
+* [524. Longest Word in Dictionary through Deleting](#524-Longest-Word-in-Dictionary-through-Deleting)
 
 
-### Two Pointers
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 ```python
 # Solution 1: two pointers - O(n) time and O(1) space
@@ -3514,7 +3433,12 @@ class Solution:
         return bestMatch
 ```
 
-### Sorting
+## Sorting
+* [215. Kth Largest Element in an Array](#215-Kth-Largest-Element-in-an-Array)
+* [347. Top K Frequent Elements](#347-Top-K-Frequent-Elements)
+* [451. Sort Characters By Frequency](#451-Sort-Characters-By-Frequency)
+* [75. Sort Colors](#75-Sort-Colors)
+
 
 #### [215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
 top K elements method could be solved using heap or quick select
@@ -3686,7 +3610,20 @@ class Solution:
                 curr += 1
 ```
 
-### Greedy
+
+## Greedy
+* [455. Assign Cookies](#455-Assign-Cookies)
+* [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
+* [452. Minimum Number of Arrows to Burst Balloons](#452-Minimum-Number-of-Arrows-to-Burst-Balloons)
+* [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
+* [121. Best Time to Buy and Sell Stock](#121-Best-Time-to-Buy-and-Sell-Stock)
+* [122. Best Time to Buy and Sell Stock II](#122-Best-Time-to-Buy-and-Sell-Stock-II)
+* [392. Is Subsequence](#392-Is-Subsequence)
+* [665. Non decreasing Array](#665-Non-decreasing-Array)
+* [53. Maximum Subarray](#53-Maximum-Subarray)
+* [763. Partition Labels](#763-Partition-Labels)
+
+
 #### [455. Assign Cookies](https://leetcode.com/problems/assign-cookies/)
 ```python
 class Solution:
@@ -3878,7 +3815,14 @@ class Solution:
                 
         return res
 ```
-### Divide and Conquer
+
+
+## Divide and Conquer
+* [241. Different Ways to Add Parentheses](#241-Different-Ways-to-Add-Parentheses)
+* [96. Unique Binary Search Trees]([#96-Unique-Binary-Search-Trees)
+* [95. Unique Binary Search Trees II](#95-Unique-Binary-Search-Trees-II)
+
+
 #### [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
 - The problem becomes easier when we think about these expressions as expression trees.
 - We can traverse over the experssion and whenever we encounter an operator, we recursively divide the expression into left and right part and evaluate them seperately until we reach a situation where our expression is purely a number and in this case we can simply return that number.
@@ -3990,7 +3934,16 @@ class Solution:
         return generateTrees(1, n) if n else []
 ```
 
-### Binary Search
+
+## Binary Search
+* [69. Sqrt x](#69-Sqrt-x)
+* [744. Find Smallest Letter Greater Than Target](#744-Find-Smallest-Letter-Greater-Than-Target)
+* [540. Single Element in a Sorted Array](#540-Single-Element-in-a-Sorted-Array)
+* [278. First Bad Version](#278-First-Bad-Version)
+* [153. Find Minimum in Rotated Sorted Array](#153-Find-Minimum-in-Rotated-Sorted-Array)
+* [34. Find First and Last Position of Element in Sorted Array](#34-Find-First-and-Last-Position-of-Element-in-Sorted-Array)
+
+
 ordinary/original binary search
 ```python
 def binarySearch(nums, key):
@@ -4166,9 +4119,37 @@ class Solution:
         return l
 ```
 
-### Search
+## Search
+* [BFS](#BFS)
+	* [1091. Shortest Path in Binary Matrix](#1091-Shortest-Path-in-Binary-Matrix)
+	* [279. Perfect Squares](#279-Perfect-Squares) 
+	* [127. Word Ladder](#127-Word-Ladder)
+* [DFS](#DFS)
+	* [695. Max Area of Island](#695-Max-Area-of-Island)
+	* [200. Number of Islands](#200-Number-of-Islands)
+	* [547. Number of Provinces](#547-Number-of-Provinces)
+	* [130. Surrounded Regions](#130-Surrounded-Regions)
+	* [417. Pacific Atlantic Water Flow](#417-Pacific-Atlantic-Water-Flow)
+* [Backtracking](#Backtracking)
+	* [17. Letter Combinations of a Phone Number](#17-Letter-Combinations-of-a-Phone-Number)
+	* [78. Subsets](#78-Subsets)
+	* [90. Subsets II](#90-Subsets-II)
+	* [77. Combinations](#77-Combinations)
+	* [39. Combination Sum](#39-Combination-Sum)
+	* [40. Combination Sum II](#40-Combination-Sum-II)
+	* [216. Combination Sum III](#216-Combination-Sum-III)
+	* [46. Permutations](#46-Permutations)
+	* [47. Permutations II](#47-Permutations-II)
+	* [131. Palindrome Partitioning](#131-Palindrome-Partitioning)
+	* [267. Palindrome Permutation II](#267-Palindrome-Permutation-II)
+	* [93. Restore IP Addresses](#93-Restore-IP-Addresses)
+	* [79. Word Search](#79-Word-Search)
+	* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
+	* [37. Sudoku Solver](#37-Sudoku-Solver)
+	* [51. N Queens](#51-N-Queens)
 
-#### BFS
+
+### BFS
 
 #### [1091. Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/)
 ```python
@@ -4939,7 +4920,49 @@ class Solution:
         return ans
 ```
 
-### Dynamic Programming
+## Dynamic Programming
+* [Fibonacci](#Fibonacci)
+	* [70. Climbing Stairs](#70-Climbing-Stairs)
+	* [198. House Robber](#198-House-Robber)
+	* [213. House Robber II](#213-House-Robber-II)
+	* [Mail Misalignment](#Mail-Misalignment)
+	* [Cow](#Cow)
+* [Matrix Path](#Matrix-Path) 
+	* [64. Minimum Path Sum](#64-Minimum-Path-Sum)
+	* [62. Unique Paths](#62-Unique-Paths)
+* [Range](#Range)
+	* [303. Range Sum Query](#303-Range-Sum-Query)
+	* [413. Arithmetic Slices](#413-Arithmetic-Slices)
+* [Breakdown Number](#Breakdown-Number)
+	* [343. Integer Break](#343-Integer-Break)
+	* [279. Perfect Squares dup](#279-Perfect-Squares-dup) 
+	* [91. Decode Ways](#91-Decode-Ways)
+* [Subsequence](#Subsequence)
+	* [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
+	* [646. Maximum Length of Pair Chain](#646-Maximum-Length-of-Pair-Chain)
+	* [376. Wiggle Subsequence](#376-Wiggle-Subsequence)
+	* [1143. Longest Common Subsequence](#1143-Longest-Common-Subsequence)
+* [01 Bag](#01-Bag)
+	* [416. Partition Equal Subset Sum](#416-Partition-Equal-Subset-Sum)
+	* [494. Target Sum](#494-Target-Sum)
+	* [474. Ones and Zeroes](#474-Ones-and-Zeroes)
+	* [322. Coin Change](#322-Coin-Change)
+	* [518. Coin Change 2](#518-Coin-Change-2)
+	* [377. Combination Sum IV](#377-Combination-Sum-IV)
+	* [139. Word Break](#139-Word-Break)
+* [Stock Trade](#Stock-Trade)
+	* [309. Best Time to Buy and Sell Stock with Cooldown](#309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown)
+	* [714. Best Time to Buy and Sell Stock with Transaction Fee](#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee)
+	* [123. Best Time to Buy and Sell Stock III](#123-Best-Time-to-Buy-and-Sell-Stock-III)
+	* [188. Best Time to Buy and Sell Stock IV](#188-Best-Time-to-Buy-and-Sell-Stock-IV)
+* [String Operations](#String-Operations)
+	* [583. Delete Operation for Two Strings](#583-Delete-Operation-for-Two-Strings)
+	* [72. Edit Distance](#72-Edit-Distance)
+	* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
+	* [204. Count Primes](#204-Count-Primes)
+	* [260. Single Number III](#260-Single-Number-III)
+
+
 Dynamic Programming is recursive approach with memorization
 
 Example: Bowling
@@ -4965,8 +4988,7 @@ Good subproblem:
 - suffixes x[i:] O(n)
 - substrings x[i:j] O(n^2)
 
-#### Fibonacci
-
+### Fibonacci
 #### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)
 ```python
 # Solution 1: bottom up DP (constant space)
@@ -5125,7 +5147,7 @@ def cow(int n):
     return dp[n]
 ```
 
-#### Matrix Path
+### Matrix Path
 
 #### [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
 ```python
@@ -5222,7 +5244,7 @@ class Solution:
         return ans
 ```
 
-#### Breakdown Number
+### Breakdown Number
 
 #### [343. Integer Break](https://leetcode.com/problems/integer-break/description/)
 write i as: i = j + S where S = i - j corresponds to either one number or a sum of two or more numbers
@@ -5334,7 +5356,7 @@ class Solution:
         return dp[len(s)]
 ```
 
-#### Subsequence
+### Subsequence
 
 #### [300. Longest Increasing Subsequence](#300-Longest-Increasing-Subsequence)
 let dp[i] represents the length of the longest increasing subsequence that **ends with nums[i]**. Then, dp[i] = max(dp[j] + 1) for all j where nums[j] < nums[i] and j < i.
@@ -5532,7 +5554,7 @@ class Solution:
         return dp_grid[0][0]
 ```
 
-#### 01-Bag
+### 01-Bag
 
 有一个容量为 N 的背包，要用这个背包装下物品的价值最大，这些物品有两个属性：体积 w 和价值 v。
 
@@ -5850,7 +5872,7 @@ class Solution:
         return dp[n]
 ```
 
-#### Stock Trade
+### Stock Trade
 
 #### [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/309.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown.png" width="500">
@@ -6020,7 +6042,7 @@ class Solution:
         return res
 ```
 
-#### String Operations
+### String Operations
 
 #### [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/)
 ```python
