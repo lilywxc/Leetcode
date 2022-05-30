@@ -1,16 +1,5 @@
-# Leetcode - Data Structure
+# Leetcode - Data Structure and Algorithm
 * [LinkedList](#LinkedList)
-    * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
-    * [206. Reverse Linked List](#206-Reverse-Linked-List)
-    * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
-    * [83. Remove Duplicates from Sorted List](#83-Remove-Duplsrcicates-from-Sorted-List)
-    * [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
-    * [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
-    * [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
-    * [234. Palindrome Linked List](#234-Palindrome-Linked-List)
-    * [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
-    * [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
-    * [142. Linked List Cycle II](#142-Linked-List-Cycle-II)
 * [Tree](#Tree)
     * [BFS](#BFS)
        * [637. Average of Levels in Binary Tree](#637-Average-of-Levels-in-Binary-Tree)
@@ -230,6 +219,19 @@
 	* [338. Counting Bits](#338-Counting-Bits)
 
 ### LinkedList
+* [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
+* [206. Reverse Linked List](#206-Reverse-Linked-List)
+* [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
+* [83. Remove Duplicates from Sorted List](#83-Remove-Duplsrcicates-from-Sorted-List)
+* [19. Remove Nth Node From End of List](#19-Remove-Nth-Node-From-End-of-List)
+* [24. Swap Nodes in Pairs](#24-Swap-Nodes-in-Pairs)
+* [445. Add Two Numbers II](#445-Add-Two-Numbers-II)
+* [234. Palindrome Linked List](#234-Palindrome-Linked-List)
+* [725. Split Linked List in Parts](#725-Split-Linked-List-in-Parts)
+* [328. Odd Even Linked List](#328-Odd-Even-Linked-List)
+* [142. Linked List Cycle II](#142-Linked-List-Cycle-II)
+
+
 #### [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
 Imagine that we have two linked lists, A and B, and we know that their lengths are N and M respectively, where M = 8 > N = 5. <br />
 Because the "tails" must have the same length, if there is an intersection, then the intersection node will be one of these 5 possibilities. <br />
