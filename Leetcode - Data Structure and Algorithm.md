@@ -1,45 +1,6 @@
 # Leetcode - Data Structure and Algorithm
 * [LinkedList](#LinkedList)
 * [Tree](#Tree)
-    * [BFS](#BFS)
-       * [637. Average of Levels in Binary Tree](#637-Average-of-Levels-in-Binary-Tree)
-       * [513. Find Bottom Left Tree Value](#513-Find-Bottom-Left-Tree-Value)
-    * [DFS](#DFS)
-       * [144. Binary Tree Preorder Traversal](#144-Binary-Tree-Preorder-Traversal)
-       * [145. Binary Tree Postorder Traversal](#145-Binary-Tree-Postorder-Traversal)
-       * [94. Binary Tree Inorder Traversal](#94-Binary-Tree-Inorder-Traversal)
-    * [Recursion](#Recursion)
-       * [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
-       * [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
-       * [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
-       * [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
-       * [687. Longest Univalue Path](#687-Longest-Univalue-Path)
-       * [226. Invert Binary Tree](#226-Invert-Binary-Tree)
-       * [617. Merge Two Binary Trees](#617-Merge-Two-Binary-Trees)
-       * [112. Path Sum](#112-Path-Sum)
-       * [437. Path Sum III](#437-Path-Sum-III)
-       * [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
-       * [101. Symmetric Tree](#101-Symmetric-Tree)
-       * [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
-       * [337. House Robber III](#337-House-Robber-III)
-       * [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
-    * [BST](#BST)
-       * [669. Trim a Binary Search Tree](#669-Trim-a-Binary-Search-Tree)
-       * [230. Kth Smallest Element in a BST](#230-Kth-Smallest-Element-in-a-BST)
-       * [701. Insert into a Binary Search Tree](#701-Insert-into-a-Binary-Search-Tree)
-       * [450. Delete Node in a BST](#450-Delete-Node-in-a-BST)
-       * [1382. Balance a Binary Search Tree](#1382-Balance-a-Binary-Search-Tree)
-       * [538. Convert BST to Greater Tree](#538-Convert-BST-to-Greater-Tree)
-       * [235. Lowest Common Ancestor of a Binary Search Tree](#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree)
-       * [236. Lowest Common Ancestor of a Binary Tree](#236-Lowest-Common-Ancestor-of-a-Binary-Tree)
-       * [108. Convert Sorted Array to Binary Search Tree](#108-Convert-Sorted-Array-to-Binary-Search-Tree)
-       * [109. Convert Sorted List to Binary Search Tree](#109-Convert-Sorted-List-to-Binary-Search-Tree)
-       * [653. Two Sum IV Input is a BST](#653-Two-Sum-IV-Input-is-a-BST)
-       * [530. Minimum Absolute Difference in BST](#530-Minimum-Absolute-Difference-in-BST)
-       * [501. Find Mode in Binary Search Tree](#501-Find-Mode-in-Binary-Search-Tree)
-    * [Trie](#Trie)
-       * [208. Implement Trie](#208-Implement-Trie)
-       * [677. Map Sum Pairs](#677-Map-Sum-Pairs)
 * [Stack and Queue](#Stack-and-Queue) 
     * [232. Implement Queue using Stacks](#232-Implement-Queue-using-Stacks)
     * [225. Implement Stack using Queues](#225-Implement-Stack-using-Queues)
@@ -218,7 +179,7 @@
 	* [318. Maximum Product of Word Lengths](#318-Maximum-Product-of-Word-Lengths)
 	* [338. Counting Bits](#338-Counting-Bits)
 
-### LinkedList
+## LinkedList
 * [160. Intersection of Two Linked Lists](#160-Intersection-of-Two-Linked-Lists)
 * [206. Reverse Linked List](#206-Reverse-Linked-List)
 * [21. Merge Two Sorted Lists](#21-Merge-Two-Sorted-Lists)
@@ -581,9 +542,48 @@ class Solution:
 If the condition of the "while" loop becomes False, it will enter the "else" statement <br />
 But if the "break" condition is met first, "else" statment won't be executed
 
-#### Tree
+## Tree
+* [BFS](#BFS)
+	* [637. Average of Levels in Binary Tree](#637-Average-of-Levels-in-Binary-Tree)
+	* [513. Find Bottom Left Tree Value](#513-Find-Bottom-Left-Tree-Value)
+	* [DFS](#DFS)
+	* [144. Binary Tree Preorder Traversal](#144-Binary-Tree-Preorder-Traversal)
+	* [145. Binary Tree Postorder Traversal](#145-Binary-Tree-Postorder-Traversal)
+	* [94. Binary Tree Inorder Traversal](#94-Binary-Tree-Inorder-Traversal)
+* [Recursion](#Recursion)
+	* [104. Maximum Depth of Binary Tree](#104-Maximum-Depth-of-Binary-Tree)
+	* [111. Minimum Depth of Binary Tree](#111-Minimum-Depth-of-Binary-Tree)
+	* [110. Balanced Binary Tree](#110-Balanced-Binary-Tree)
+	* [543. Diameter of Binary Tree](#543-Diameter-of-Binary-Tree)
+	* [687. Longest Univalue Path](#687-Longest-Univalue-Path)
+	* [226. Invert Binary Tree](#226-Invert-Binary-Tree)
+	* [617. Merge Two Binary Trees](#617-Merge-Two-Binary-Trees)
+	* [112. Path Sum](#112-Path-Sum)
+	* [437. Path Sum III](#437-Path-Sum-III)
+	* [572. Subtree of Another Tree](#572-Subtree-of-Another-Tree)
+	* [101. Symmetric Tree](#101-Symmetric-Tree)
+	* [404. Sum of Left Leaves](#404-Sum-of-Left-Leaves)
+	* [337. House Robber III](#337-House-Robber-III)
+	* [671. Second Minimum Node In a Binary Tree](#671-Second-Minimum-Node-In-a-Binary-Tree)
+* [BST](#BST)
+	* [669. Trim a Binary Search Tree](#669-Trim-a-Binary-Search-Tree)
+	* [230. Kth Smallest Element in a BST](#230-Kth-Smallest-Element-in-a-BST)
+	* [701. Insert into a Binary Search Tree](#701-Insert-into-a-Binary-Search-Tree)
+	* [450. Delete Node in a BST](#450-Delete-Node-in-a-BST)
+	* [1382. Balance a Binary Search Tree](#1382-Balance-a-Binary-Search-Tree)
+	* [538. Convert BST to Greater Tree](#538-Convert-BST-to-Greater-Tree)
+	* [235. Lowest Common Ancestor of a Binary Search Tree](#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree)
+	* [236. Lowest Common Ancestor of a Binary Tree](#236-Lowest-Common-Ancestor-of-a-Binary-Tree)
+	* [108. Convert Sorted Array to Binary Search Tree](#108-Convert-Sorted-Array-to-Binary-Search-Tree)
+	* [109. Convert Sorted List to Binary Search Tree](#109-Convert-Sorted-List-to-Binary-Search-Tree)
+	* [653. Two Sum IV Input is a BST](#653-Two-Sum-IV-Input-is-a-BST)
+	* [530. Minimum Absolute Difference in BST](#530-Minimum-Absolute-Difference-in-BST)
+	* [501. Find Mode in Binary Search Tree](#501-Find-Mode-in-Binary-Search-Tree)
+* [Trie](#Trie)
+	* [208. Implement Trie](#208-Implement-Trie)
+	* [677. Map Sum Pairs](#677-Map-Sum-Pairs)
 
-#### BFS
+### BFS
 #### [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
 ```python
 # class TreeNode:
@@ -655,9 +655,9 @@ class Solution:
         return node.val
 ```
 
-#### DFS
+### DFS
 
- <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Traversal.png" width="500">
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Traversal.png" width="500">
 
 #### [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
 pre-order: root -> left -> right
@@ -864,7 +864,7 @@ class Solution:
         return output
 ```
 
-#### Recursion
+### Recursion
 #### [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 ```python
 # recursive DFS - O(n) time and O(logN) ~ O(N) space
@@ -1401,7 +1401,7 @@ class Solution:
         return self.ans if self.ans < float('inf') else -1
 ```
 
-#### BST
+### BST
 left <= root <= right
 
 #### [669. Trim a Binary Search Tree](https://leetcode.com/problems/trim-a-binary-search-tree/)
@@ -1906,7 +1906,7 @@ class Solution:
         return self.maxCntNums
 ```
 
-#### Trie
+### Trie
 
 <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/Trie.jfif" width="350">
 
