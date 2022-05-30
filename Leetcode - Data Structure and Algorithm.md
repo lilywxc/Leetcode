@@ -4934,8 +4934,6 @@ class Solution:
 	* [583. Delete Operation for Two Strings](#583-Delete-Operation-for-Two-Strings)
 	* [72. Edit Distance](#72-Edit-Distance)
 	* [650. 2 Keys Keyboard](#650-2-Keys-Keyboard)
-	* [204. Count Primes](#204-Count-Primes)
-	* [260. Single Number III](#260-Single-Number-III)
 
 
 Dynamic Programming is recursive approach with memorization
