@@ -2314,6 +2314,41 @@ class Solution(object):
 
 #### Array 
 
+Things to look out during an interview:
+1. Clarify if there are duplicate values in the array. Would the presence of duplicate values affect the answer? Does it make the question simpler or harder?
+2. When using an index to iterate through array elements, be careful not to go out of bounds.
+3. Be mindful about slicing or concatenating arrays in your code. Typically, slicing and concatenating arrays would take O(n) time. Use start and end indices to demarcate a subarray/range where possible.
+
+Corner Caes:
+1. Empty sequence
+2. Sequence with 1 or 2 elements
+3. Sequence with repeated elements
+
+Techniques:
+1. Sliding window
+   - [3. Longest Substring Without Repeating Characters](#3-Longest-Substring-Without-Repeating-Characters)
+   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
+   - [76. Minimum Window Substring](#76-Minimum-Window-Substring)
+2. Two pointers
+   - [75. Sort Colors](#75-Sort-Colors)
+   - [647. Palindromic Substrings](#647-Palindromic-Substrings)
+   - [88. Merge Sorted Array](#88-Merge-Sorted-Array)
+4. Traversing from the right
+   - [739. Daily Temperatures](#739-Daily-Temperatures)
+   - [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
+   - [1944. Number of Visible People in a Queue](#1944-Number-of-Visible-People-in-a-Queue)
+6. Sorting the array
+   - [56. Merge Intervals](#56-Merge-Intervals)
+   - [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
+8. Precomputation
+*For questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful*
+   - [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
+   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
+   - [LeetCode questions tagged "prefix-sum"](https://leetcode.com/tag/prefix-sum/)
+9. Index has a hash key
+   - [739. Daily Temperatures](#739-Daily-Temperatures)
+   - [41. First Missing Positive](#41-First-Missing-Positive)
+
 #### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
 ```python
 class Solution:
