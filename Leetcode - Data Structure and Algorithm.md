@@ -1,11 +1,11 @@
 # Leetcode - Data Structure and Algorithm
+* [Array](#Array)
+* [Matrix](#Matrix)
 * [LinkedList](#LinkedList)
 * [Tree](#Tree)
 * [Stack and Queue](#Stack-and-Queue) 
 * [HashMap](#HashMap)
 * [String](#String)
-* [Array](#Array)
-* [Matrix](#Matrix)
 * [Graph](#Graph)
 * [Two Pointers](#Two-Pointers)
 * [Sorting](#Sorting)
@@ -16,6 +16,592 @@
 * [Dynamic Programming](#Dynamic-Programming)
 * [Math](#Math)
 * [Bit Computation](#Bit-Computation)
+
+
+## Array 
+* [283. Move Zeroes](#283-Move-Zeroes)
+* [645. Set Mismatch](#645-Set-Mismatch)
+* [41. First Missing Positive](#41-First-Missing-Positive)
+* [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
+* [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
+* [697. Degree of an Array](#697-Degree-of-an-Array)
+* [565. Array Nesting](#565-Array-Nesting)
+* [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
+* [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
+    
+
+Things to look out during an interview:
+1. Clarify if there are duplicate values in the array. Would the presence of duplicate values affect the answer? Does it make the question simpler or harder?
+2. When using an index to iterate through array elements, be careful not to go out of bounds.
+3. Be mindful about slicing or concatenating arrays in your code. Typically, slicing and concatenating arrays would take O(n) time. Use start and end indices to demarcate a subarray/range where possible.
+
+Corner Caes:
+1. Empty sequence
+2. Sequence with 1 or 2 elements
+3. Sequence with repeated elements
+
+Techniques:
+1. Sliding window
+   - [3. Longest Substring Without Repeating Characters](#3-Longest-Substring-Without-Repeating-Characters)
+   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
+   - [76. Minimum Window Substring](#76-Minimum-Window-Substring)
+2. Two pointers
+   - [75. Sort Colors](#75-Sort-Colors)
+   - [647. Palindromic Substrings](#647-Palindromic-Substrings)
+   - [88. Merge Sorted Array](#88-Merge-Sorted-Array)
+4. Traversing from the right
+   - [739. Daily Temperatures](#739-Daily-Temperatures)
+   - [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
+   - [1944. Number of Visible People in a Queue](#1944-Number-of-Visible-People-in-a-Queue)
+6. Sorting the array
+   - [56. Merge Intervals](#56-Merge-Intervals)
+   - [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
+8. Precomputation<br />
+*For questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful*
+   - [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
+   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
+   - [LeetCode questions tagged "prefix-sum"](https://leetcode.com/tag/prefix-sum/)
+9. Index has a hash key
+   - [739. Daily Temperatures](#739-Daily-Temperatures)
+   - [41. First Missing Positive](#41-First-Missing-Positive)
+
+
+#### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+```python
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if nums is None or len(nums) == 0:
+            return     
+
+        insertPos = 0
+        for num in nums:
+            if num != 0:
+                nums[insertPos] = num    
+                insertPos += 1
+
+        while insertPos < len(nums):
+            nums[insertPos] = 0
+            insertPos += 1
+```
+
+#### [645. Set Mismatch](https://leetcode.com/problems/set-mismatch/)
+```python
+# Solution 1: O(N) time and O(N) space
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        return [sum(nums) - sum(set(nums)), sum(range(1, len(nums)+1)) - sum(set(nums))]
+```
+```python
+# Solution 2: swap to right place (allow to modify the input)
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        for i in range(len(nums)):
+            while nums[i] != i + 1 and nums[nums[i] - 1] != nums[i]:
+                right_pos = nums[i] - 1
+                nums[i], nums[right_pos] = nums[right_pos], nums[i]
+                
+        for i in range(len(nums)):
+            if nums[i] != i + 1:
+                return [nums[i], i + 1]
+```
+```python
+# Solution 3: negative marking (NOT allow to modify the input)
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        for num in nums:
+            cur = abs(num)
+            if nums[cur - 1] < 0:
+                duplicate = cur
+            else:
+                nums[cur - 1] *= -1
+
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                missing = i + 1
+            else:
+                nums[i] = abs(nums[i]) # restore numbers
+
+        return [duplicate, missing]
+
+# Solution 4: sort and iterate
+```
+
+#### [41. First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
+```python
+# Solution 1: swap
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        for i in range(n):
+            while nums[i] > 0 and nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+                right_pos = nums[i] - 1
+                nums[i], nums[right_pos] = nums[right_pos], nums[i]
+                
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+            
+        return n + 1
+```
+```python
+# Solution 2: negative marking
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        for i in range(n):
+            if nums[i] <= 0: # remove useless elements
+                nums[i] = n + 1
+                
+        for num in nums:
+            curr = abs(num)
+            if curr <= n and nums[curr - 1] > 0:
+                nums[curr - 1] *= -1
+            
+        for i in range(n):
+            if nums[i] >= 0:
+                return i + 1
+            
+        return n + 1
+```
+
+#### [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+```python
+# Solution 1: negative marking - O(n) time and O(1) space
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        for num in nums:
+            cur = abs(num)
+            if nums[cur] < 0:
+                duplicate = cur
+                break
+            nums[cur] = - nums[cur]
+
+        # Restore numbers
+        for i in range(len(nums)):
+            nums[i] = abs(nums[i])
+
+        return duplicate
+```
+```python
+# Solution 2: binary search - O(nlog) time and O (1) sapce
+# e.g. count(1,2,3,4,5,6,7)= (1,2,3,6,7,8,8)
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        low = 1
+        high = len(nums) - 1
+        
+        while low <= high:
+            mid = low + (high - low) // 2
+
+            # Count numbers less than or equal to 'mid'
+            count = sum(num <= mid for num in nums)
+            if count > mid:
+                duplicate = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+                
+        return duplicate
+```
+We can rephrase the problem as finding the entrance point of a cyclic linkedlist, which is the same as [142. Linked List Cycle II](#142-Linked-List-Cycle-II)
+In **Phrase 1**, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
+```
+2 * (F + a) = F + nC + a, where n is some contant
+```
+Solving the eq. gives us
+```
+F + n = nC
+```
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/287.%20Find%20the%20Duplicate%20Number.png" width="500">
+   
+In **Phrase 2**, let slow pointer start at the head and fast start at the intersection point, and they move at the same speed. They will meet at the entrance of cycle. To prove:
+- The slow pointer started at zero, so its position after F steps is F.
+- The faster pointer started at the intersection point F + a = nC, so its position after F steps is nC + F, that is the same point as F.
+```python
+# Solution 3: Floyd's Tortoise and Hare (Cycle Detection)
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        # phrase 1
+        slow = fast = nums[0]
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        
+        # phrase 2
+        slow = nums[0]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        
+        return fast    
+```
+
+#### [667. Beautiful Arrangement II](https://leetcode.com/problems/beautiful-arrangement-ii/)
+use first k+1 elements to create list of k distinct diff, i.e. 1, 1+k, 2, k, 3, k-1, ...
+e.g. [1,4,2,3,5,6] -> [1,4,2,3,5,6]
+```python
+class Solution:
+    def constructArray(self, n: int, k: int) -> List[int]:
+        res = [0] * n
+        res[0] = 1
+        
+        i = 1
+        intv = k
+        while i <= k:
+            if i % 2 == 1:
+                res[i] = res[i - 1] + intv
+            else:
+                res[i] = res[i - 1] - intv
+            i += 1
+            intv -= 1
+        
+        for i in range(k + 1, n):
+            res[i] = i + 1
+            
+        return res
+```
+
+#### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/)
+```python
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        first = {} # index of first occurance of this number
+        count = defaultdict(int)
+        
+        min_length = degree = 0
+        for i, num in enumerate(nums):
+            first.setdefault(num, i) # assign i to nums only if nums does not exist
+            count[num] += 1
+            
+            if count[num] > degree:
+                degree = count[num]
+                min_length = i - first[num] + 1
+            elif count[num] == degree:
+                min_length = min(min_length, i - first[num] + 1)
+                
+        return min_length
+```
+
+#### [565. Array Nesting](https://leetcode.com/problems/array-nesting/)
+
+<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/565.%20Array%20Nesting.png" width="500">
+
+```python
+class Solution:
+    def arrayNesting(self, nums: List[int]) -> int:
+        longest = 0
+        for curr in nums:
+            if curr == -1: 
+                continue
+                
+            cnt = 0
+            while nums[curr] != -1:
+                cnt += 1
+                nums[curr], curr = -1, nums[curr] # be careful with order
+                
+            longest = max(longest, cnt)
+                
+        return longest
+```
+
+#### [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted/)
+find some splitting line so that numbers on the left are smaller than numbers on the right. The idea is very similar to quick sort.
+```python
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        chunks = 0
+        left_max = arr[0]
+        for idx in range(len(arr)):
+            left_max = max(left_max, arr[idx])
+            if left_max == idx:
+                chunks += 1
+        
+        return chunks
+```
+
+#### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/description/)
+```python
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        length = len(nums)
+        
+        L, R, answer = [0]*length, [0]*length, [0]*length
+        
+        L[0] = 1
+        for i in range(1, length):
+            L[i] = nums[i - 1] * L[i - 1]
+        
+        R[length - 1] = 1
+        for i in reversed(range(length - 1)):
+            R[i] = nums[i + 1] * R[i + 1]
+        
+        for i in range(length):
+            answer[i] = L[i] * R[i]
+        
+        return answer
+    
+# space optimziation
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        length = len(nums)
+        answer = [0]*length
+        answer[0] = 1
+        
+        for i in range(1, length):
+            answer[i] = nums[i - 1] * answer[i - 1]
+        
+        R = 1
+        for i in range(length-1, -1, -1):
+            answer[i] = answer[i] * R
+            R *= nums[i]
+        
+        return answer
+```
+
+
+## Matrix
+* [566. Reshape the Matrix](#566-Reshape-the-Matrix)
+* [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
+* [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+* [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
+* [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
+* [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
+    
+    
+#### [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/)
+```python
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        m, n = len(mat), len(mat[0])
+        
+        if r * c != m * n: 
+            return mat 
+        
+        count = 0
+        ans = [[0] * c for _ in range(r)]
+        for i in range(m):
+            for j in range(n):
+                row, col = divmod(count, c) 
+                ans[row][col] = mat[i][j]
+                count += 1
+                
+        return ans
+# numpy has a function reshape: np.reshape(nums, (r, c)).tolist()
+```
+
+#### [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
+
+ <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/240.%20Search%20a%202D%20Matrix%20II.png" width="300">
+
+we seek along the matrix's middle column for an index row such that matrix[row-1][mid] < target < matrix[row][mid] <br /> 
+The existing matrix can be partitioned into four submatrice around this index:
+- the top-left and bottom-right submatrice cannot contain target, so we ignore
+- the bottom-left and top-right submatrice are sorted two-dimensional matrices, so we can recursively apply this algorithm to them
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        
+        def search(left, right, up, down):
+            # base case: zero are
+            if left > right or up > down:
+                return False
+            
+            # base case: smaller than smallest or larger than largest matrix value
+            if target < matrix[up][left] or target > matrix[down][right]:
+                return False
+            
+            mid = left + (right - left) // 2
+            
+            row = up
+            while row <= down and matrix[row][mid] <= target:
+                if matrix[row][mid] == target:
+                    return True
+                row += 1
+                
+            return search(left, mid - 1, row, down) or search(mid + 1, right, up, row - 1)
+        
+        return search(0, len(matrix[0]) - 1, 0, len(matrix) - 1)
+```
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # start our "pointer" in the bottom-left
+        row = len(matrix) - 1
+        col = 0
+
+        while col < len(matrix[0]) and row >= 0:
+            if matrix[row][col] > target:
+                row -= 1
+            elif matrix[row][col] < target:
+                col += 1
+            else:
+                return True
+        
+        return False
+```
+
+#### [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
+This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
+```
+# # # # # ? .
+# # # ? . . .
+# ? . . . . .   "#" means pair already in the output
+# ? . . . . .   "?" means pair currently in the queue
+# ? . . . . .
+? . . . . . .
+. . . . . . .
+```
+```python
+# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time and O(X) space
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        heap = []
+        
+        def push(i, j):
+            if i < len(matrix) and j < len(matrix[0]):
+                heapq.heappush(heap, [matrix[i][j], i, j])
+
+        push(0, 0)
+        while k:
+            element, i, j = heapq.heappop(heap)
+            push(i, j + 1)
+            
+            if j == 0:
+                push(i + 1, 0)
+
+            k -= 1
+
+        return element
+```
+```python
+# Solution 2: binary search
+# let N = len(matrix), it's O(Nlog(max-min)) time and O(1) space
+class Solution:
+    def countLessEqual(self, matrix, mid, smaller, larger):
+        n = len(matrix)
+        row, col = n - 1, 0
+        
+        count = 0
+        while row >= 0 and col < n:
+            if matrix[row][col] >= mid:
+                larger = min(larger, matrix[row][col])
+                row -= 1
+            else:
+                smaller = max(smaller, matrix[row][col])
+                count += row + 1
+                col += 1
+
+        return count, smaller, larger
+    
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n = len(matrix)
+        start, end = matrix[0][0], matrix[n - 1][n - 1]
+        while start < end:
+            mid = start + (end - start) / 2
+            
+            smaller = matrix[0][0]  # track the biggest number less than or equal to the mid
+            larger = matrix[n - 1][n - 1] # track the smallest number greater than the mid
+
+            count, smaller, larger = self.countLessEqual(matrix, mid, smaller, larger)
+
+            if count == k:
+                return smaller
+            if count < k:
+                start = larger  # search higher
+            else:
+                end = smaller  # search lower
+
+        return start
+```
+
+#### [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+This problem can be visualized as a m x n matrix. For example, for nums1=[1,7,11], and nums2=[2,4,6]
+```
+      2   4   6
+   +------------
+ 1 |  3   5   7
+ 7 |  9  11  13
+11 | 13  15  17
+```
+Then it becomes the same problem as [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
+```python
+# let X = min(K, len(nums1)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        heap = []
+        
+        def push(i, j):
+            if i < len(nums1) and j < len(nums2):
+                heapq.heappush(heap, [nums1[i] + nums2[j], i, j])
+                
+        push(0, 0)
+        res = []
+        while heap and k:
+            _, i, j = heapq.heappop(heap)
+            res.append([nums1[i], nums2[j]])
+            push(i, j + 1)
+            
+            if j == 0:
+                push(i + 1, 0)
+                
+            k -= 1
+                
+        return res
+```
+
+#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+```python
+# O(log(mn)) time and O(1) space
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        n = len(matrix[0])
+        start, end = 0, n * len(matrix) - 1
+        
+        while start <= end:
+            mid_idx = start + (end - start) // 2
+            mid_element = matrix[mid_idx // n][mid_idx % n]
+            
+            if target == mid_element:
+                return True
+            elif target < mid_element:
+                end = mid_idx - 1
+            else:
+                start = mid_idx + 1
+                
+        return False
+```
+
+#### [766. Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/)
+```python
+# brute force: O(MN) time and O(M + N) space
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        # on the same diagonal, r1 - c1 == r2 - c2.
+        groups = {}
+        for r, row in enumerate(matrix):
+            for c, val in enumerate(row):
+                if r - c not in groups:
+                    groups[r - c] = val
+                elif groups[r - c] != val:
+                    return False
+        return True
+    
+# space optimization
+class Solution(object):
+    def isToeplitzMatrix(self, matrix):
+        return all(r == 0 or c == 0 or 
+                   matrix[r - 1][c - 1] == val
+                   for r, row in enumerate(matrix)
+                   for c, val in enumerate(row))
+```
 
 
 ## LinkedList
@@ -2306,590 +2892,6 @@ class Solution(object):
                 cur += 1
 
         return ans + min(prev, cur)
-```
-
-## Array 
-* [283. Move Zeroes](#283-Move-Zeroes)
-* [645. Set Mismatch](#645-Set-Mismatch)
-* [41. First Missing Positive](#41-First-Missing-Positive)
-* [287. Find the Duplicate Number](#287-Find-the-Duplicate-Number)
-* [667. Beautiful Arrangement II](#667-Beautiful-Arrangement-II)
-* [697. Degree of an Array](#697-Degree-of-an-Array)
-* [565. Array Nesting](#565-Array-Nesting)
-* [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
-* [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
-    
-
-Things to look out during an interview:
-1. Clarify if there are duplicate values in the array. Would the presence of duplicate values affect the answer? Does it make the question simpler or harder?
-2. When using an index to iterate through array elements, be careful not to go out of bounds.
-3. Be mindful about slicing or concatenating arrays in your code. Typically, slicing and concatenating arrays would take O(n) time. Use start and end indices to demarcate a subarray/range where possible.
-
-Corner Caes:
-1. Empty sequence
-2. Sequence with 1 or 2 elements
-3. Sequence with repeated elements
-
-Techniques:
-1. Sliding window
-   - [3. Longest Substring Without Repeating Characters](#3-Longest-Substring-Without-Repeating-Characters)
-   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
-   - [76. Minimum Window Substring](#76-Minimum-Window-Substring)
-2. Two pointers
-   - [75. Sort Colors](#75-Sort-Colors)
-   - [647. Palindromic Substrings](#647-Palindromic-Substrings)
-   - [88. Merge Sorted Array](#88-Merge-Sorted-Array)
-4. Traversing from the right
-   - [739. Daily Temperatures](#739-Daily-Temperatures)
-   - [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
-   - [1944. Number of Visible People in a Queue](#1944-Number-of-Visible-People-in-a-Queue)
-6. Sorting the array
-   - [56. Merge Intervals](#56-Merge-Intervals)
-   - [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
-8. Precomputation<br />
-*For questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful*
-   - [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
-   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
-   - [LeetCode questions tagged "prefix-sum"](https://leetcode.com/tag/prefix-sum/)
-9. Index has a hash key
-   - [739. Daily Temperatures](#739-Daily-Temperatures)
-   - [41. First Missing Positive](#41-First-Missing-Positive)
-
-#### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
-```python
-class Solution:
-    def moveZeroes(self, nums: List[int]) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        if nums is None or len(nums) == 0:
-            return     
-
-        insertPos = 0
-        for num in nums:
-            if num != 0:
-                nums[insertPos] = num    
-                insertPos += 1
-
-        while insertPos < len(nums):
-            nums[insertPos] = 0
-            insertPos += 1
-```
-
-#### [645. Set Mismatch](https://leetcode.com/problems/set-mismatch/)
-```python
-# Solution 1: O(N) time and O(N) space
-class Solution:
-    def findErrorNums(self, nums: List[int]) -> List[int]:
-        return [sum(nums) - sum(set(nums)), sum(range(1, len(nums)+1)) - sum(set(nums))]
-```
-```python
-# Solution 2: swap to right place (allow to modify the input)
-class Solution:
-    def findErrorNums(self, nums: List[int]) -> List[int]:
-        for i in range(len(nums)):
-            while nums[i] != i + 1 and nums[nums[i] - 1] != nums[i]:
-                right_pos = nums[i] - 1
-                nums[i], nums[right_pos] = nums[right_pos], nums[i]
-                
-        for i in range(len(nums)):
-            if nums[i] != i + 1:
-                return [nums[i], i + 1]
-```
-```python
-# Solution 3: negative marking (NOT allow to modify the input)
-class Solution:
-    def findErrorNums(self, nums: List[int]) -> List[int]:
-        for num in nums:
-            cur = abs(num)
-            if nums[cur - 1] < 0:
-                duplicate = cur
-            else:
-                nums[cur - 1] *= -1
-
-        for i in range(len(nums)):
-            if nums[i] > 0:
-                missing = i + 1
-            else:
-                nums[i] = abs(nums[i]) # restore numbers
-
-        return [duplicate, missing]
-
-# Solution 4: sort and iterate
-```
-
-#### [41. First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
-```python
-# Solution 1: swap
-class Solution:
-    def firstMissingPositive(self, nums: List[int]) -> int:
-        n = len(nums)
-        for i in range(n):
-            while nums[i] > 0 and nums[i] <= n and nums[nums[i] - 1] != nums[i]:
-                right_pos = nums[i] - 1
-                nums[i], nums[right_pos] = nums[right_pos], nums[i]
-                
-        for i in range(n):
-            if nums[i] != i + 1:
-                return i + 1
-            
-        return n + 1
-```
-```python
-# Solution 2: negative marking
-class Solution:
-    def firstMissingPositive(self, nums: List[int]) -> int:
-        n = len(nums)
-        
-        for i in range(n):
-            if nums[i] <= 0: # remove useless elements
-                nums[i] = n + 1
-                
-        for num in nums:
-            curr = abs(num)
-            if curr <= n and nums[curr - 1] > 0:
-                nums[curr - 1] *= -1
-            
-        for i in range(n):
-            if nums[i] >= 0:
-                return i + 1
-            
-        return n + 1
-```
-
-#### [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
-```python
-# Solution 1: negative marking - O(n) time and O(1) space
-class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        for num in nums:
-            cur = abs(num)
-            if nums[cur] < 0:
-                duplicate = cur
-                break
-            nums[cur] = - nums[cur]
-
-        # Restore numbers
-        for i in range(len(nums)):
-            nums[i] = abs(nums[i])
-
-        return duplicate
-```
-```python
-# Solution 2: binary search - O(nlog) time and O (1) sapce
-# e.g. count(1,2,3,4,5,6,7)= (1,2,3,6,7,8,8)
-class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        low = 1
-        high = len(nums) - 1
-        
-        while low <= high:
-            mid = low + (high - low) // 2
-
-            # Count numbers less than or equal to 'mid'
-            count = sum(num <= mid for num in nums)
-            if count > mid:
-                duplicate = mid
-                high = mid - 1
-            else:
-                low = mid + 1
-                
-        return duplicate
-```
-We can rephrase the problem as finding the entrance point of a cyclic linkedlist, which is the same as [142. Linked List Cycle II](#142-Linked-List-Cycle-II)
-In **Phrase 1**, fast pointer moves twice as fast as the slow pointer, until the two pointers meet. At intersection, we have
-```
-2 * (F + a) = F + nC + a, where n is some contant
-```
-Solving the eq. gives us
-```
-F + n = nC
-```
-
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/287.%20Find%20the%20Duplicate%20Number.png" width="500">
-   
-In **Phrase 2**, let slow pointer start at the head and fast start at the intersection point, and they move at the same speed. They will meet at the entrance of cycle. To prove:
-- The slow pointer started at zero, so its position after F steps is F.
-- The faster pointer started at the intersection point F + a = nC, so its position after F steps is nC + F, that is the same point as F.
-```python
-# Solution 3: Floyd's Tortoise and Hare (Cycle Detection)
-class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        # phrase 1
-        slow = fast = nums[0]
-        while True:
-            slow = nums[slow]
-            fast = nums[nums[fast]]
-            if slow == fast:
-                break
-        
-        # phrase 2
-        slow = nums[0]
-        while slow != fast:
-            slow = nums[slow]
-            fast = nums[fast]
-        
-        return fast    
-```
-
-#### [667. Beautiful Arrangement II](https://leetcode.com/problems/beautiful-arrangement-ii/)
-use first k+1 elements to create list of k distinct diff, i.e. 1, 1+k, 2, k, 3, k-1, ...
-e.g. [1,4,2,3,5,6] -> [1,4,2,3,5,6]
-```python
-class Solution:
-    def constructArray(self, n: int, k: int) -> List[int]:
-        res = [0] * n
-        res[0] = 1
-        
-        i = 1
-        intv = k
-        while i <= k:
-            if i % 2 == 1:
-                res[i] = res[i - 1] + intv
-            else:
-                res[i] = res[i - 1] - intv
-            i += 1
-            intv -= 1
-        
-        for i in range(k + 1, n):
-            res[i] = i + 1
-            
-        return res
-```
-
-#### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/)
-```python
-class Solution:
-    def findShortestSubArray(self, nums: List[int]) -> int:
-        first = {} # index of first occurance of this number
-        count = defaultdict(int)
-        
-        min_length = degree = 0
-        for i, num in enumerate(nums):
-            first.setdefault(num, i) # assign i to nums only if nums does not exist
-            count[num] += 1
-            
-            if count[num] > degree:
-                degree = count[num]
-                min_length = i - first[num] + 1
-            elif count[num] == degree:
-                min_length = min(min_length, i - first[num] + 1)
-                
-        return min_length
-```
-
-#### [565. Array Nesting](https://leetcode.com/problems/array-nesting/)
-
-<img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/565.%20Array%20Nesting.png" width="500">
-
-```python
-class Solution:
-    def arrayNesting(self, nums: List[int]) -> int:
-        longest = 0
-        for curr in nums:
-            if curr == -1: 
-                continue
-                
-            cnt = 0
-            while nums[curr] != -1:
-                cnt += 1
-                nums[curr], curr = -1, nums[curr] # be careful with order
-                
-            longest = max(longest, cnt)
-                
-        return longest
-```
-
-#### [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted/)
-find some splitting line so that numbers on the left are smaller than numbers on the right. The idea is very similar to quick sort.
-```python
-class Solution:
-    def maxChunksToSorted(self, arr: List[int]) -> int:
-        chunks = 0
-        left_max = arr[0]
-        for idx in range(len(arr)):
-            left_max = max(left_max, arr[idx])
-            if left_max == idx:
-                chunks += 1
-        
-        return chunks
-```
-
-#### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/description/)
-```python
-class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length = len(nums)
-        
-        L, R, answer = [0]*length, [0]*length, [0]*length
-        
-        L[0] = 1
-        for i in range(1, length):
-            L[i] = nums[i - 1] * L[i - 1]
-        
-        R[length - 1] = 1
-        for i in reversed(range(length - 1)):
-            R[i] = nums[i + 1] * R[i + 1]
-        
-        for i in range(length):
-            answer[i] = L[i] * R[i]
-        
-        return answer
-    
-# space optimziation
-class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length = len(nums)
-        answer = [0]*length
-        answer[0] = 1
-        
-        for i in range(1, length):
-            answer[i] = nums[i - 1] * answer[i - 1]
-        
-        R = 1
-        for i in range(length-1, -1, -1):
-            answer[i] = answer[i] * R
-            R *= nums[i]
-        
-        return answer
-```
-
-
-## Matrix
-* [566. Reshape the Matrix](#566-Reshape-the-Matrix)
-* [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
-* [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
-* [373. Find K Pairs with Smallest Sums](#373-Find-K-Pairs-with-Smallest-Sums)
-* [74. Search a 2D Matrix](#74-Search-a-2D-Matrix)
-* [766. Toeplitz Matrix](#766-Toeplitz-Matrix)
-    
-    
-#### [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/)
-```python
-class Solution:
-    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
-        m, n = len(mat), len(mat[0])
-        
-        if r * c != m * n: 
-            return mat 
-        
-        count = 0
-        ans = [[0] * c for _ in range(r)]
-        for i in range(m):
-            for j in range(n):
-                row, col = divmod(count, c) 
-                ans[row][col] = mat[i][j]
-                count += 1
-                
-        return ans
-# numpy has a function reshape: np.reshape(nums, (r, c)).tolist()
-```
-
-#### [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
-
- <img src="https://github.com/lilywxc/Leetcode/blob/main/pictures/240.%20Search%20a%202D%20Matrix%20II.png" width="300">
-
-we seek along the matrix's middle column for an index row such that matrix[row-1][mid] < target < matrix[row][mid] <br /> 
-The existing matrix can be partitioned into four submatrice around this index:
-- the top-left and bottom-right submatrice cannot contain target, so we ignore
-- the bottom-left and top-right submatrice are sorted two-dimensional matrices, so we can recursively apply this algorithm to them
-```python
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        
-        def search(left, right, up, down):
-            # base case: zero are
-            if left > right or up > down:
-                return False
-            
-            # base case: smaller than smallest or larger than largest matrix value
-            if target < matrix[up][left] or target > matrix[down][right]:
-                return False
-            
-            mid = left + (right - left) // 2
-            
-            row = up
-            while row <= down and matrix[row][mid] <= target:
-                if matrix[row][mid] == target:
-                    return True
-                row += 1
-                
-            return search(left, mid - 1, row, down) or search(mid + 1, right, up, row - 1)
-        
-        return search(0, len(matrix[0]) - 1, 0, len(matrix) - 1)
-```
-```python
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        # start our "pointer" in the bottom-left
-        row = len(matrix) - 1
-        col = 0
-
-        while col < len(matrix[0]) and row >= 0:
-            if matrix[row][col] > target:
-                row -= 1
-            elif matrix[row][col] < target:
-                col += 1
-            else:
-                return True
-        
-        return False
-```
-
-#### [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
-A simpler version is to find Kth smallest element from 2 sorted lists using two pointers <br />
-This problem can be reframed as finding the K smallest elements from amongst N sorted lists <br />
-```
-# # # # # ? .
-# # # ? . . .
-# ? . . . . .   "#" means pair already in the output
-# ? . . . . .   "?" means pair currently in the queue
-# ? . . . . .
-? . . . . . .
-. . . . . . .
-```
-```python
-# Solution 1: min heap - let X = min(K, len(matrix)), it's O(KlogX) time and O(X) space
-class Solution:
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        heap = []
-        
-        def push(i, j):
-            if i < len(matrix) and j < len(matrix[0]):
-                heapq.heappush(heap, [matrix[i][j], i, j])
-
-        push(0, 0)
-        while k:
-            element, i, j = heapq.heappop(heap)
-            push(i, j + 1)
-            
-            if j == 0:
-                push(i + 1, 0)
-
-            k -= 1
-
-        return element
-```
-```python
-# Solution 2: binary search
-# let N = len(matrix), it's O(Nlog(max-min)) time and O(1) space
-class Solution:
-    def countLessEqual(self, matrix, mid, smaller, larger):
-        n = len(matrix)
-        row, col = n - 1, 0
-        
-        count = 0
-        while row >= 0 and col < n:
-            if matrix[row][col] >= mid:
-                larger = min(larger, matrix[row][col])
-                row -= 1
-            else:
-                smaller = max(smaller, matrix[row][col])
-                count += row + 1
-                col += 1
-
-        return count, smaller, larger
-    
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        n = len(matrix)
-        start, end = matrix[0][0], matrix[n - 1][n - 1]
-        while start < end:
-            mid = start + (end - start) / 2
-            
-            smaller = matrix[0][0]  # track the biggest number less than or equal to the mid
-            larger = matrix[n - 1][n - 1] # track the smallest number greater than the mid
-
-            count, smaller, larger = self.countLessEqual(matrix, mid, smaller, larger)
-
-            if count == k:
-                return smaller
-            if count < k:
-                start = larger  # search higher
-            else:
-                end = smaller  # search lower
-
-        return start
-```
-
-#### [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
-This problem can be visualized as a m x n matrix. For example, for nums1=[1,7,11], and nums2=[2,4,6]
-```
-      2   4   6
-   +------------
- 1 |  3   5   7
- 7 |  9  11  13
-11 | 13  15  17
-```
-Then it becomes the same problem as [378. Kth Smallest Element in a Sorted Matrix](#378-Kth-Smallest-Element-in-a-Sorted-Matrix)
-```python
-# let X = min(K, len(nums1)), it's O(KlogX) time: K iterations of popping and pushing from a heap of X elements
-class Solution:
-    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
-        heap = []
-        
-        def push(i, j):
-            if i < len(nums1) and j < len(nums2):
-                heapq.heappush(heap, [nums1[i] + nums2[j], i, j])
-                
-        push(0, 0)
-        res = []
-        while heap and k:
-            _, i, j = heapq.heappop(heap)
-            res.append([nums1[i], nums2[j]])
-            push(i, j + 1)
-            
-            if j == 0:
-                push(i + 1, 0)
-                
-            k -= 1
-                
-        return res
-```
-
-#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
-```python
-# O(log(mn)) time and O(1) space
-class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        n = len(matrix[0])
-        start, end = 0, n * len(matrix) - 1
-        
-        while start <= end:
-            mid_idx = start + (end - start) // 2
-            mid_element = matrix[mid_idx // n][mid_idx % n]
-            
-            if target == mid_element:
-                return True
-            elif target < mid_element:
-                end = mid_idx - 1
-            else:
-                start = mid_idx + 1
-                
-        return False
-```
-
-#### [766. Toeplitz Matrix](https://leetcode.com/problems/toeplitz-matrix/)
-```python
-# brute force: O(MN) time and O(M + N) space
-class Solution:
-    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-        # on the same diagonal, r1 - c1 == r2 - c2.
-        groups = {}
-        for r, row in enumerate(matrix):
-            for c, val in enumerate(row):
-                if r - c not in groups:
-                    groups[r - c] = val
-                elif groups[r - c] != val:
-                    return False
-        return True
-    
-# space optimization
-class Solution(object):
-    def isToeplitzMatrix(self, matrix):
-        return all(r == 0 or c == 0 or 
-                   matrix[r - 1][c - 1] == val
-                   for r, row in enumerate(matrix)
-                   for c, val in enumerate(row))
 ```
 
 
