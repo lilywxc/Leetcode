@@ -81,6 +81,7 @@
     * [697. Degree of an Array](#697-Degree-of-an-Array)
     * [565. Array Nesting](#565-Array-Nesting)
     * [769. Max Chunks To Make Sorted](#769-Max-Chunks-To-Make-Sorted)
+    * [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
 * [Matrix](#Matrix)
     * [566. Reshape the Matrix](#566-Reshape-the-Matrix)
     * [240. Search a 2D Matrix II](#240-Search-a-2D-Matrix-II)
@@ -207,7 +208,6 @@
 	* [462. Minimum Moves to Equal Array Elements II](#462-Minimum-Moves-to-Equal-Array-Elements-II)
 	* [169. Majority Element](#169-Majority-Element)
 	* [367. Valid Perfect Square](#367-Valid-Perfect-Square)
-	* [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
 	* [628. Maximum Product of Three Numbers](#628-Maximum-Product-of-Three-Numbers)
 * [Bit Computation](#Bit-Computation)
 	* [504. Base 7](#504-Base-7)
@@ -2741,6 +2741,44 @@ class Solution:
         return chunks
 ```
 
+#### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/description/)
+```python
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        length = len(nums)
+        
+        L, R, answer = [0]*length, [0]*length, [0]*length
+        
+        L[0] = 1
+        for i in range(1, length):
+            L[i] = nums[i - 1] * L[i - 1]
+        
+        R[length - 1] = 1
+        for i in reversed(range(length - 1)):
+            R[i] = nums[i + 1] * R[i + 1]
+        
+        for i in range(length):
+            answer[i] = L[i] * R[i]
+        
+        return answer
+    
+# space optimziation
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        length = len(nums)
+        answer = [0]*length
+        answer[0] = 1
+        
+        for i in range(1, length):
+            answer[i] = nums[i - 1] * answer[i - 1]
+        
+        R = 1
+        for i in range(length-1, -1, -1):
+            answer[i] = answer[i] * R
+            R *= nums[i]
+        
+        return answer
+```
 
 
 #### Matrix
@@ -6278,45 +6316,6 @@ class Solution:
                 l = m + 1
         
         return False
-```
-
-#### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/description/)
-```python
-class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length = len(nums)
-        
-        L, R, answer = [0]*length, [0]*length, [0]*length
-        
-        L[0] = 1
-        for i in range(1, length):
-            L[i] = nums[i - 1] * L[i - 1]
-        
-        R[length - 1] = 1
-        for i in reversed(range(length - 1)):
-            R[i] = nums[i + 1] * R[i + 1]
-        
-        for i in range(length):
-            answer[i] = L[i] * R[i]
-        
-        return answer
-    
-# space optimziation
-class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length = len(nums)
-        answer = [0]*length
-        answer[0] = 1
-        
-        for i in range(1, length):
-            answer[i] = nums[i - 1] * answer[i - 1]
-        
-        R = 1
-        for i in range(length-1, -1, -1):
-            answer[i] = answer[i] * R
-            R *= nums[i]
-        
-        return answer
 ```
 
 #### [628. Maximum Product of Three Numbers](https://leetcode.com/problems/maximum-product-of-three-numbers/)
