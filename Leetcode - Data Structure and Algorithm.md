@@ -44,13 +44,14 @@ Corner Caes:
 3. Sequence with repeated elements
 
 Techniques:
-1. **Sliding window**: the idea is to use a hashmap to check the validity of the window and have two pointers to adjust the window size (ex: [76](#76-Minimum-Window-Substring), [209](#209-Minimum-Size-Subarray-Sum), [3](#3-Longest-Substring-Without-Repeating-Characters))
+1. **Sliding window** (ex: [76](#76-Minimum-Window-Substring), [209](#209-Minimum-Size-Subarray-Sum), [3](#3-Longest-Substring-Without-Repeating-Characters)) <br />
+the idea is to use a hashmap to check the validity of the window and have two pointers to adjust the window size 
 	```
 	1. Use two pointers: left and right to represent a window.
 	2. Move right pointer to find a valid window.
 	3. When a valid window is found, move left to contract and get a smaller window.
 	```
-2. **Two pointers**: a general version of sliding window (ex. [75](#75-Sort-Colors), [88](#88-Merge-Sorted-Array))
+2. **Two pointers** (ex. [75](#75-Sort-Colors), [88](#88-Merge-Sorted-Array))
 3. **Traversing from the right**
 4. Sorting the array
    - [56. Merge Intervals](#56-Merge-Intervals)
