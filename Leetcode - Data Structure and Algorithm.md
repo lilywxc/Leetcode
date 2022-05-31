@@ -19,6 +19,9 @@
 
 
 ## Array 
+* [76. Minimum Window Substring](#76-Minimum-Window-Substring)
+* [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
+* [3. Longest Substring Without Repeating Characters](#3-Longest-Substring-Without-Repeating-Characters)
 * [283. Move Zeroes](#283-Move-Zeroes)
 * [645. Set Mismatch](#645-Set-Mismatch)
 * [41. First Missing Positive](#41-First-Missing-Positive)
@@ -41,30 +44,112 @@ Corner Caes:
 3. Sequence with repeated elements
 
 Techniques:
-1. Sliding window
-   - [3. Longest Substring Without Repeating Characters](#3-Longest-Substring-Without-Repeating-Characters)
-   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
-   - [76. Minimum Window Substring](#76-Minimum-Window-Substring)
-2. Two pointers
+1. **Sliding window**: the idea is to use a hashmap to check the validity of the window and have two pointers to adjust the window size.
+```
+1. Use two pointers: left and right to represent a window.
+2. Move right pointer to find a valid window.
+3. When a valid window is found, move left to contract and get a smaller window.
+```
+2. **Two pointers**
    - [75. Sort Colors](#75-Sort-Colors)
    - [647. Palindromic Substrings](#647-Palindromic-Substrings)
    - [88. Merge Sorted Array](#88-Merge-Sorted-Array)
-4. Traversing from the right
+3. Traversing from the right
    - [739. Daily Temperatures](#739-Daily-Temperatures)
    - [406. Queue Reconstruction by Height](#406-Queue-Reconstruction-by-Height)
    - [1944. Number of Visible People in a Queue](#1944-Number-of-Visible-People-in-a-Queue)
-6. Sorting the array
+4. Sorting the array
    - [56. Merge Intervals](#56-Merge-Intervals)
    - [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
-8. Precomputation<br />
-*For questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful*
+5. Precomputation: for questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful*
    - [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
    - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
    - [LeetCode questions tagged "prefix-sum"](https://leetcode.com/tag/prefix-sum/)
-9. Index has a hash key
+6. Index has a hash key
    - [739. Daily Temperatures](#739-Daily-Temperatures)
    - [41. First Missing Positive](#41-First-Missing-Positive)
 
+
+#### [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
+The idea is, we keep expanding the window by moving the right pointer. <br />
+When the window has all the desired characters, we contract (if possible) and save the smallest window till now.
+```python
+# O(S+T) time and O(T) space
+class Solution(object):
+    def minWindow(self, s, t):
+        if not t or not s:
+            return ""
+
+        dict_t = Counter(t)
+        t_num = len(dict_t)
+        l, r = 0, 0
+        match_num = 0 # a char is considered 'matched' only if both char and count match
+        window = defaultdict(int)
+
+        res = (len(s) + 1, None, None) # (window length, left pointer, right pointer)
+
+        while r < len(s):
+            ch = s[r]
+            
+            if ch in dict_t:
+                window[ch] += 1
+                if window[ch] == dict_t[ch]:
+                    match_num += 1
+
+            while l <= r and match_num == t_num:
+                ch = s[l]
+
+                if r - l + 1 < res[0]:
+                    res = (r - l + 1, l, r)
+
+                if ch in dict_t:
+                    window[ch] -= 1
+                    if window[ch] < dict_t[ch]:
+                        match_num -= 1
+
+                l += 1    
+
+            r += 1    
+            
+        return "" if res[0] == len(s) + 1 else s[res[1] : res[2] + 1]
+```
+
+#### [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-window-substring/)
+```python
+class Solution:
+    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+        total = 0
+        min_length = len(nums) + 1
+        
+        l = 0
+        for r, n in enumerate(nums):
+            total += n
+            while total >= s:
+                min_length = min(min_length, r - l + 1)
+                total -= nums[l]
+                l += 1
+                
+        return min_length if min_length <= len(nums) else 0
+```
+
+#### [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        maxlength = 0
+        used = {} # char: index of latest occurance of the char
+        
+        l = 0
+        for r, char in enumerate(s):
+            if char in used and l <= used[char]:
+                l = used[char] +1
+            else:
+                maxlength = max(maxlength, r - l + 1)
+    
+            used[char] = r
+            
+        return maxlength
+```
 
 #### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
 ```python
