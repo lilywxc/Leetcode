@@ -22,6 +22,7 @@
 * [76. Minimum Window Substring](#76-Minimum-Window-Substring)
 * [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
 * [3. Longest Substring Without Repeating Characters](#3-Longest-Substring-Without-Repeating-Characters)
+* [56. Merge Intervals](#56-Merge-Intervals)
 * [283. Move Zeroes](#283-Move-Zeroes)
 * [645. Set Mismatch](#645-Set-Mismatch)
 * [41. First Missing Positive](#41-First-Missing-Positive)
@@ -53,16 +54,11 @@ the idea is to use a hashmap to check the validity of the window and have two po
 	```
 2. **Two pointers** (ex. [75](#75-Sort-Colors), [88](#88-Merge-Sorted-Array))
 3. **Traversing from the right**
-4. Sorting the array
-   - [56. Merge Intervals](#56-Merge-Intervals)
-   - [435. Non overlapping Intervals](#435-Non-overlapping-Intervals)
-5. Precomputation: for questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful*
-   - [238. Product of Array Except Self](#238-Product-of-Array-Except-Self)
-   - [209. Minimum Size Subarray Sum](#209-Minimum-Size-Subarray-Sum)
-   - [LeetCode questions tagged "prefix-sum"](https://leetcode.com/tag/prefix-sum/)
-6. Index has a hash key
-   - [739. Daily Temperatures](#739-Daily-Temperatures)
-   - [41. First Missing Positive](#41-First-Missing-Positive)
+4. **Sorting the array** (ex: [56](#56-Merge-Intervals), [435](#435-Non-overlapping-Intervals))
+5. **Precomputation** (ex: [238](#238-Product-of-Array-Except-Self), [209](#209-Minimum-Size-Subarray-Sum))
+for questions where summation or multiplication of a subarray is involved, pre-computation using hashing or a prefix/suffix sum/product might be useful
+6. **Index has a hash key** (ex: [645](#645-Set-Mismatch), [287](#287-Find-the-Duplicate-Number), [41](#41-First-Missing-Positive)) <br />
+This approach is usually used when interviewer asks for O(1) space. For example, if the array only has values from 1 to N, where N is the length of the array, negate the value at that index to indicate presence of that number
 
 
 #### [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
@@ -146,9 +142,17 @@ class Solution:
         return maxlength
 ```
 
-#### [1944. Number of Visible People in a Queue](https://leetcode.com/problems/number-of-visible-people-in-a-queue/)
+#### [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
 ```python
-
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        res = []
+        for start, end in sorted(intervals, key = lambda i: i[0]):
+            if res and start <= res[-1][1]:
+                res[-1][1] = max(res[-1][1], end)
+            else:
+                res.append([start, end])
+        return res
 ```
 
 #### [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
@@ -164,7 +168,7 @@ class Solution:
         insertPos = 0
         for num in nums:
             if num != 0:
-                nums[insertPos] = num    
+                nums[insertPos] =1944. Number of Visible People in a Queue num    
                 insertPos += 1
 
         while insertPos < len(nums):
