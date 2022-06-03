@@ -4536,6 +4536,11 @@ class Solution:
 ### Backtracking
 the execution of the backtracking is unfolded as a DFS traversal in a n-ary tree. The total number of steps during the backtracking would be the number of nodes in the tree.
 
+Things to look out for during interviews:
+- Always remember to define a base case(s) so that your recursion will end.
+- Recursion implicitly uses a stack. Hence all recursive approaches can be rewritten iteratively using a stack. Beware of cases where the recursion level goes too deep and causes a stack overflow (the default limit in Python is 1000). Point this out to the interviewer if asked to implement a recursion.
+
+
 #### [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/submissions/)
 ```python
 class Solution:
