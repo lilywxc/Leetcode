@@ -1,6 +1,8 @@
 # Leetcode - Data Structure and Algorithm
 * [Array](#Array)
 * [Two Pointers](#Two-Pointers)
+
+
 * [Matrix](#Matrix)
 * [LinkedList](#LinkedList)
 * [Tree](#Tree)
@@ -657,6 +659,211 @@ class Solution:
                     bestMatch = word
                     
         return bestMatch
+```
+
+
+## String
+* [242. Valid Anagram](#242-Valid-Anagram)
+* [409. Longest Palindrome](#409-Longest-Palindrome)
+* [205. Isomorphic Strings](#205-Isomorphic-Strings)
+* [647. Palindromic Substrings](#647-Palindromic-Substrings)
+* [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
+* [9. Palindrome Number](#9-Palindrome-Number)
+* [696. Count Binary Substrings](#696-Count-Binary-Substrings)
+
+Things to look out for during interviews:
+- Ask about input character set and case sensitivity.
+- note that Counter() takes O(1) space instead of O(n) because range of characters is usually bounded by 26, a constant.
+
+
+#### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return collections.Counter(s) == collections.Counter(t)
+```
+
+#### [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/description/)
+```python
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        odds = sum(v & 1 for v in collections.Counter(s).values()) # v & 1 is equivalent to v%2==1
+        return len(s) - odds + bool(odds)
+```
+
+#### [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/description/)
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        mapping_s_t = {}
+        mapping_t_s = {}
+        
+        for c1, c2 in zip(s, t):
+            if (c1 not in mapping_s_t) and (c2 not in mapping_t_s):
+                mapping_s_t[c1] = c2
+                mapping_t_s[c2] = c1          
+            elif mapping_s_t.get(c1) != c2 or mapping_t_s.get(c2) != c1:
+                return False
+            
+        return True
+```
+For paper, the transformed string will be 01034. <br />
+For title. The transformed string would be 01034, which is the same as that for paper
+```python
+class Solution: 
+    def encode(self, s: str) -> str:
+        index_mapping = {}
+        encoded = []
+        
+        for i, c in enumerate(s):
+            if c not in index_mapping:
+                index_mapping[c] = str(i)
+            encoded.append(index_mapping[c])
+        
+        return " ".join(encoded)
+    
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return self.encode(s) == self.encode(t)
+```
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(zip(s, t))) == len(set(s)) == len(set(t))
+```
+Follow up question <br />
+input: ['aab', 'xxy', 'xyz', 'abc', 'def', 'xyx'] 
+
+return: <br />
+[<br />
+['xyx'], <br />
+['xyz', 'abc', 'def'], <br />
+['aab', 'xxy']<br />
+]
+```python
+def groupIsomorphic(strs)
+        def encode(s):
+            d = {}
+            encoded = []
+            for c in s:
+                if c not in d:
+                    d[c] = len(d)
+                encoded.append(d[c])
+            return str(encoded)
+
+        groups = {}
+        for s in strs:
+            encoded = encode(s)
+            groups.get(encoded, []).append(s)
+
+        return list(groups.values())
+```
+
+#### [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/description/)
+a[i], a[i+1], ..., a[j-1], a[j] is a palindrome if a[i] == a[j] and <br />
+1. a[i+1], ..., a[j-1] is a palindrome, or 
+2. j-i < 3
+   - i = j: we have only 1 character
+   - i + 1 = j: we have 2 repeated character a[i] = a[j]
+   - i + 2 = j: we have 2 repeated character a[i] = a[j] wrapping around one character (does not matter what it is)
+We use dp[i+1][j-1] to calculate dp[i][j] because i is in descending order and j is in ascending order. <>br /
+Thus we know the value of dp[i+1][j-1] before dp[i][j]
+```python
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        n = len(s)
+        dp = [[0] * n for _ in range(n)]
+        
+        res = 0
+        for i in range(n-1, -1, -1):
+            for j in range(i, n):
+                dp[i][j] = s[i] == s[j] and (j-i < 3 or dp[i+1][j-1])
+                res += dp[i][j]
+        return res
+```
+```python
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        count = 0
+        for i in range(len(s)):
+            count += self.EAC(s, i, i) # single character center
+            count += self.EAC(s, i, i+1) # two characters center
+        
+        return count
+            
+    # Expand Around Center
+    def EAC(self, s, l, r,):
+        count = 0
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            count += 1
+            l -= 1
+            r += 1
+            
+        return count
+```
+
+#### [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+```python
+class Solution:
+    def longestPalindrome(self, s):
+        n = len(s)
+        dp = [[0] * n for _ in range(n)]
+        
+        longest_palindrom = ''
+        for i in range(n - 1, -1, -1):
+            for j in range(i, n):  
+                if s[i] == s[j] and (j - i < 3 or dp[i+1][j-1]):
+                        dp[i][j] = 1
+                        longest_palindrom = max(longest_palindrom, s[i:j+1], key = len)
+                
+        return longest_palindrom
+```
+
+#### [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/)
+```python
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0 or (x % 10 == 0 and x != 0):
+            return False
+
+        reverted = 0
+        while x > reverted:
+            reverted = reverted * 10 + x % 10
+            x = x // 10
+       
+        return x == reverted or x == reverted //10 
+        # if x is single center, e.g. 12321
+```
+
+#### [696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/)
+```python
+class Solution:
+    def countBinarySubstrings(self, s: str) -> int:
+        # group, e.g. if s = "110001111000000", then groups = [2, 3, 4, 6]
+        groups = [1]
+        for i in range(1, len(s)):
+            if s[i-1] != s[i]:
+                groups.append(1)
+            else:
+                groups[-1] += 1
+
+        ans = 0
+        for i in range(1, len(groups)):
+            ans += min(groups[i-1], groups[i])
+        return ans
+```
+```python
+# space optimization
+class Solution(object):
+    def countBinarySubstrings(self, s):
+        ans, prev, cur = 0, 0, 1
+        for i in range(1, len(s)):
+            if s[i-1] != s[i]:
+                ans += min(prev, cur)
+                prev, cur = cur, 1
+            else:
+                cur += 1
+
+        return ans + min(prev, cur)
 ```
 
 
@@ -3002,207 +3209,6 @@ class Solution:
             length = max(length, end - x)
                 
         return length
-```
-
-
-## String
-* [242. Valid Anagram](#242-Valid-Anagram)
-* [409. Longest Palindrome](#409-Longest-Palindrome)
-* [205. Isomorphic Strings](#205-Isomorphic-Strings)
-* [647. Palindromic Substrings](#647-Palindromic-Substrings)
-* [5. Longest Palindromic Substring](#5-Longest-Palindromic-Substring)
-* [9. Palindrome Number](#9-Palindrome-Number)
-* [696. Count Binary Substrings](#696-Count-Binary-Substrings)
-
-
-#### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
-```python
-class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        return collections.Counter(s) == collections.Counter(t)
-```
-
-#### [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/description/)
-```python
-class Solution:
-    def longestPalindrome(self, s: str) -> int:
-        odds = sum(v & 1 for v in collections.Counter(s).values()) # v & 1 is equivalent to v%2==1
-        return len(s) - odds + bool(odds)
-```
-
-#### [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/description/)
-```python
-class Solution:
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        mapping_s_t = {}
-        mapping_t_s = {}
-        
-        for c1, c2 in zip(s, t):
-            if (c1 not in mapping_s_t) and (c2 not in mapping_t_s):
-                mapping_s_t[c1] = c2
-                mapping_t_s[c2] = c1          
-            elif mapping_s_t.get(c1) != c2 or mapping_t_s.get(c2) != c1:
-                return False
-            
-        return True
-```
-For paper, the transformed string will be 01034. <br />
-For title. The transformed string would be 01034, which is the same as that for paper
-```python
-class Solution: 
-    def encode(self, s: str) -> str:
-        index_mapping = {}
-        encoded = []
-        
-        for i, c in enumerate(s):
-            if c not in index_mapping:
-                index_mapping[c] = str(i)
-            encoded.append(index_mapping[c])
-        
-        return " ".join(encoded)
-    
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        return self.encode(s) == self.encode(t)
-```
-```python
-class Solution:
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        return len(set(zip(s, t))) == len(set(s)) == len(set(t))
-```
-Follow up question <br />
-input: ['aab', 'xxy', 'xyz', 'abc', 'def', 'xyx'] 
-
-return: <br />
-[<br />
-['xyx'], <br />
-['xyz', 'abc', 'def'], <br />
-['aab', 'xxy']<br />
-]
-```python
-def groupIsomorphic(strs)
-        def encode(s):
-            d = {}
-            encoded = []
-            for c in s:
-                if c not in d:
-                    d[c] = len(d)
-                encoded.append(d[c])
-            return str(encoded)
-
-        groups = {}
-        for s in strs:
-            encoded = encode(s)
-            groups.get(encoded, []).append(s)
-
-        return list(groups.values())
-```
-
-#### [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/description/)
-a[i], a[i+1], ..., a[j-1], a[j] is a palindrome if a[i] == a[j] and <br />
-1. a[i+1], ..., a[j-1] is a palindrome, or 
-2. j-i < 3
-   - i = j: we have only 1 character
-   - i + 1 = j: we have 2 repeated character a[i] = a[j]
-   - i + 2 = j: we have 2 repeated character a[i] = a[j] wrapping around one character (does not matter what it is)
-We use dp[i+1][j-1] to calculate dp[i][j] because i is in descending order and j is in ascending order. <>br /
-Thus we know the value of dp[i+1][j-1] before dp[i][j]
-```python
-class Solution:
-    def countSubstrings(self, s: str) -> int:
-        n = len(s)
-        dp = [[0] * n for _ in range(n)]
-        
-        res = 0
-        for i in range(n-1, -1, -1):
-            for j in range(i, n):
-                dp[i][j] = s[i] == s[j] and (j-i < 3 or dp[i+1][j-1])
-                res += dp[i][j]
-        return res
-```
-```python
-class Solution:
-    def countSubstrings(self, s: str) -> int:
-        count = 0
-        for i in range(len(s)):
-            count += self.EAC(s, i, i) # single character center
-            count += self.EAC(s, i, i+1) # two characters center
-        
-        return count
-            
-    # Expand Around Center
-    def EAC(self, s, l, r,):
-        count = 0
-        while l >= 0 and r < len(s) and s[l] == s[r]:
-            count += 1
-            l -= 1
-            r += 1
-            
-        return count
-```
-
-#### [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
-```python
-class Solution:
-    def longestPalindrome(self, s):
-        n = len(s)
-        dp = [[0] * n for _ in range(n)]
-        
-        longest_palindrom = ''
-        for i in range(n - 1, -1, -1):
-            for j in range(i, n):  
-                if s[i] == s[j] and (j - i < 3 or dp[i+1][j-1]):
-                        dp[i][j] = 1
-                        longest_palindrom = max(longest_palindrom, s[i:j+1], key = len)
-                
-        return longest_palindrom
-```
-
-#### [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/)
-```python
-class Solution:
-    def isPalindrome(self, x: int) -> bool:
-        if x < 0 or (x % 10 == 0 and x != 0):
-            return False
-
-        reverted = 0
-        while x > reverted:
-            reverted = reverted * 10 + x % 10
-            x = x // 10
-       
-        return x == reverted or x == reverted //10 
-        # if x is single center, e.g. 12321
-```
-
-#### [696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/)
-```python
-class Solution:
-    def countBinarySubstrings(self, s: str) -> int:
-        # group, e.g. if s = "110001111000000", then groups = [2, 3, 4, 6]
-        groups = [1]
-        for i in range(1, len(s)):
-            if s[i-1] != s[i]:
-                groups.append(1)
-            else:
-                groups[-1] += 1
-
-        ans = 0
-        for i in range(1, len(groups)):
-            ans += min(groups[i-1], groups[i])
-        return ans
-```
-```python
-# space optimization
-class Solution(object):
-    def countBinarySubstrings(self, s):
-        ans, prev, cur = 0, 0, 1
-        for i in range(1, len(s)):
-            if s[i-1] != s[i]:
-                ans += min(prev, cur)
-                prev, cur = cur, 1
-            else:
-                cur += 1
-
-        return ans + min(prev, cur)
 ```
 
 
