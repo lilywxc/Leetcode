@@ -1,14 +1,12 @@
 # Leetcode - Data Structure and Algorithm
 * [Array](#Array)
 * [Two Pointers](#Two-Pointers)
-
-
+* [String](#String)
 * [Matrix](#Matrix)
 * [LinkedList](#LinkedList)
 * [Tree](#Tree)
 * [Stack and Queue](#Stack-and-Queue) 
 * [HashMap](#HashMap)
-* [String](#String)
 * [Graph](#Graph)
 * [Sorting](#Sorting)
 * [Greedy](#Greedy)
