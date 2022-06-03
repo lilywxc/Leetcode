@@ -1470,7 +1470,7 @@ But if the "break" condition is met first, "else" statment won't be executed
 * [BFS](#BFS)
 	* [637. Average of Levels in Binary Tree](#637-Average-of-Levels-in-Binary-Tree)
 	* [513. Find Bottom Left Tree Value](#513-Find-Bottom-Left-Tree-Value)
-	* [DFS](#DFS)
+* [DFS](#DFS)
 	* [144. Binary Tree Preorder Traversal](#144-Binary-Tree-Preorder-Traversal)
 	* [145. Binary Tree Postorder Traversal](#145-Binary-Tree-Postorder-Traversal)
 	* [94. Binary Tree Inorder Traversal](#94-Binary-Tree-Inorder-Traversal)
