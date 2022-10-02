@@ -3241,6 +3241,7 @@ class Solution:
 
 #### [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)
 ```python
+# DFS
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         prereq = [[] for _ in range(numCourses)]
@@ -3269,6 +3270,31 @@ class Solution:
                 return False
             
         return True
+```
+```python
+# BFS
+import collections
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        edges = [[] for _ in range(numCourses)] #{k: [v1, v2, ...]} k is prereq for [v1, v2, ...]
+        in_degree = [0]*numCourses # number of prereq
+        result = 0
+        
+        for i, pre in prerequisites:
+            edges[pre].append(i)
+            in_degree[i] += 1
+        
+        q = collections.deque([u for u in range(numCourses) if in_degree[u]==0]) # course with no prereq
+        
+        while q:
+            u = q.popleft()
+            result += 1
+            for v in edges[u]:
+                in_degree[v] -= 1
+                if in_degree[v] == 0:
+                    q.append(v)
+        
+        return result == numCourses
 ```
 
 #### [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)
