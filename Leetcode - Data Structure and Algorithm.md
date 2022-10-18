@@ -2375,7 +2375,7 @@ class Solution:
         inorder(root)
         return self.val
 ```
-``python        
+```python        
 # iterative inorder - O(H) time and O(H) space, where H is the tree height
 class Solution:
     def kthSmallest(self, root, k):
