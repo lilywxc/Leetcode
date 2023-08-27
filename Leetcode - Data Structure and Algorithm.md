@@ -457,6 +457,9 @@ class Solution:
 
 ## Two Pointers
 * [167. Two Sum II](#167-Two-Sum-II)
+* [15. 3Sum](#15-3Sum)
+* [259. 3Sum Smaller](#259-3Sum-Smaller)
+* [16. 3Sum Closest](#16-3Sum-Closest)
 * [633. Sum of Square Numbers](#633-Sum-of-Square-Numbers)
 * [345. Reverse Vowels of a String](#345-Reverse-Vowels-of-a-String)
 * [680. Valid Palindrome II](#680-Valid-Palindrome-II)
@@ -464,6 +467,37 @@ class Solution:
 * [141. Linked List Cycle](#141-Linked-List-Cycle)
 * [524. Longest Word in Dictionary through Deleting](#524-Longest-Word-in-Dictionary-through-Deleting)
 
+#### [15. 3Sum](https://leetcode.com/problems/3sum/?envType=study-plan-v2&envId=top-interview-150)
+```python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+
+        for i, n in enumerate(nums):
+            if n > 0:
+                break
+            if i > 0 and n == nums[i - 1]:
+                continue
+            
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                three_sum = n + nums[l] + nums[r]
+
+                if three_sum < 0:
+                    l += 1
+                elif three_sum > 0: 
+                    r -= 1
+                else:
+                    res.append([n, nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+
+                    while l < r and nums[l] == nums[l - 1]:
+                        l += 1
+
+        return res
+```
 
 #### [167. Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 ```python
@@ -510,6 +544,38 @@ class Solution:
                     l = mid + 1
                 else:
                     r = mid - 1
+```
+
+#### [15. 3Sum](https://leetcode.com/problems/3sum/?envType=study-plan-v2&envId=top-interview-150)
+```python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+
+        for i, n in enumerate(nums):
+            if n > 0:
+                break
+            if i > 0 and n == nums[i - 1]:
+                continue
+            
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                three_sum = n + nums[l] + nums[r]
+
+                if three_sum < 0:
+                    l += 1
+                elif three_sum > 0: 
+                    r -= 1
+                else:
+                    res.append([n, nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+
+                    while l < r and nums[l] == nums[l - 1]:
+                        l += 1
+
+        return res
 ```
 
 #### [633. Sum of Square Numbers](https://leetcode.com/problems/sum-of-square-numbers/)
