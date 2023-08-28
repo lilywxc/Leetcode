@@ -549,13 +549,51 @@ class Solution:
 
 #### [259. 3Sum Smaller](https://leetcode.com/problems/3sum-smaller/)
 ```python
-
+# if (i,j,k) works, then (i,j,k), (i,j,k-1),..., (i,j,j+1) all work, (k-j) triplets
+class Solution:
+    def threeSumSmaller(self, nums: List[int], target: int) -> int:
+        count = 0
+        nums.sort()
+        for i in range(len(nums)):
+            j, k = i + 1, len(nums) - 1
+            while j < k:
+                s = nums[i] + nums[j] + nums[k]
+                if s < target:
+                    count += k-j
+                    j += 1
+                else:
+                    k -= 1
+                    
+        return count
 ```
 
 
 #### [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/description/)
 ```python
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        res = nums[0] + nums[1] + nums[2]
+        nums.sort() # O(nlogn)
+        
+        for i in range(len(nums)-2): 
+            #if i > 0 and nums[i]==nums[i-1]: continue 
+                
+            l, r = i+1, len(nums)-1 
+            while l<r:
+                total = nums[i] + nums[l] + nums[r]
+                
+                if total == target:
+                    return total
+                
+                if abs(total - target) < abs(res - target):
+                    res = total
 
+                if total < target: 
+                    l += 1
+                elif total > target: 
+                    r-=1
+            
+        return res
 ```
 
 
