@@ -4183,7 +4183,24 @@ def binarySearch(nums, key):
 - In this case where r is assigned m, we need while loop of l < r instead of l <= r to avoid possibly infinite loop.
 - In some scenarios, you may see the loop condition as l < r instead of l <= r. This is usually when we are confident that the solution exists within the array and we do not want to check the same index multiple times.
 - Note that the "l < r" condition of the while loop ensures that we break out the while loop when l == r. So in most of the questions that we use l < r condition (all the ones below), return either l or r is fine.
-- This code also help identify the smallest element larger than the key, say if we look for 8 in [4, 7, 7, 9, 9, 10], the index of first 9 will be returned.
+- This code identifies the smallest element **larger than or equal to** the key, say if we look for 8 in [4, 7, 7, 9, 9, 10], the index of first 9 will be returned. But if we want to find the smallest element strictly larger than the key, we need the following code: [744](#744-Find-Smallest-Letter-Greater-Than-Target)
+
+```python
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        l = 0
+        h = len(letters) - 1
+        
+        while l <= h:
+            m = l + (h - l) // 2
+            
+            if letters[m] <= target:
+                l = m + 1
+            else:
+                h = m - 1
+        
+        return letters[l] if l < len(letters) else letters[0]
+```
 
 #### [69. Sqrt x](https://leetcode.com/problems/sqrtx/)
 ```python
