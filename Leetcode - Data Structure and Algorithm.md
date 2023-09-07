@@ -4180,9 +4180,9 @@ def binarySearch(nums, key):
   
     return l
 ```
-in this case where r is assigned m, we need while loop of l < r instead of l <= r to avoid possibly infinite loop.
-
-In some scenarios, you may see the loop condition as l < r instead of l <= r. This is usually when we are confident that the solution exists within the array and we do not want to check the same index multiple times.
+- In this case where r is assigned m, we need while loop of l < r instead of l <= r to avoid possibly infinite loop.
+- In some scenarios, you may see the loop condition as l < r instead of l <= r. This is usually when we are confident that the solution exists within the array and we do not want to check the same index multiple times.
+- Note that the "l < r" condition of the while loop ensures that we break out the while loop when l == r. So in most of the questions that we use l < r condition (all the ones below), return either l or r is fine.
 
 #### [69. Sqrt x](https://leetcode.com/problems/sqrtx/)
 ```python
