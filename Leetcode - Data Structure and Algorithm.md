@@ -4163,7 +4163,7 @@ def binarySearch(nums, key):
     return -1
 ```
 
-Variant example: find the leftmost match of a key in a non-decreasing array (has repeated numbers)
+Variant example: find the leftmost match of a key in a non-decreasing array (has repeated numbers) if the key exists, otherwise, it return the index of the smallest element larger than the key, i.e., it returns the smallest element **larger than or equal to** the key.
 ```python
 def binarySearch(nums, key):
    l = 0
