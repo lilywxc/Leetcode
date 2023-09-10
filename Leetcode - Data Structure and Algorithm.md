@@ -4905,14 +4905,15 @@ class Solution:
 
 #### [267. Palindrome Permutation II](https://leetcode.com/problems/palindrome-permutation-ii/)
 ```python
+from collections import Counter, defaultdict
 class Solution:
     def generatePalindromes(self, s: str) -> List[str]:
-        counter = collections.Counter(s)
+        counter = defaultdict(int)
         mid = ''
-        half = []
-        for char, count in counter.items():
+
+        for char, count in Counter(s).items():
             q, r = divmod(count, 2)
-            half += char * q
+            counter[char] = q
             
             if r == 1:
                 if mid == '':
@@ -4920,24 +4921,23 @@ class Solution:
                 else:
                     return [] # only one single char is acceptable
             
-        def backtrack(path):
+        def backtrack(path, counter):
             if len(path) == n:
                 cur = ''.join(path)
                 ans.append(cur + mid + cur[::-1])
-            else:
-                for i in range(n):
-                    if visited[i] or (i > 0 and half[i] == half[i-1] and not visited[i-1]):
-                        continue
-                    visited[i] = True
-                    path.append(half[i])
-                    backtrack(path)
-                    visited[i] = False
+                return
+            
+            for num in counter:
+                if counter[num] > 0:
+                    path.append(num)
+                    counter[num] -= 1
+                    backtrack(path, counter)
                     path.pop()
+                    counter[num] += 1
                     
         ans = []
-        n = len(half)
-        visited = [False] * len(half)
-        backtrack([])
+        n = len(s)//2
+        backtrack([], counter)
         
         return ans
 ```
