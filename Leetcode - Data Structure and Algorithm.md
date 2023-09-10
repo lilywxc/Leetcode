@@ -4366,6 +4366,7 @@ class Solution:
 	* [257. Binary Tree Paths](#257-Binary-Tree-Paths)
 	* [37. Sudoku Solver](#37-Sudoku-Solver)
 	* [51. N Queens](#51-N-Queens)
+ 	* [22. Generate Parentheses](#22-Generate-Parentheses)
 
 
 ### BFS
@@ -5143,6 +5144,31 @@ class Solution:
         
         return ans
 ```
+
+#### [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/description/?envType=study-plan-v2&envId=top-interview-150)
+```python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        
+        def backtrack(path, left_cnt, right_cnt):
+            if len(path) == 2 * n:
+                res.append(''.join(path))
+
+            if left_cnt < n:
+                path.append('(')
+                backtrack(path, left_cnt + 1, right_cnt)
+                path.pop()
+
+            if right_cnt < left_cnt:
+                path.append(')')
+                backtrack(path, left_cnt, right_cnt + 1)
+                path.pop()
+
+        res = []
+        backtrack([], 0, 0)
+        return res
+```
+
 
 ## Dynamic Programming
 * [Fibonacci](#Fibonacci)
