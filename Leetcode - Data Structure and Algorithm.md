@@ -6089,7 +6089,7 @@ class Solution:
         return dp[amount]
 ```
 
-#### [377. Combination Sum IV](377. Combination Sum IV)
+#### [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/)
 ```python
 class Solution:
     def combinationSum4(self, nums: List[int], amount: int) -> int:
