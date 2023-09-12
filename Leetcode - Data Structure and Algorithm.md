@@ -5855,7 +5855,7 @@ Variants:
 - 多维费用背包：物品不仅有重量，还有体积，同时考虑这两种限制
 - 其它：物品之间相互约束或者依赖
 
-#### [416. Partition Equal Subset Sum](#416-Partition-Equal-Subset-Sum)(https://leetcode.com/problems/partition-equal-subset-sum/)
+#### [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
 思路：背包大小为 total_sum//2 的0-1背包问题
 
 dp[i][j] = true if the sum j can be formed by elements in subset {nums[0], ..., nums[i]}, otherwise dp[i][j] = false
@@ -5911,7 +5911,7 @@ class Solution:
         return dp[subset_sum]
 ```
 
-#### [494. Target Sum](https://leetcode.com/problems/target-sum/description/)(https://leetcode.com/problems/target-sum/)
+#### [494. Target Sum](https://leetcode.com/problems/target-sum/)
 思路：背包大小为 target + sum(nums)//2 的0-1背包问题
 ```
                   sum(P) - sum(N) = target
